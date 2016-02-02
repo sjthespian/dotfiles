@@ -1,0 +1,9 @@
+[color]
+	ui = auto
+[user]
+	name = Daniel Rich
+	email = drich@employees.org
+[alias]
+	co = checkout
+[push]
+	default = simple
