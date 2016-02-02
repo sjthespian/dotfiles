@@ -2,17 +2,21 @@
 # .bashrc:  sets up the bash environment 
 #
 
-set +x
+# Special DreamWorks bits
+fqdn=`hostname -f`
+case $fqdn in
+    *dreamworks.*|*.ddu-india.com|*.pdi.com)
+	# Get studio environment if not set
+	if [ -z "$STUDIO" -a -n "$PS1" ]; then
+  	    #echo "Loading /etc/profile..."
+  	    . /etc/profile
+  	    export STUDIO
+	fi
 
-# Get studio environment if not set
-if [ -z "$STUDIO" -a -n "$PS1" ]; then
-  #echo "Loading /etc/profile..."
-  . /etc/profile
-  export STUDIO
-fi
-
-# Set default printer
-export PRINTER=dw602
+	# Set default printer
+	export PRINTER=dw917
+	;;
+esac
 
 #
 # prepend() and append() functions for path management
@@ -61,6 +65,13 @@ case `uname -s` in
     "Linux")
 		SYSTYPE="linux"
 		append PATH /sbin:/usr/sbin;;
+    "Darwin")
+                SYSTYPE="mac"
+                # Add homebrwew coreutils path
+                prepend PATH /usr/local/opt/coreutils/libexec/gnubin
+                prepend MANPATH /usr/local/opt/coreutils/libexec/gnuman
+                append PATH /usr/local/sbin
+                ;;
     *)		SYSTYPE="";;
 esac
 
@@ -82,38 +93,12 @@ fi
 # Set the prompt, use color if possible
 PS1PRE=''
 if [ -n "$PS1" ]; then
-#    # Term Colors
-#    Black="$(tput setaf 0)"
-#    BlackBG="$(tput setab 0)"
-#    DarkGrey="$(tput bold ; tput setaf 0)"
-#    LightGrey="$(tput setaf 7)"
-#    LightGreyBG="$(tput setab 7)"
-#    White="$(tput bold ; tput setaf 7)"
-#    Red="$(tput setaf 1)"
-#    RedBG="$(tput setab 1)"
-#    LightRed="$(tput bold ; tput setaf 1)"
-#    Green="$(tput setaf 2)"
-#    GreenBG="$(tput setab 2)"
-#    LightGreen="$(tput bold ; tput setaf 2)"
-#    Brown="$(tput setaf 3)"
-#    BrownBG="$(tput setab 3)"
-#    Yellow="$(tput bold ; tput setaf 3)"
-#    Blue="$(tput setaf 4)"
-#    BlueBG="$(tput setab 4)"
-#    LightBlue="$(tput bold ; tput setaf 4)"
-#    Purple="$(tput setaf 5)"
-#    PurpleBG="$(tput setab 5)"
-#    Pink="$(tput bold ; tput setaf 5)"
-#    Cyan="$(tput setaf 6)"
-#    CyanBG="$(tput setab 6)"
-#    LightCyan="$(tput bold ; tput setaf 6)"
-#    NC="$(tput sgr0)" # No Color
     Bold="$(tput bold)"
     NoBold="$(tput sgr0)"
     
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
-        xterm*|screen*) color_prompt=yes;;
+        xterm*|rxvt*|screen*|linux) color_prompt=yes;;
     esac
     
     # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -134,7 +119,6 @@ if [ -n "$PS1" ]; then
 
     # Figure out which site I'm at and set prompt color
     dwa_site='GLD'
-    fqdn=`hostname --fqdn`
     PS1COLOR='Magenta'
     case $fqdn in
 	*.rwc.dreamworks.net)
@@ -244,10 +228,11 @@ fi
 
 # This path may be appended, but do not change the original order
 if [ -n "$SYSTYPE" ]; then
-    #prepend PATH /usr/local/bin
-    prepend PATH $HOME/bin:$HOME/bin/$CONFIG_GUESS
+    prepend PATH $HOME/bin:/usr/local/sbin:/usr/local/bin
+    if [ -n "$CONFIG_GUESS" ]; then
+       prepend PATH $HOME/bin/$CONFIG_GUESS
+    fi
 else
-    #PATH=/usr/local/bin:$PATH:$HOME/bin
     PATH=$PATH:$HOME/bin
 fi
 
@@ -283,23 +268,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# setup printers with duplex option
-#lpoptions -p dw616/duplex -o Duplex=DuplexNoTumble
-#lpoptions -p dw616/duplex-landscape -o Duplex=DuplexTumble
-#lpoptions -p dw617/duplex -o Duplex=DuplexNoTumble
-#lpoptions -p dw617/duplex-landscape -o Duplex=DuplexTumble
-
-# Proxy settings
-#export proxy="http://proxy.anim.dreamworks.com:3128/"
-#export http_proxy=${proxy}
-#export ftp_proxy=${proxy}
-#export no_proxy="pdi.com,dreamworks.com,anim.dreamworks.com"
-
-# Make ut_ticket work
-export PYTHON_INCLUDE_PATH=/rel/map/osa/python
-# Add additional OSA tools
-append PATH /usr/home/osa/scripts
-
 # Make locally installed modules work
 #   See ~/.pydistutils.cfg
 #export PYTHONPATH=/home/drich/py-lib
@@ -309,54 +277,6 @@ append PATH /usr/home/osa/scripts
 #    . $HOME/etc/bash_completion
 #fi
 
-# Tape library default
-export CHANGER=/dev/sg1
-
-# Convert variables.csh to shell and source it
-if [ -f '/etc/profile.d/variables.csh' ]; then
-  sed 's/setenv/export/;s/\(export [^ ]*\) /\1=/;s/^set/#set/' /etc/profile.d/variables.csh > /tmp/variables-$$.sh
-  . /tmp/variables-$$.sh
-  /bin/rm -f /tmp/variables-$$.sh
-fi
-
-# Get the /rel path for sys_hey and other utils
-if [ -f /rel/boot/env/softmap_path.default ]; then
-  OIFS=$IFS
-  IFS=:
-  RELMAPDIRS=`cat /rel/boot/env/softmap_path.default`
-  SOFTMAP_PATH=''
-  for mapdir in $RELMAPDIRS; do
-    IFS=$OIFS
-    if [ -d "$mapdir/bin" ]; then
-      append PATH $mapdir/bin
-      append SOFTMAP_PATH $mapdir
-    fi
-    if [ -d "/rel/map/$mapdir/bin" ]; then
-      append PATH /rel/map/$mapdir/bin
-      append SOFTMAP_PATH /rel/map/$mapdir
-    fi
-    if [ -d "/rel/folio/pipeline/$mapdir/bin" ]; then
-      append PATH /rel/folio/pipeline/$mapdir/bin
-      append SOFTMAP_PATH /rel/folio/pipeline/$mapdir
-    fi
-    if [ -d "/rel/folio/jose/$mapdir/bin" ]; then
-      append PATH /rel/folio/jose/$mapdir/bin
-      append SOFTMAP_PATH /rel/folio/jose/$mapdir
-    fi
-  done
-  IFS=$OIFS
-  export SOFTMAP_PATH
-fi
-
-# Add Zenoss env on the zenoss servers
-if [ -d ~zenoss ]; then
-  . ~zenoss/.bashrc
-fi
-
-if [ -n "$PS1" ]; then
-  stty erase ^h
-fi
-
 # Additional bash completion
 #_personal_completion_loader()
 #{
@@ -364,6 +284,68 @@ fi
 #    . "~/.bash_completion.d/$1.sh" >/dev/null 2>&1 && return 124
 #}
 #complete -D -F _personal_completion_loader
+
+case $fqdn in
+    *dreamworks.*|*.ddu-india.com|*.pdi.com)
+        # Make ut_ticket work
+        export PYTHON_INCLUDE_PATH=/rel/map/osa/python
+        # Add additional OSA tools
+        append PATH /usr/home/osa/scripts
+
+        # Convert variables.csh to shell and source it
+        if [ -f '/etc/profile.d/variables.csh' ]; then
+          sed 's/setenv/export/;s/\(export [^ ]*\) /\1=/;s/^set/#set/' /etc/profile.d/variables.csh > /tmp/variables-$$.sh
+          . /tmp/variables-$$.sh
+          /bin/rm -f /tmp/variables-$$.sh
+        fi
+
+        # Get the /rel path for sys_hey and other utils
+        if [ -f /rel/boot/env/softmap_path.default ]; then
+          OIFS=$IFS
+          IFS=:
+          RELMAPDIRS=`cat /rel/boot/env/softmap_path.default`
+          SOFTMAP_PATH=''
+          for mapdir in $RELMAPDIRS; do
+            IFS=$OIFS
+            if [ -d "$mapdir/bin" ]; then
+              append PATH $mapdir/bin
+              append SOFTMAP_PATH $mapdir
+            fi
+            if [ -d "/rel/map/$mapdir/bin" ]; then
+              append PATH /rel/map/$mapdir/bin
+              append SOFTMAP_PATH /rel/map/$mapdir
+            fi
+            if [ -d "/rel/folio/pipeline/$mapdir/bin" ]; then
+              append PATH /rel/folio/pipeline/$mapdir/bin
+              append SOFTMAP_PATH /rel/folio/pipeline/$mapdir
+            fi
+            if [ -d "/rel/folio/jose/$mapdir/bin" ]; then
+              append PATH /rel/folio/jose/$mapdir/bin
+              append SOFTMAP_PATH /rel/folio/jose/$mapdir
+            fi
+          done
+          IFS=$OIFS
+          export SOFTMAP_PATH
+        fi
+
+        # Add Zenoss env on the zenoss servers
+        if [ -d ~zenoss ]; then
+          . ~zenoss/.bashrc
+        fi
+        ;;
+esac
+
+if [ -n "$PS1" ]; then
+  stty erase ^h
+fi
+
+# Setup CD/DVD tools for OSX
+if [ "$SYSTYPE" == "mac" ]; then
+    export CDR_DEVICE=1,0,0
+    export CDR_SPEED=40
+    export CDR_FIFISIZE=2m
+    alias cdrecord='sudo cdrecord --driveropts=burnfree -eject'
+fi
 
 # Ensure we have a working ssh-agent
 check-ssh-agent() {
