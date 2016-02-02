@@ -2,7 +2,9 @@
 alias rm='rm -i'
 
 alias ?='man man'
-alias ls='ls -CF'
+alias ls='ls -CF --color=always'
+alias grep='grep --color=always'
+alias egrep='egrep --color=always'
 alias list='more -l'
 alias wa='who -a'
 alias h='history'
