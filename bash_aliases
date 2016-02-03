@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # interactively remove file -- good for beginners
 alias rm='rm -i'
 
@@ -9,19 +11,13 @@ alias list='more -l'
 alias wa='who -a'
 alias h='history'
 alias lo='logout'
-#print() { pr -l66 $* |lp }
-#nprint() { pr -n5 -l66  $* | lp; }
-#prlong() { fold $* | pr -l66 -h $* | lp; }
-#prman() { man $* | lp; }
-#frlogin() {
-    #/usr/ucb/rlogin $*;echo You are back on `hostname`;
-#}
-#alias rlogin='frlogin'
-#ftelnet() {
-    #/usr/ucb/telnet $*;echo You are back on `hostname`;
-#}
-#alias telnet='ftelnet'
-#killall() { if [ -n "$1" && `echo $1 | sed '/^-/p'` = $1 ]; then SIGNAL=$1; shift; else SIGNAL="" fi; echo $SIGNAL `ps -aux | grep $* | awk '{print $2}'` }
+gnomeopen=`which gnome-open 2>/dev/null`
+if [ -n "`which gnome-open 2>/dev/null`" ]; then
+  alias open='gnome-open'
+fi
+if [ -x /usr/bin/vim ]; then
+  alias vi=vim
+fi
 
 # Use the Berkeley Mail program
 alias mail='Mail'
@@ -29,129 +25,18 @@ alias mail='Mail'
 alias addpath='set path = (`pwd` $path) ; echo "path now includes `pwd`"'
 
 alias al='ls -al'
-#cx() { chmod +x $*; }
-#hogs() { cd $HOME; cd ..; du -s * | sort -rn | more; }
 alias su='su -'
-
-# unpack tar files
-#untar() { zcat $*.tar.Z ; tar xvof -; }
-
-# print files in read protected directories to default printer 
-#tlp() { cat $* | /usr/bin/lp; }
-
-# change directories to a file server
-#rcd() { cd /r/$*/u/$USER; }
 
 # logout alias
 alias bye='clear; logout'
 
-# Mail reader
-#alias vm='emacs -i -f vm'
-alias emacs19='/usr/appl/emacs-19/bin/mips-sgi-irix5/emacs'
-alias vm19='/usr/appl/emacs-19/bin/mips-sgi-irxi5/emacs -f vm'
-
-##fenscript() { /usr/bin/enscript -2rGp - $* | lpr; }
-##alias enscript='fenscript'
-#fpsroff() { /usr/bin/psroff -t $* | lpr; }
-#alias psroff='fpsroff'
-#alias xtrn='/usr/sbin/xwsh -name trn -title ReadNews -icontitle ReadNews -fn 8x13 -geometry 80x60 -bg ivory1 -fg black -bold red -e trn'
-
-# Aliases for cassette labels
-alias tape_prolog="awk '/^%.PS/,/^%%BeginDoc//^%%EndDoc/,/^%%EndPro/'"
-alias tape_trailer="awk '/^%%Trailer/,/^--eof--\$/'"
-catapes() {
-    (tape_prolog $TAPEPS;cat $*; tape_trailer $TAPEPS);
-}
-printapes() {
-    (catapes $*) | lp;
-}
-
-# Sound conversion aliases
-#snd2au() { sox -t .ub -r 11025 $*.snd -r 8000 -U $*.au; }
-#vox2au() { sox $*.voc -r 8000 -U $*.au; }
-#au2aiff() { sox $*.au $*.aiff; }
-#iff2au() { sox -t 8SVX $*.iff -r 8000 -U $*.au }
-#iff2aiff() { sox -t 8SVX $*.iff $*.aiff }
-#aiff2au() { sox $*.aiff -r 8000 -U $*.au; }
-
-# Add applications to the path
-
-#PATH=$PATH:/usr/appl/pbmplus/bin
-export PATH
-
-TAPEPS=$HOME/Archive/Postscript/Tapes/audio-tape.ps
-
 # X11 Auth update
 #rxauth() { xauth extract - `uname -n`:0 | rsh $* xauth merge - }
-
-alias imgscan='imgscan ricoh'
-alias request='/usr/tmp/requests/request'
-
-# Sun calendar manager
-#alias xcm='rxauth thumper; rsh thumper "/usr/openwin/bin/cm -Wfsdb -Wt screen12 -Wr $DISPLAY -bg \"light blue\"" < /dev/null'
-#alias xcm='rsh thumper "/usr/openwin/bin/cm -Wfsdb -Wt screen12 -Wr $DISPLAY -bg \"light blue\"" < /dev/null'
-alias xcm='( $HOME/bin/rxauth -p /usr/openwin/bin fiji; rsh fiji "DISPLAY=$DISPLAY /usr/openwin/bin/cm -bg \"light blue\"" < /dev/null & )'
-
-# FSP aliases:
-#FSP_PORT=6678
-#FSP_HOST=192.70.34.205
-#FSP_DIR=/
-#FSP_TRACE=""
-#FSP_DELAY=3000
-#export FSP_PORT FSP_HOST FSP_DIR FSP_TRACE FSP_DELAY
-
-#fcd() { FSP_DIR=`(ARGV=$*; set noglob; exec fcdcmd $ARGV)`; export FSP_DIR }
-#fls() { (ARGV=$*; set noglob; exec flscmd -CF $ARGV) }
-#fget() { (ARGV=$*; set noglob; exec fgetcmd $ARGV) }
-#fgrab() { (ARGV=$*; set noglob; exec fgrabcmd $ARGV) }
-#fcat() { (ARGV=$*; set noglob; exec fcatcmd $ARGV) }
-#fmore() { (ARGV=$*; set noglob; exec fcatcmd $ARGV | less ) }
-#frm() { (ARGV=$*; set noglob; exec frmcmd $ARGV) }
-#frmdir() { (ARGV=$*; set noglob; exec frmdircmd $ARGV) }
-#fpro() { (ARGV=$*; set noglob; exec fprocmd $ARGV) }
-#fpwd() { echo $FSP_DIR on $FSP_HOST port $FSP_PORT }
-#fhost() { fsp_host=$*; . ~/bin/fhost; unset fsp_host }
-##fhost() { FSP_DIR=/; FSP_HOST=$1; FSP_PORT=$2; export FSP_DIR FSP_HOST FSP_PORT }
-
-alias synchronize='synchronize -bg gray80'
-alias trn='trn -x6ms +m -S -XXD -B -p -M -G -Hcontent-type -Hcontent-transfer-encoding'
-
-alias bz='/usr/demos/bin/bz -logo crow.bzl -pick'
-alias bzflag='/usr/demos/IndiZone/bzflag'
-
-alias chkkwong='rsh guest@shibui last | head'
-alias mktape='pushd ~; tar cvf /dev/tape News/.new $* && ( cd News/.new; /bin/rm erotica/* erotica/.xvpics/* teen/* teen/.xvpics/*; mt -t /dev/tape unload); popd'
-
-alias xemacs-beta="/usr/local/beta/bin/xemacs" 
-alias xemacs-19.14="/usr/local/beta/bin/xemacs-19.14" 
-alias xemacs-20.0="/usr/local/beta/bin/xemacs-20.0" 
-
-# PCP aliases for www
-alias pmchart="pmsocks pmchart -h 204.94.214.4"
-
-# TimeSheet copy
-alias getjobs="rcp guest@woowoo:/usr/spool/pcnfs/pc-sublime/time.tab WWW/Workarea/TimeSheet/job.nums"
-
-# Workarea aliases
-alias wa="cd $HOME/WWW/Workarea; export WORKAREA=$HOME/WWW/Workarea" 
-alias wa-cgi="cd $HOME/WWW/Workarea/cgi-bin; export WORKAREA=$HOME/WWW/Workarea/cgi-bin" 
-alias wa-java="cd $HOME/WWW/Java; export WORKAREA=$HOME/WWW/Java" 
-alias wa-freeware="cd $HOME/Src/Freeware; export WORKAREA=$HOME/Src/Freeware; export ROOT=/hosts/babylon.engr/usr/dist/6.2/LATEST/proot; export TOOLROOT=/hosts/babylon.engr/usr/dist/6.2/LATEST/ptoolroot" 
-
-# resize alias
-resize() {
-    eval `/usr/local/X11R6/bin/resize $*`
+# Setup root xauth
+rootxauth () {
+  export XAUTHORITY=$HOME/.Xauthority
+  chmod a+r $XAUTHORITY
 }
-alias resettty="stty sane intr '^c' kill '^u' erase '^h'; resize"
-alias reset48="stty sane rows 48 intr '^c' kill '^u' erase '^h'; resize"
-alias set48="stty rows 48; resize"
-
-#alias pfind='rsh ghostbuster pfind'
-
-alias aim="( /usr/local/aim/aim > /dev/null 2>&1 & )"
-
-# Meeting Maker on my machine at work
-alias mmxp="ssh sandman.cisco.com /usr/local/share/bin/mmxp"
 
 # Xterm aliases
 settitle () {
@@ -163,7 +48,107 @@ seticonname () {
 
 alias wake_dream="sudo ether-wake 00:60:08:20:CF:34"
 
-alias open=gnome-open
+#
+# DWA Aliases
+alias sys_hey="sys_hey -fg DarkRed -image /home/drich/Images/heybg.jpg -font lucidasans-bold-12 -nogray"
+#alias pw_escrow='cat /home/systems/pw_escrow/executive.asc | gpg --decrypt | less'
+alias pw_escrow='TMPFILE=`mktemp` && cp /home/systems/pw_escrow/executive.asc $TMPFILE && gpg --decrypt $TMPFILE | less && /bin/rm $TMPFILE'
+alias rpmarch='rpm -qa --qf "%{name}-%{version}-%{release}.%{arch}\n"'
+alias rpmtime='rpm -qa --qf "%{installtime} (%{installtime:date}) %{name}\n"'
+
+# JIRA aliases
+alias ut_ticket='ut_ticket -config /usr/home/dst/config/data/ut_ticket.config'
+
+# DWA VNC
+alias lasvncstart="ssh -f -n gw.virtualdreamworks.com vncserver -geometry :42 1280x1024"
+alias lasvncstop="ssh -f -n gw.virtualdreamworks.com vncserver -kill :42"
+alias lasvncforward="ssh -f -N -L5904:localhost:5942 gw.virtualdreamworks.com"
+alias skyglowvncstart="ssh -f -n skyglow x11vnc -display :0 -many -bg  && sleep 5 && vncviewer skyglow"
+alias skyglowvncstop="ssh -f -n skyglow killall x11vnc"
+alias odw-vnc='ssh -fN -L5999:localhost:5900 odw-vnc && vncviewer :99'
+
+# LDAP aliases/functions
+ldappinfo () {
+  ldapsearch -LLL -x uid=$1 uid cn ou passwordExpirationTime passwordRetryCount retryCountResetTime accountUnlockTime
+}
+
+# Sudo aliases
+alias sudo2zenoss='sudo -Hi -u zenoss $*'
+
+# Puppet aliases
+function puppetrunroot() {
+  PATH=/bin:/usr/bin sudo -iH /usr/local/bin/puppetrun $*;
+}
+function puppetcronroot() {
+  PATH=/bin:/usr/bin sudo -iH /usr/local/bin/puppetcron && grep puppet /var/log/messages $*;
+}
+function puppetgittest() {
+  PATH=/bin:/usr/bin sudo -iH puppet apply --modulepath=/usr/pic1/git/puppet/modules /usr/pic1/git/puppet/site.pp $*;
+}
+function puppetgittestremote() {
+  PATH=/bin:/usr/bin sudo -iH puppet apply --modulepath=/hosts/grayfury/usr/pic1/git/puppet/modules /hosts/grayfury/usr/pic1/git/puppet/site.pp $*;
+}
+alias puppeterrors='SDATE=`date +"%b %e"` && egrep "${SDATE}.*puppet" /var/log/messages'
+alias prr=puppetrunroot
+alias pcr=puppetcronroot
+alias pgt=puppetgittest
+alias pgtr=puppetgittestremote
+
+# DDU proxy for downloads
+startdduproxy() {
+  if [ -n "$1" ]; then
+    ssh -nNTgx -D 4444 aretha.pdi.com &
+    ssh -nNTx -R 33128:mpt-internetproxy.anim.dreamworks.com:8080 $1 &
+    ssh -nNTx -R 4444:aretha.pdi.com:4444 $1 &
+    echo "On $1, run the following:"
+    echo "export socks_proxy=socks://`hostname`:4444/"
+    echo "export http_proxy=http://localhost:33128/"
+    echo ""
+    echo "To use socks with python for zenoss, TSOCKS_CONF_FILE=~/tsocks.conf tsocks python setup.py install"
+  else
+    echo "usage: startdduproxy dduhost" >&2
+  fi
+}
+stopdduproxy() {
+  if [ -n "$1" ]; then
+    PID1=`ps -efww | egrep -- 'ssh.*-D 4444' | egrep -v grep | awk '{print $2}'`
+    PID2=`ps -efww | egrep -- "ssh.*-R 33128.*$1" | egrep -v grep | awk '{print $2}'`
+    PID1=`ps -efww | egrep -- 'ssh.*-R 4444' | egrep -v grep | awk '{print $2}'`
+    if [ -n "$PID1" -o -n "$PID2" -o -n "$PID3" ]; then
+      kill $PID1 $PID2 $PID3
+    fi
+  else
+    echo "usage: stopdduproxy dduhost" >&2
+  fi
+}
+
+# OSA aliases
+alias hermit='/usr/home/osa/scripts/hermit'
+
+# END DWA
+#
+
+# Compiz startup -- update in /usr/bin/compiz-gtk
+function runCompiz() {
+    gtk-window-decorator &
+#    exec compiz –ignore-desktop-hints glib gconf gnomecompat $@
+    exec compiz --replace --sm-disable --indirect-rendering --ignore-desktop-hin
+ts ccp glib gconf gnomecompat $@ &
+#    exec compiz --replace --sm-disable --loose-binding --ignore-desktop-hints c
+cp glib gconf gnomecompat $@ &
+}
+
+# Configure chef dev environment
+alias chefdk='eval "$(chef shell-init bash)"'
+
+# JSON
+function jsonlint() {
+  if [ -f "$1" ]; then
+    python -mjson.tool < $1 > /dev/null
+  else
+    python -mjson.tool > /dev/null
+  fi
+}
 
 # SSH forwarding
 endforward() {
@@ -175,20 +160,40 @@ endforward() {
 alias homeforward='endforward && ssh -f -N morpheus-forward && echo "Proxy started"'
 alias homeproxyforward='endforward && ssh -f -N morpheus-forward-proxy && echo "Proxy started"'
 
-# Larger window for rdesktop
-alias rdesktop='rdesktop -g1152x768'
-
-# VNC is vinagre
-alias vncviewer="vinagre"
-
 fixssh() {
-  sshhost=`nslookup $1 | sed -n '/Name:/,/Address:/p' | awk '{print $2}'`
-  for sshhost in $1 $sshhost; do
+ sshfqdn=`host $1 | awk '{print $1}'`
+  sshaddr=`host $1 | awk '{print $NF}'`
+  #sshhost=`nslookup $1 | sed -n '/Name:/,/Address:/p' | awk '{print $2}'`
+  for sshhost in $1 $sshfqdn $sshaddr; do
     exists=`ssh-keygen -F $sshhost | wc -c`
     if [ "$exists" != 0 ]; then
       echo $sshhost | sed 's/,/ /g' | xargs -n1 ssh-keygen -R
     fi
   done
+  ssh $sshfqdn
+}
+alias sshnokey='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
+
+
+if [ -n "`which xxdiff 2>/dev/null`" ]; then
+  alias xdiff="xxdiff"
+fi
+
+# Larger window for rdesktop
+#alias rdesktop='rdesktop -g1152x768'
+alias rdesktop='rdesktop -a16 -g1280x1024'
+
+# VNC is vinagre
+if [ -n "`which vinagre 2>/dev/null`" ]; then
+  alias vncviewer="vinagre"
+fi
+# Start/stop remove VNC
+# General host start/stop
+vncstart () {
+  ssh -f -n $1 x11vnc -display :0 -many -bg  && sleep 5 && vncviewer -geometry +0+0 $1
+}
+vncstop () {
+  ssh -f -n $1 killall x11vnc
 }
 
 # Remote connection aliasts
@@ -219,6 +224,7 @@ sshstop() {
     kill $pid
   fi
 }
+
 alias headphones='sshportforward xbmc.lapseofthought.com 8181 3600 && echo "Use headphones-stop to end it" && firefox http://localhost:8181/'
 alias lazylibrarian='sshportforward xbmc.lapseofthought.com 5299 3600 && echo "Use lazylibrarian-stop to end it" && firefox http://localhost:5299/'
 alias maraschino='sshportforward xbmc.lapseofthought.com 7000 3600 && echo "Use maraschino-stop to end it" && firefox http://localhost:7000/'
