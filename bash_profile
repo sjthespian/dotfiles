@@ -29,9 +29,6 @@ then
     stty -g > $HOME/.wshttymode
 fi
 
-# list directories in columns
-#ls () { /bin/ls -C $*; }
-
 if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
 
 

@@ -4,6 +4,10 @@
 
 # Special DreamWorks bits
 fqdn=`hostname -f`
+location=''
+if [ -x /usr/bin/facter ]; then
+    location=`/usr/bin/facter location`
+fi
 case $fqdn in
     *dreamworks.*|*.ddu-india.com|*.pdi.com)
 	# Get studio environment if not set
@@ -120,28 +124,53 @@ if [ -n "$PS1" ]; then
     # Figure out which site I'm at and set prompt color
     dwa_site='GLD'
     PS1COLOR='Magenta'
-    case $fqdn in
-	*.rwc.dreamworks.net)
-	    dwa_site='RWC'
-	    PS1COLOR='Green'
+    if [ -n "$location" ]; then
+        case $location in
+            rwc)
+                dwa_site='RWC'
+                PS1COLOR='Green'
+                ;;
+            gld)
+                dwa_site='DDU'
+                PS1COLOR='Magenta'
+                ;;
+            ttp)
+                dwa_site='DDU'
+                PS1COLOR='Blue'
+                ;;
+        esac
+    else
+        case $fqdn in
+	    *.rwc.dreamworks.net)
+	        dwa_site='RWC'
+	        PS1COLOR='Green'
+	        ;;
+	    *.odw.com.cn)
+	        dwa_site='ODW'
+	        PS1COLOR='Cyan'
+	        ;;
+	    *.ddu-india.com)
+	        dwa_site='DDU'
+	        PS1COLOR='Blue'
+	        ;;
+	    *.dreamworks.com|*.dreamworks.net)
+	        dwa_site='DDU'
+	        PS1COLOR='Magenta'
+	        ;;
+	    *.employees.org)
+		dwa_site=''
+	        PS1COLOR='Yellow'
+	        ;;
+	    *.lapseofthought.com)
+		dwa_site=''
+	        PS1COLOR='Cyan'
+	        ;;
+	    *)
+	        dwa_site='unknown'
+	        PS1COLOR='Blue'
 	    ;;
-	*.odw.com.cn)
-	    dwa_site='ODW'
-	    PS1COLOR='Cyan'
-	    ;;
-	*.ddu-india.com)
-	    dwa_site='DDU'
-	    PS1COLOR='Blue'
-	    ;;
-	*.dreamworks.com|*.dreamworks.net)
-	    dwa_site='DDU'
-	    PS1COLOR='Magenta'
-	    ;;
-	*)
-	    dwa_site='GLD'
-	    PS1COLOR='Blue'
-	    ;;
-    esac
+        esac
+    fi
     # If not color capable, use bold
     if [ "$color_prompt" != yes ]; then
 	PS1COLOR='Bold'
@@ -220,6 +249,20 @@ if [ -n "$PS1" ]; then
 
         # Load git prompt package config
         source ~/.bash-git-prompt/gitprompt.sh
+
+	# Set up ${color} variables for later use
+        # Fix colors for shell use (strip leading and trailing brackets)
+        fixcolor () {
+            c=$1
+            eval esc=\$$c
+            esclen=`expr ${#esc} - 4`
+            esc=${esc:2:$esclen}
+            eval $c='$esc'
+        }
+        fixcolor 'ResetColor'
+        for i in 0 1 2 3 4 5 6 7; do
+            fixcolor ${ColorNames[$i]}
+        done
     fi
     
     # Fix bs/del mapping
@@ -257,9 +300,6 @@ fi
 append PATH /home/systems/bin:/usr/local/sys/bin
 # And other systems dirs
 append PATH /opt/cxoffice/bin:/sbin:/usr/sbin
-if [ -d "/rel/map/osa/bin" ]; then
-  append PATH /rel/map/osa/bin
-fi
 
 export PATH MANPATH EDITOR A1MAIL
 
@@ -356,4 +396,7 @@ check-ssh-agent() {
 check-ssh-agent || export SSH_AUTH_SOCK=~/tmp/ssh-agent.sock
 # if agent.env data is invalid, start a new one
 check-ssh-agent || eval "$(ssh-agent -s -a ~/tmp/ssh-agent.sock)" > /dev/null
+
+# Vagrant setup
+export VAGRANT_HOME='/usr/pic1/vagrant.d'
 
