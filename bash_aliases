@@ -122,6 +122,10 @@ stopdduproxy() {
   fi
 }
 
+# Default dsh to ssh
+export DSH_REMOTE_CMD=ssh
+alias dsh='dsh -o "-o StrictHostKeyChecking=no" -t sh'
+
 # OSA aliases
 alias hermit='/usr/home/osa/scripts/hermit'
 
