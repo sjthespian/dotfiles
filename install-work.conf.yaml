@@ -1,0 +1,30 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.dotfiles: ''
+    ~/.bashrc: bashrc
+    ~/.bash_aliases: bash_aliases
+    ~/.bash_profile: bash_profile
+    ~/.bash_git_prompt: bash_git_prompt
+    ~/.dircolors: dircolors-dark
+    ~/.emacs: emacs
+    ~/.emacs.d: emacs.d
+    ~/.gitconfig: gitconfig-work
+    ~/.gitignore_global: gitignore_global
+    ~/.gnupg/gpg.conf:
+      create: true
+      path: gpg.conf
+    ~/.ssh:
+      create: true
+    ~/.ssh/config: ssh/config-work
+    ~/.tmux.conf: tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vimrc
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [chmod 700 ~/.ssh && chmod 600 ~/.ssh/config, Updating ssh file permissions]
