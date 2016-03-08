@@ -1,0 +1,89 @@
+# Defaults for all hosts
+KeepAlive yes
+Compression yes
+
+Host asterisk.lapseofthought.com
+Host asterisk
+        User root
+        ForwardAgent yes
+	ForwardX11 yes
+
+Host pdi
+	Hostname ftp.pdi.com
+        Compression yes
+        ForwardAgent yes
+        ForwardX11 yes
+        GatewayPorts yes
+        LocalForward 4025 localhost:4025
+        LocalForward 4993 localhost:4993
+        LocalForward 5900 localhost:5900
+
+Host cowbell
+	Hostname cowbell.employees.org
+	IdentityFile ~/.ssh/id_dsa
+        Compression yes
+        ForwardAgent yes
+        ForwardX11 yes
+
+Host willers
+	Hostname willers.employees.org
+        Compression yes
+        ForwardAgent yes
+        ForwardX11 yes
+
+Host dream-vnc
+	Hostname dream.lapseofthought.com
+        Compression yes
+        ForwardAgent yes
+        ForwardX11 yes
+	LocalForward 5900 localhost:5900
+
+Host ftp.sharedhosting.net
+        User scpweb
+        ForwardAgent no
+	ForwardX11 no
+	IdentityFile ~/.ssh/identity-scp
+	IdentityFile2 ~/.ssh/id_dsa-scp
+
+Host venice.dreamhost.com
+        User wwwscp
+        ForwardAgent no
+	ForwardX11 no
+	IdentityFile ~/.ssh/identity-scp
+	IdentityFile2 ~/.ssh/id_dsa-scp
+
+Host www.sunnyvaleplayers.org
+	#Hostname ftp.sharedhosting.net
+        #User scpweb
+	#Hostname forge.dreamhost.com
+	#Hostname jakarta.dreamhost.com
+	#Hostname fomalhaut.dreamhost.com
+	#Hostname banks.dreamhost.com
+	Hostname francis-lightfoot-lee.dreamhost.com
+	User wwwscp
+        ForwardAgent no
+	ForwardX11 no
+	IdentityFile ~/.ssh/identity-scp
+	IdentityFile2 ~/.ssh/id_dsa-scp
+
+Host ssh.pdi.com
+	Hostname 63.237.201.20
+        Compression yes
+        ForwardAgent yes
+        ForwardX11 yes
+
+Host lopsa-sb1
+	Hostname lopsa-sb1.lopsa.org
+        Compression yes
+	Port 52222
+
+Host dreamhost-lopsa
+	Hostname principal.dreamhost.com
+	User danric61
+        ForwardAgent no
+	ForwardX11 no
+	IdentityFile ~/.ssh/id_dsa-dhlopsa
+
+Host filecat.dreamworks.com
+	User digitalfish
+	IdentityFile ~/.ssh/dwa-digitalfish-sftp_dsa
