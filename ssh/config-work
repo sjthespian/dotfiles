@@ -1,5 +1,6 @@
 Host    morpheus-forward
 	Hostname morpheus.lapseofthought.com
+	User drich
 	Compression yes
 	ForwardAgent yes
 	ForwardX11 yes
@@ -48,7 +49,15 @@ Host	127.0.0.1
 	ForwardAgent no
 	ForwardX11 no
 
-# Send all other fqdn through pavo as a proxy
+Host	*.lapseofthought.com
+	User drich
+	IdentityFile ~/.ssh/id_dsa
+	ForwardAgent yes
+	ForwardX11 yes
+	Protocol 2,1
+	ServerAliveInterval 1800
+	Compression yes
+	
 Host    *.*
 	IdentityFile ~/.ssh/id_dsa
 	ForwardAgent yes
