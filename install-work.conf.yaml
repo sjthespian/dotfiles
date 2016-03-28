@@ -9,6 +9,7 @@
     ~/.bash_aliases: bash_aliases
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
+    ~/.git-prompt-colors.sh: git-prompt-colors.sh
     ~/.dircolors: dircolors-dark
     ~/.emacs: emacs
     ~/.emacs.d: emacs.d
