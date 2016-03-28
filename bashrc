@@ -52,9 +52,13 @@ case `uname -s` in
     "Darwin")
                 SYSTYPE="mac"
                 # Add homebrwew coreutils path
-                prepend PATH /usr/local/opt/coreutils/libexec/gnubin
-                prepend MANPATH /usr/local/opt/coreutils/libexec/gnuman
-                append PATH /usr/local/sbin
+		if [ -d /usr/local/opt/coreutils ]; then
+                    prepend PATH /usr/local/opt/coreutils/libexec/gnubin
+                    #prepend MANPATH /usr/local/opt/coreutils/libexec/gnuman
+		fi
+		if [ -d /usr/local/sbin ]; then
+                    append PATH /usr/local/sbin
+		fi
                 ;;
     *)		SYSTYPE="";;
 esac
@@ -82,7 +86,10 @@ if [ -n "$PS1" ]; then
     
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
-        ansi|xterm*|rxvt*|screen*|linux) color_prompt=yes;;
+        ansi|xterm*|rxvt*|screen*|linux)
+	    export CLICOLOR=1
+	    export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+	    color_prompt=yes;;
     esac
     
     # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -261,21 +268,12 @@ if [ -n "$DISPLAY" ]; then
   fi
 fi
 
-# Make sure we have systems bin
-append PATH /home/systems/bin:/usr/local/sys/bin
-# And other systems dirs
-append PATH /opt/cxoffice/bin:/sbin:/usr/sbin
-
 export PATH MANPATH EDITOR A1MAIL
 
 # Read bash aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-# Make locally installed modules work
-#   See ~/.pydistutils.cfg
-#export PYTHONPATH=/home/drich/py-lib
 
 ## Load bash completion
 #if [ -f "$HOME/etc/bash_completion" ]; then
@@ -289,56 +287,6 @@ fi
 #    . "~/.bash_completion.d/$1.sh" >/dev/null 2>&1 && return 124
 #}
 #complete -D -F _personal_completion_loader
-
-case $fqdn in
-    *dreamworks.*|*.ddu-india.com|*.pdi.com)
-        # Make ut_ticket work
-        export PYTHON_INCLUDE_PATH=/rel/map/osa/python
-        # Add additional OSA tools
-        append PATH /usr/home/osa/scripts
-
-        # Convert variables.csh to shell and source it
-        if [ -f '/etc/profile.d/variables.csh' ]; then
-          sed 's/setenv/export/;s/\(export [^ ]*\) /\1=/;s/^set/#set/' /etc/profile.d/variables.csh > /tmp/variables-$$.sh
-          . /tmp/variables-$$.sh
-          /bin/rm -f /tmp/variables-$$.sh
-        fi
-
-        # Get the /rel path for sys_hey and other utils
-        if [ -f /rel/boot/env/softmap_path.default ]; then
-          OIFS=$IFS
-          IFS=:
-          RELMAPDIRS=`cat /rel/boot/env/softmap_path.default`
-          SOFTMAP_PATH=''
-          for mapdir in $RELMAPDIRS; do
-            IFS=$OIFS
-            if [ -d "$mapdir/bin" ]; then
-              append PATH $mapdir/bin
-              append SOFTMAP_PATH $mapdir
-            fi
-            if [ -d "/rel/map/$mapdir/bin" ]; then
-              append PATH /rel/map/$mapdir/bin
-              append SOFTMAP_PATH /rel/map/$mapdir
-            fi
-            if [ -d "/rel/folio/pipeline/$mapdir/bin" ]; then
-              append PATH /rel/folio/pipeline/$mapdir/bin
-              append SOFTMAP_PATH /rel/folio/pipeline/$mapdir
-            fi
-            if [ -d "/rel/folio/jose/$mapdir/bin" ]; then
-              append PATH /rel/folio/jose/$mapdir/bin
-              append SOFTMAP_PATH /rel/folio/jose/$mapdir
-            fi
-          done
-          IFS=$OIFS
-          export SOFTMAP_PATH
-        fi
-
-        # Add Zenoss env on the zenoss servers
-        if [ -d ~zenoss ]; then
-          . ~zenoss/.bashrc
-        fi
-        ;;
-esac
 
 if [ -n "$PS1" ]; then
   stty erase ^h
@@ -361,7 +309,4 @@ check-ssh-agent() {
 check-ssh-agent || export SSH_AUTH_SOCK=~/tmp/ssh-agent.sock
 # if agent.env data is invalid, start a new one
 check-ssh-agent || eval "$(ssh-agent -s -a ~/tmp/ssh-agent.sock)" > /dev/null
-
-# Vagrant setup
-export VAGRANT_HOME='/usr/pic1/vagrant.d'
 
