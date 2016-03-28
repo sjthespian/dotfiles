@@ -4,9 +4,7 @@
 alias rm='rm -i'
 
 alias ?='man man'
-alias ls='ls -CF --color=always'
-alias grep='grep --color=always'
-alias egrep='egrep --color=always'
+alias ls='ls -CF'
 alias list='more -l'
 alias wa='who -a'
 alias h='history'
@@ -47,90 +45,6 @@ seticonname () {
 }
 
 alias wake_dream="sudo ether-wake 00:60:08:20:CF:34"
-
-#
-# DWA Aliases
-alias sys_hey="sys_hey -fg DarkRed -image /home/drich/Images/heybg.jpg -font lucidasans-bold-12 -nogray"
-#alias pw_escrow='cat /home/systems/pw_escrow/executive.asc | gpg --decrypt | less'
-alias pw_escrow='TMPFILE=`mktemp` && cp /home/systems/pw_escrow/executive.asc $TMPFILE && gpg --decrypt $TMPFILE | less && /bin/rm $TMPFILE'
-alias rpmarch='rpm -qa --qf "%{name}-%{version}-%{release}.%{arch}\n"'
-alias rpmtime='rpm -qa --qf "%{installtime} (%{installtime:date}) %{name}\n"'
-
-# JIRA aliases
-alias ut_ticket='ut_ticket -config /usr/home/dst/config/data/ut_ticket.config'
-
-# DWA VNC
-alias lasvncstart="ssh -f -n gw.virtualdreamworks.com vncserver -geometry :42 1280x1024"
-alias lasvncstop="ssh -f -n gw.virtualdreamworks.com vncserver -kill :42"
-alias lasvncforward="ssh -f -N -L5904:localhost:5942 gw.virtualdreamworks.com"
-alias skyglowvncstart="ssh -f -n skyglow x11vnc -display :0 -many -bg  && sleep 5 && vncviewer skyglow"
-alias skyglowvncstop="ssh -f -n skyglow killall x11vnc"
-alias odw-vnc='ssh -fN -L5999:localhost:5900 odw-vnc && vncviewer :99'
-
-# LDAP aliases/functions
-ldappinfo () {
-  ldapsearch -LLL -x uid=$1 uid cn ou passwordExpirationTime passwordRetryCount retryCountResetTime accountUnlockTime
-}
-
-# Sudo aliases
-alias sudo2zenoss='sudo -Hi -u zenoss $*'
-
-# Puppet aliases
-function puppetrunroot() {
-  PATH=/bin:/usr/bin sudo -iH /usr/local/bin/puppetrun $*;
-}
-function puppetcronroot() {
-  PATH=/bin:/usr/bin sudo -iH /usr/local/bin/puppetcron && grep puppet /var/log/messages $*;
-}
-function puppetgittest() {
-  PATH=/bin:/usr/bin sudo -iH puppet apply --modulepath=/usr/pic1/git/puppet/modules /usr/pic1/git/puppet/site.pp $*;
-}
-function puppetgittestremote() {
-  PATH=/bin:/usr/bin sudo -iH puppet apply --modulepath=/hosts/grayfury/usr/pic1/git/puppet/modules /hosts/grayfury/usr/pic1/git/puppet/site.pp $*;
-}
-alias puppeterrors='SDATE=`date +"%b %e"` && egrep "${SDATE}.*puppet" /var/log/messages'
-alias prr=puppetrunroot
-alias pcr=puppetcronroot
-alias pgt=puppetgittest
-alias pgtr=puppetgittestremote
-
-# DDU proxy for downloads
-startdduproxy() {
-  if [ -n "$1" ]; then
-    ssh -nNTgx -D 4444 aretha.pdi.com &
-    ssh -nNTx -R 33128:mpt-internetproxy.anim.dreamworks.com:8080 $1 &
-    ssh -nNTx -R 4444:aretha.pdi.com:4444 $1 &
-    echo "On $1, run the following:"
-    echo "export socks_proxy=socks://`hostname`:4444/"
-    echo "export http_proxy=http://localhost:33128/"
-    echo ""
-    echo "To use socks with python for zenoss, TSOCKS_CONF_FILE=~/tsocks.conf tsocks python setup.py install"
-  else
-    echo "usage: startdduproxy dduhost" >&2
-  fi
-}
-stopdduproxy() {
-  if [ -n "$1" ]; then
-    PID1=`ps -efww | egrep -- 'ssh.*-D 4444' | egrep -v grep | awk '{print $2}'`
-    PID2=`ps -efww | egrep -- "ssh.*-R 33128.*$1" | egrep -v grep | awk '{print $2}'`
-    PID1=`ps -efww | egrep -- 'ssh.*-R 4444' | egrep -v grep | awk '{print $2}'`
-    if [ -n "$PID1" -o -n "$PID2" -o -n "$PID3" ]; then
-      kill $PID1 $PID2 $PID3
-    fi
-  else
-    echo "usage: stopdduproxy dduhost" >&2
-  fi
-}
-
-# Default dsh to ssh
-export DSH_REMOTE_CMD=ssh
-alias dsh='dsh -o "-o StrictHostKeyChecking=no" -t sh'
-
-# OSA aliases
-alias hermit='/usr/home/osa/scripts/hermit'
-
-# END DWA
-#
 
 # Compiz startup -- update in /usr/bin/compiz-gtk
 function runCompiz() {

@@ -1,11 +1,5 @@
-[http]
-#	proxy = http://mpt-internetproxy.anim.dreamworks.com:8080/
-	sslVerify = false 
-[https]
-#	proxy = http://mpt-internetproxy.anim.dreamworks.com:8080/
-	sslVerify = false 
 [user]
-	email = daniel.rich@dreamworks.com
+	email = daniel.rich@disney.com
 	name = Daniel Rich
 [color]
 	ui = true

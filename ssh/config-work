@@ -1,6 +1,4 @@
 Host    morpheus-forward
-	ProxyCommand ssh pavo.anim.dreamworks.com nc %h %p
-	#ProxyCommand ssh action.pdi.com nc %h %p
 	Hostname morpheus.lapseofthought.com
 	Compression yes
 	ForwardAgent yes
@@ -45,96 +43,6 @@ Host www.sunnyvaleplayers.org
 	IdentityFile ~/.ssh/identity-scp
 	IdentityFile2 ~/.ssh/id_dsa-scp
 
-Host	im.ddu-india.com
-	Hostname kern.ddu-india.com
-	LocalForward 9090 localhost:9090
-	LocalForward 9222 localhost:5222
-
-Host    employees.org-forward
-	ProxyCommand ssh pavo.anim.dreamworks.com nc %h %p
-	Hostname willers.employees.org
-	Compression yes
-	ForwardAgent yes
-	ForwardX11 yes
-	# IRC bip
-	#LocalForward 4667 localhost:5667
-	LocalForward 4680 localhost:8800
-	# Jabber
-	LocalForward 5922 jabber.lapseofthought.com:5222
-	LocalForward 5923 jabber.lapseofthought.com:5223
-
-
-Host lopsa-003
-	ProxyCommand ssh pavo.anim.dreamworks.com nc %h %p
-	Hostname lopsa-003.lopsa.org
-	Compression yes
-	Port 52222
-Host lopsa-004
-	ProxyCommand ssh pavo.anim.dreamworks.com nc %h %p
-	Hostname lopsa-004.lopsa.org
-	Compression yes
-	Port 52222
-
-Host    *.pdi.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-	ForwardAgent yes
-	ForwardX11 yes
-#	ForwardX11Trusted yes
-	Protocol 2,1
-Host    *.dreamworks.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-	ForwardAgent yes
-	ForwardX11 yes
-#	ForwardX11Trusted yes
-	Protocol 2,1
-Host    *.anim.dreamworks.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-	ForwardAgent yes
-	ForwardX11 yes
-#	ForwardX11Trusted yes
-	Protocol 2,1
-Host	*.las.virtualdreamworks.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-Host	*.ddu-india.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-
-# DMC & ODW
-Host	*.dreammoonchild.com
-	IdentityFile ~/.ssh/id_dsa
-	ProxyCommand	none
-	Compression yes
-	ForwardAgent yes
-	ForwardX11 yes
-Host	dmc
-	IdentityFile ~/.ssh/id_dsa
-	Hostname moe.dreammoonchild.com
-	Compression yes
-	ForwardAgent yes
-	ForwardX11 yes
-	# Zenoss on zenoss.anim.odw.com.cn
-	LocalForward 3080 zenoss:80
-Host	odw-vnc
-	IdentityFile ~/.ssh/id_dsa
-	Hostname larry.dreammoonchild.com
-	#proxycommand ssh larry.dreammoonchild.com nc specs.anim.odw.com.cn 22
-	ForwardX11 no
-	LocalForward 5999 specs.anim.odw.com.cn:5900
-
-Host	*.anim.odw.com.cn
-	IdentityFile ~/.ssh/id_dsa
-	#ProxyCommand ssh mission.anim.odw.com.cn nc %h %p
-	#ProxyCommand ssh 116.239.13.194 nc %h %p
-	ProxyCommand ssh larry.dreammoonchild.com nc %h %p
-	#ProxyCommand	none
-	Compression yes
-	ForwardAgent yes
-	ForwardX11 yes
-
 Host	127.0.0.1
 	ProxyCommand none
 	ForwardAgent no
@@ -143,8 +51,6 @@ Host	127.0.0.1
 # Send all other fqdn through pavo as a proxy
 Host    *.*
 	IdentityFile ~/.ssh/id_dsa
-	#ProxyCommand ssh action.pdi.com nc %h %p
-	ProxyCommand ssh pavo.anim.dreamworks.com nc %h %p
 	ForwardAgent yes
 	ForwardX11 yes
 	Protocol 2,1

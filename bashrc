@@ -2,26 +2,6 @@
 # .bashrc:  sets up the bash environment 
 #
 
-# Special DreamWorks bits
-fqdn=`hostname -f`
-location=''
-if [ -x /usr/bin/facter ]; then
-    location=`/usr/bin/facter location`
-fi
-case $fqdn in
-    *dreamworks.*|*.ddu-india.com|*.pdi.com)
-	# Get studio environment if not set
-	if [ -z "$STUDIO" -a -n "$PS1" ]; then
-  	    #echo "Loading /etc/profile..."
-  	    . /etc/profile
-  	    export STUDIO
-	fi
-
-	# Set default printer
-	export PRINTER=dw917
-	;;
-esac
-
 #
 # prepend() and append() functions for path management
 #
@@ -87,9 +67,9 @@ export HISTIGNORE="&:[bf]g:exit"
 export PAGER="less -m"
 
 # Fix root's path - makes sure system directories are first
-if [ `id -u` = "0" ]; then
-    export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sys/bin:/home/systems/bin:/usr/kerberos/bin:/usr/X11R6/bin"
-fi
+#if [ `id -u` = "0" ]; then
+#    export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sys/bin:/home/systems/bin:/usr/kerberos/bin:/usr/X11R6/bin"
+#fi
 
 #
 # Prompt setup
@@ -102,7 +82,7 @@ if [ -n "$PS1" ]; then
     
     # set a fancy prompt (non-color, unless we know we "want" color)
     case "$TERM" in
-        xterm*|rxvt*|screen*|linux) color_prompt=yes;;
+        ansi|xterm*|rxvt*|screen*|linux) color_prompt=yes;;
     esac
     
     # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -122,55 +102,40 @@ if [ -n "$PS1" ]; then
     fi
 
     # Figure out which site I'm at and set prompt color
-    dwa_site='GLD'
+    site='PAL'
     PS1COLOR='Magenta'
-    if [ -n "$location" ]; then
-        case $location in
-            rwc)
-                dwa_site='RWC'
-                PS1COLOR='Green'
-                ;;
-            gld)
-                dwa_site='DDU'
-                PS1COLOR='Magenta'
-                ;;
-            ttp)
-                dwa_site='DDU'
-                PS1COLOR='Blue'
-                ;;
-        esac
-    else
-        case $fqdn in
-	    *.rwc.dreamworks.net)
-	        dwa_site='RWC'
-	        PS1COLOR='Green'
-	        ;;
-	    *.odw.com.cn)
-	        dwa_site='ODW'
-	        PS1COLOR='Cyan'
-	        ;;
-	    *.ddu-india.com)
-	        dwa_site='DDU'
-	        PS1COLOR='Blue'
-	        ;;
-	    *.dreamworks.com|*.dreamworks.net)
-	        dwa_site='DDU'
-	        PS1COLOR='Magenta'
-	        ;;
-	    *.employees.org)
-		dwa_site=''
-	        PS1COLOR='Yellow'
-	        ;;
-	    *.lapseofthought.com)
-		dwa_site=''
-	        PS1COLOR='Cyan'
-	        ;;
-	    *)
-	        dwa_site='unknown'
-	        PS1COLOR='Blue'
+    fqdn=`hostname -f`
+    case $fqdn in
+	PAL*)
+	    site='PAL'
+	    PS1COLOR='Green'
 	    ;;
-        esac
-    fi
+	BUR*)
+	    site='ODW'
+	    PS1COLOR='Cyan'
+	    ;;
+	BLR*)
+	    site='BLR'
+	    PS1COLOR='Blue'
+	    ;;
+	CAN*)
+	    site='CAN'
+	    PS1COLOR='Magenta'
+	    ;;
+	*.employees.org)
+	    site=''
+	    PS1COLOR='Yellow'
+	    ;;
+	*.lapseofthought.com)
+	    site=''
+	    PS1COLOR='Cyan'
+	    ;;
+	*)
+	    site='unknown'
+	    PS1COLOR='Blue'
+	;;
+    esac
+
     # If not color capable, use bold
     if [ "$color_prompt" != yes ]; then
 	PS1COLOR='Bold'
@@ -193,7 +158,7 @@ if [ -n "$PS1" ]; then
     esac
 
     # Get colors from git-bash-prompt module
-    if [ -d ~/.bash-git-prompt ]; then
+    if [ -e ~/.bash-git-prompt ]; then
       source ~/.bash-git-prompt/prompt-colors.sh
     fi
     PSCOLOR=""
@@ -230,7 +195,7 @@ if [ -n "$PS1" ]; then
     export PS1
     unset color_prompt force_color_prompt
 
-    if [ -d ~/.bash-git-prompt ]; then
+    if [ -e ~/.bash-git-prompt ]; then
         # git prompt setup - https://github.com/magicmonty/bash-git-prompt
         # Also defines colors based on the theme
         # Set config variables first

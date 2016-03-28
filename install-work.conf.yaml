@@ -5,11 +5,10 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
     ~/.bashrc: bashrc
     ~/.bash_aliases: bash_aliases
     ~/.bash_profile: bash_profile
-    ~/.bash_git_prompt: bash-git-prompt
+    ~/.bash-git-prompt: bash-git-prompt
     ~/.dircolors: dircolors-dark
     ~/.emacs: emacs
     ~/.emacs.d: emacs.d
@@ -18,8 +17,6 @@
     ~/.gnupg/gpg.conf:
       create: true
       path: gpg.conf
-    ~/.ssh:
-      create: true
     ~/.ssh/config: ssh/config-work
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
