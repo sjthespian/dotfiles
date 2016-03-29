@@ -231,10 +231,10 @@ if [ -n "$PS1" ]; then
             esc=${esc:2:$esclen}
             eval $c='$esc'
         }
-        fixcolor 'ResetColor'
-        for i in 0 1 2 3 4 5 6 7; do
-            fixcolor ${ColorNames[$i]}
-        done
+#        fixcolor 'ResetColor'
+#        for i in 0 1 2 3 4 5 6 7; do
+#            fixcolor ${ColorNames[$i]}
+#        done
     fi
     
     # Fix bs/del mapping
