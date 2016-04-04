@@ -125,6 +125,14 @@ if [ -n "$PS1" ]; then
 	    site='BLR'
 	    PS1COLOR='Blue'
 	    ;;
+	*.general.*)
+	    site='CAN'
+	    PS1COLOR='Magenta'
+	    ;;
+	*.compliant.*)
+	    site='CAN'
+	    PS1COLOR='BrightRed'
+	    ;;
 	CAN*)
 	    site='CAN'
 	    PS1COLOR='Magenta'
@@ -310,3 +318,6 @@ check-ssh-agent || export SSH_AUTH_SOCK=~/tmp/ssh-agent.sock
 # if agent.env data is invalid, start a new one
 check-ssh-agent || eval "$(ssh-agent -s -a ~/tmp/ssh-agent.sock)" > /dev/null
 
+
+# Groovy
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
