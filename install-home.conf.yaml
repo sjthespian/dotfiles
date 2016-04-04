@@ -6,7 +6,6 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ''
     ~/.bashrc: bashrc
     ~/.bash_aliases: bash_aliases
     ~/.bash_profile: bash_profile
@@ -36,7 +35,6 @@
     ~/.ssh/conf.d/99-wildcard.conf:
       create: true
       path: ssh/conf.d/99-wildcard.conf
-    ~/.ssh/config: ssh/config-home
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
