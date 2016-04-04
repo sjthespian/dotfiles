@@ -220,8 +220,12 @@ if [ -n "$PS1" ]; then
 
         # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
         # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
-        GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}"
-        GIT_PROMPT_END="> "
+	if [ -d ~/.chefvm ]; then
+	    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}"
+	else
+	    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}"
+	fi
+        GIT_PROMPT_END="${BoldWhite}>${ResetColor} "
 
         # as last entry source the gitprompt script
         # GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh

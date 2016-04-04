@@ -36,3 +36,8 @@ if [ -f ~/.bashrc ]; then source ~/.bashrc; fi
 if [ -n "$DISPLAY" -a -d ~/.fonts ]; then
   xset +fp ~/.fonts
 fi
+
+# ChefVM init (https://github.com/trobrock/chefvm)
+if [ -d ~/.chefvm ]; then
+  eval "$(/Users/richd140/.chefvm/bin/chefvm init -)"
+fi
