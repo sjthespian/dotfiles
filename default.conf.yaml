@@ -7,7 +7,26 @@
 
 - link:
     ~/.bashrc: bashrc
+    ~/.bashrc.d/01-systype.sh:
+      create: true
+      path: bashrc.d/01-systype.sh
+    ~/.bashrc.d/10-prompt.sh:
+      create: true
+      path: bashrc.d/10-prompt.sh
+    ~/.bashrc.d/75-editor.sh:
+      create: true
+      path: bashrc.d/75-editor.sh
+    ~/.bashrc.d/80-completion.sh:
+      create: true
+      path: bashrc.d/80-completion.sh
+    ~/.bashrc.d/85-ssh-agent.sh:
+      create: true
+      path: bashrc.d/85-ssh-agent.sh
+    ~/.bashrc.d/99-misc.sh:
+      create: true
+      path: bashrc.d/99-misc.sh
     ~/.bash_aliases: bash_aliases
+    ~/.bash_functions: bash_functions
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
     ~/.dircolors: dircolors-dark
