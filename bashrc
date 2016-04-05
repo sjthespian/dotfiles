@@ -223,7 +223,7 @@ if [ -n "$PS1" ]; then
 	if [ -d ~/.chefvm ]; then
 	    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}"
 	else
-	    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}"
+	    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}"
 	fi
         GIT_PROMPT_END="${BoldWhite}>${ResetColor} "
 
