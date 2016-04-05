@@ -39,5 +39,5 @@ fi
 
 # ChefVM init (https://github.com/trobrock/chefvm)
 if [ -d ~/.chefvm ]; then
-  eval "$(/Users/richd140/.chefvm/bin/chefvm init -)"
+  eval "$(~/.chefvm/bin/chefvm init -)"
 fi
