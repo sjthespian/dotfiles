@@ -303,9 +303,12 @@ if [ "$SYSTYPE" == "mac" ]; then
 fi
 
 # Additional bash completion
-for i in ~/.bash_completion.d/*.sh; do
-    . $i >/dev/null 2>&1 && return 124
-done
+_personal_completion_loader() {
+    for i in ~/.bash_completion.d/*.sh; do
+        . $i >/dev/null 2>&1 || echo "WARNING: include of $script failed!"
+    done
+}
+_personal_completion_loader
 #_personal_completion_loader()
 #{
 #    . "~/.bash_completion.d/$1.sh" >/dev/null 2>&1 && return 124
@@ -314,14 +317,6 @@ done
 
 if [ -n "$PS1" ]; then
   stty erase ^h
-fi
-
-# Setup CD/DVD tools for OSX
-if [ "$SYSTYPE" == "mac" ]; then
-    export CDR_DEVICE=1,0,0
-    export CDR_SPEED=40
-    export CDR_FIFISIZE=2m
-    alias cdrecord='sudo cdrecord --driveropts=burnfree -eject'
 fi
 
 # Ensure we have a working ssh-agent
@@ -334,6 +329,12 @@ check-ssh-agent || export SSH_AUTH_SOCK=~/tmp/ssh-agent.sock
 # if agent.env data is invalid, start a new one
 check-ssh-agent || eval "$(ssh-agent -s -a ~/tmp/ssh-agent.sock)" > /dev/null
 
-
 # Groovy
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
+
+# Additional include files
+if [ -d ~/.bashrc.d ]; then
+    for script in ~/.bashrc.d/*.sh; do
+	. $script >/dev/null 2>&1 || echo "WARNING: include of $script failed!"
+    done
+fi

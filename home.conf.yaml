@@ -6,6 +6,9 @@
 - clean: ['~']
 
 - link:
+    ~/.bashrc.d/90-cdrsettings.sh:
+      create: true
+      path: bashrc.d/90-cdrsettings.sh:
     ~/.gitconfig: gitconfig-home
     ~/.ssh/conf.d/60-lopsa.conf:
       create: true
