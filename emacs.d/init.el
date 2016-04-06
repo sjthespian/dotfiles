@@ -39,6 +39,7 @@
 (add-hook 'ruby-mode-hook (lambda () (flymake-ruby-load)))
 
 ;; YAML
+(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 

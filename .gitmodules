@@ -31,3 +31,6 @@
 [submodule "Lisp/yaml-mode"]
 	path = Lisp/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
+[submodule "Lisp/cedet"]
+	path = Lisp/cedet
+	url = http://git.code.sf.net/p/cedet/git
