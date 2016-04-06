@@ -8,22 +8,22 @@
 - link:
     ~/.emacs: emacs
     ~/.emacs.d: emacs.d
-    ~/Lisp/cedet: Lisp/cedet
-    ~/Lisp/chef-mode.el: Lisp/chef-mode.el
-    ~/Lisp/color-theme: Lisp/color-theme
-    ~/Lisp/dash.el: Lisp/dash.el
-    ~/Lisp/emacs-color-theme-solarized: Lisp/emacs-color-theme-solarized
-    ~/Lisp/emacs-for-python: Lisp/emacs-for-python
-    ~/Lisp/flycheck: Lisp/flycheck
-    ~/Lisp/flymake-easy.el: Lisp/flymake-easy.el
-    ~/Lisp/flymake-puppet.el: Lisp/flymake-puppet.el
-    ~/Lisp/flymake-ruby.el: Lisp/flymake-ruby.el
-    ~/Lisp/git-modes: Lisp/git-modes
-    ~/Lisp/json-mode.el: Lisp/json-mode.el
-    ~/Lisp/magit: Lisp/magit
-    ~/Lisp/markdown-mode: Lisp/markdown-mode
-    ~/Lisp/rubocop.el: Lisp/rubocop.el
-    ~/Lisp/yaml-mode: Lisp/yaml-mode
+#    ~/Lisp/cedet: Lisp/cedet
+#    ~/Lisp/color-theme: Lisp/color-theme
+#    ~/Lisp/dash.el: Lisp/dash.el
+#    ~/Lisp/emacs-color-theme-solarized: Lisp/emacs-color-theme-solarized
+#    ~/Lisp/emacs-for-python: Lisp/emacs-for-python
+#    ~/Lisp/flycheck: Lisp/flycheck
+#    ~/Lisp/flymake-easy.el: Lisp/flymake-easy.el
+#    ~/Lisp/flymake-puppet.el: Lisp/flymake-puppet.el
+#    ~/Lisp/flymake-ruby.el: Lisp/flymake-ruby.el
+#    ~/Lisp/git-modes: Lisp/git-modes
+#    ~/Lisp/json-mode.el: Lisp/json-mode.el
+#    ~/Lisp/magit: Lisp/magit
+#    ~/Lisp/markdown-mode: Lisp/markdown-mode
+#    ~/Lisp/nxhtml: Lisp/nxhtml
+#    ~/Lisp/rubocop.el: Lisp/rubocop.el
+#    ~/Lisp/yaml-mode: Lisp/yaml-mode
 
 - shell:
   - [ git submodule update --init --recursive, Installing submodules]

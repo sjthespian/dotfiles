@@ -3,8 +3,8 @@
 
 ;;; Setup directory and path information
 (setq home-directory (getenv "HOME"))
-(setq lisp-directory (concat home-directory "/Lisp"))
-(add-to-list 'load-path lisp-directory)
+(setq lisp-directory (concat home-directory "/.emacs.d"))
+;(add-to-list 'load-path lisp-directory)
 
 (custom-set-variables
  '(ldap-host-parameters-alist (quote (("ldaprr.pdi.com" base "dc=pdi,dc=dreamworks,dc=com"))))
@@ -31,7 +31,7 @@
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
 ;; Ruby
-(add-to-list 'load-path (concat lisp-directory "/dash.el"))
+;(add-to-list 'load-path (concat lisp-directory "/dash.el"))
 (autoload 'dash "dash" "Dash" t)
 (autoload 'rubocop-mode "rubocop" "Rubocop syntax checking" t)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
@@ -39,7 +39,7 @@
 (add-hook 'ruby-mode-hook (lambda () (flymake-ruby-load)))
 
 ;; YAML
-(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
+;(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
@@ -75,7 +75,7 @@
 
 ;;
 ;; Load nxhtml for jsp editing
-(load "nxhtml/autostart.el")
+(load-file (concat lisp-directory "/nxhtml/autostart.el"))
 
 ;;
 ;; Puppet automation
@@ -125,22 +125,25 @@ calls vc-diff)"
 (global-set-key  (kbd "C-x v=") 'my-vc-diff)
 
 ;; speedbar - http://cedet.sourceforge.net/speedbar.shtml
-(add-to-list 'load-path (concat lisp-directory "/cedet"))
+;(add-to-list 'load-path (concat lisp-directory "/cedet"))
 
 ;; Solarized color scheme
-(add-to-list 'load-path (concat lisp-directory "/emacs-color-theme-solarized"))
+;(add-to-list 'load-path (concat lisp-directory "/emacs-color-theme-solarized"))
+(if (>= emacs-major-version 24)
 ;; For emacs 24
-;;(load-theme 'solarized-light t)
+    (load-theme 'sanityinc-solarized-light t)
 ;; -- end of emacs 24
 ;; For emacs 23
-(add-to-list 'load-path (concat lisp-directory "/color-theme"))
-(require 'color-theme "color-theme")
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-hober)))
-(require 'color-theme-solarized)
-(color-theme-solarized-light)
+  (progn
+    (add-to-list 'load-path (concat lisp-directory "/color-theme"))
+    (require 'color-theme "color-theme")
+    (eval-after-load "color-theme"
+      '(progn
+	 (color-theme-initialize)
+	 (color-theme-hober)))
+    (require 'color-theme-solarized)
+    (color-theme-solarized-light)
+    ))
 ;; -- end of emacs 23
 
 ;; Emacs-for-python
@@ -149,7 +152,7 @@ calls vc-diff)"
 
 ;;
 ;; Markdown mode
-(add-to-list 'load-path (concat lisp-directory "/markdown-mode"))
+;(add-to-list 'load-path (concat lisp-directory "/markdown-mode"))
 (autoload 'markdown-mode "markdown-mode"
 	     "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
