@@ -9,10 +9,45 @@ DOTBOT_DIR="dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Parse command line options
+DOTBOTOPTS=""
+VERBOSE="normal"
+while getopts "Qqvd:c:" opt; do
+    case $opt in
+	v)
+	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
+	    ;;
+	Q)
+	    VERBOSE='veryquiet'
+	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
+	    ;;
+	q)
+	    VERBOSE='quiet'
+	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
+	    ;;
+	d)
+	    BASEDIR=$opt
+	    ;;
+	c)
+	    CONFIG_SUFFIX=$opt
+	    ;;
+	?)
+	    exit 1
+	    ;;
+    esac
+done
+# Clean up parsed options
+while (( $((OPTIND--)) > 1 )); do
+    shift
+done
+
+
 cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-	echo "Installing $conf..."
-	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
+	if [ $VERBOSE != "veryquiet" ]; then
+		echo -e "\nInstalling $conf..."
+	fi
+	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" ${DOTBOTOPTS} -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
 done
