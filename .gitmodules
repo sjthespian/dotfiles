@@ -7,3 +7,27 @@
 [submodule "blackbox"]
 	path = blackbox
 	url = https://github.com/StackExchange/blackbox
+[submodule "Lisp/dash.el"]
+	path = Lisp/dash.el
+	url = https://github.com/magnars/dash.el.git
+[submodule "Lisp/emacs-color-theme-solarized"]
+	path = Lisp/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "Lisp/emacs-for-python"]
+	path = Lisp/emacs-for-python
+	url = https://github.com/gabrielelanaro/emacs-for-python
+[submodule "Lisp/flycheck"]
+	path = Lisp/flycheck
+	url = https://github.com/flycheck/flycheck.git
+[submodule "Lisp/git-modes"]
+	path = Lisp/git-modes
+	url = https://github.com/magit/git-modes.git
+[submodule "Lisp/magit"]
+	path = Lisp/magit
+	url = https://github.com/magit/magit.git
+[submodule "Lisp/markdown-mode"]
+	path = Lisp/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
+[submodule "Lisp/yaml-mode"]
+	path = Lisp/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git

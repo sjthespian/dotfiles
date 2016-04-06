@@ -146,6 +146,15 @@ calls vc-diff)"
 ;; https://github.com/gabrielelanaro/emacs-for-python
 (load-file (concat lisp-directory "/emacs-for-python/epy-init.el"))
 
+;;
+;; Markdown mode
+(add-to-list 'load-path (concat lisp-directory "/markdown-mode"))
+(autoload 'markdown-mode "markdown-mode"
+	     "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; Don't start the server unless we can verify that it isn't running.
 (require 'server)
 (when (and (functionp 'server-running-p) (not (server-running-p)))
