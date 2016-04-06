@@ -1,3 +1,7 @@
+# some editor defaults
+EXINIT='set noautoindent showmatch showmode autowrite redraw'
+export EXINIT
+
 # Set default editor if emacs is available and not forwrding over ssh
 if [ -n "$DISPLAY" ]; then
     DISPLAYISLOCALHOST=`echo "$DISPLAY" | grep -c localhost`;
