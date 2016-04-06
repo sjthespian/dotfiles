@@ -22,6 +22,9 @@
     ~/.bashrc.d/85-ssh-agent.sh:
       create: true
       path: bashrc.d/85-ssh-agent.sh
+    ~/.bashrc.d/86-gpg-agent.sh:
+      create: true
+      path: bashrc.d/86-gpg-agent.sh
     ~/.bashrc.d/99-misc.sh:
       create: true
       path: bashrc.d/99-misc.sh
