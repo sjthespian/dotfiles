@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Seed the GPG agent (it won't work with xargs
+if [ -z "$GPG_AGENT_INFO" ]; then
+     gpg --output /dev/null --sign /dev/null
+fi
+
+# Update public keys by finding key files that are newer than the keyring
+find keys/gpg/public/ -type f -newer ~/.gnupg/pubring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
+
+# Update private keys by finding key files that are newer than the keyring
+find keys/gpg/private/ -type f -newer ~/.gnupg/secring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
