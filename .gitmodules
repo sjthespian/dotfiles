@@ -34,9 +34,9 @@
 [submodule "Lisp/cedet"]
 	path = Lisp/cedet
 	url = http://git.code.sf.net/p/cedet/git
-[submodule "Lisp/nxhtml"]
-	path = emacs.d/nxhtml
-	url = https://github.com/jwiegley/nxhtml.git
 [submodule "emacs.d/chef-mode"]
 	path = emacs.d/chef-mode
 	url = https://github.com/mpasternacki/chef-mode
+[submodule "emacs.d/nxhtml"]
+	path = emacs.d/nxhtml
+	url = https://github.com/jwiegley/nxhtml.git
