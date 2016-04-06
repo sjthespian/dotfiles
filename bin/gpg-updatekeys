@@ -6,7 +6,13 @@ if [ -z "$GPG_AGENT_INFO" ]; then
 fi
 
 # Update public keys by finding key files that are newer than the keyring
-find keys/gpg/public/ -type f -newer ~/.gnupg/pubring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
+if [ `find keys/gpg/public/ -type f -newer ~/.gnupg/pubring.gpg | wc -l` -gt 0 ]; then
+    find keys/gpg/public/ -type f -newer ~/.gnupg/pubring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
+    touch ~/.gnupg/pubring.pgp
+fi
 
 # Update private keys by finding key files that are newer than the keyring
-find keys/gpg/private/ -type f -newer ~/.gnupg/secring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
+if [ `find keys/gpg/private/ -type f -newer ~/.gnupg/secring.gpg | wc -l` -gt 0 ]; then
+    find keys/gpg/private/ -type f -newer ~/.gnupg/secring.gpg| xargs blackbox/bin/blackbox_cat | gpg --import
+    touch ~/.gnupg/secring.pgp
+fi
