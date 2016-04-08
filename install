@@ -11,18 +11,11 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Parse command line options
 DOTBOTOPTS=""
-VERBOSE="normal"
+VERBOSE=""
 while getopts "Qqvd:c:" opt; do
     case $opt in
-	v)
-	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
-	    ;;
-	Q)
-	    VERBOSE='veryquiet'
-	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
-	    ;;
-	q)
-	    VERBOSE='quiet'
+	v|Q|q)
+	    VERBOSE=$opt
 	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
 	    ;;
 	d)
@@ -46,7 +39,7 @@ cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-	if [ $VERBOSE != "veryquiet" ]; then
+	if [ $VERBOSE != "Q" ]; then
 		echo -e "\nInstalling $conf..."
 	fi
 	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" ${DOTBOTOPTS} -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
