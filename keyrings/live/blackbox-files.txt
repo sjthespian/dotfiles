@@ -1,4 +1,5 @@
 keys/gpg/private/25716A2D.asc
 keys/gpg/private/C938A5B3.asc
 keys/gpg/public/25716A2D.asc
+keys/gpg/public/65D0FD58.asc
 keys/gpg/public/C938A5B3.asc
