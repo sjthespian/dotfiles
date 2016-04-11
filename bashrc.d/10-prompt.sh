@@ -110,8 +110,9 @@ then
         PS1="\h# "
     else
         if [ "$color_prompt" == yes ]; then
-            PS1="${BrightRed}\h${ResetColor}# "
 	    PSCOLOR='BrightRed'
+            eval PSCOLOR=\$$PSCOLOR
+            PS1="${PSCOLOR}\u@\h${ResetColor}# "
         else
             PS1="${Bold}\h# "
 	    PSCOLOR='Red'
