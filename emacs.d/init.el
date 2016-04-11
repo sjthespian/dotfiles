@@ -4,7 +4,7 @@
 ;;; Setup directory and path information
 (setq home-directory (getenv "HOME"))
 (setq lisp-directory (concat home-directory "/.emacs.d"))
-;(add-to-list 'load-path lisp-directory)
+(add-to-list 'load-path (concat lisp-directory "/lisp"))
 
 (custom-set-variables
  '(ldap-host-parameters-alist (quote (("ldaprr.pdi.com" base "dc=pdi,dc=dreamworks,dc=com"))))
