@@ -14,13 +14,13 @@
 	path = Lisp/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "Lisp/emacs-for-python"]
-	path = emacs.d/emacs-for-python
+	path = emacs.d/lisp/emacs-for-python
 	url = https://github.com/gabrielelanaro/emacs-for-python
 [submodule "Lisp/flycheck"]
 	path = Lisp/flycheck
 	url = https://github.com/flycheck/flycheck.git
 [submodule "Lisp/git-modes"]
-	path = emacs.d/git-modes
+	path = emacs.d/lisp/git-modes
 	url = https://github.com/magit/git-modes.git
 [submodule "Lisp/magit"]
 	path = Lisp/magit
@@ -35,8 +35,8 @@
 	path = Lisp/cedet
 	url = http://git.code.sf.net/p/cedet/git
 [submodule "emacs.d/chef-mode"]
-	path = emacs.d/chef-mode
+	path = emacs.d/lisp/chef-mode
 	url = https://github.com/mpasternacki/chef-mode
 [submodule "emacs.d/nxhtml"]
-	path = emacs.d/nxhtml
+	path = emacs.d/lisp/nxhtml
 	url = https://github.com/jwiegley/nxhtml.git
