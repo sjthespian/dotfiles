@@ -28,6 +28,9 @@ alias su='su -'
 # logout alias
 alias bye='clear; logout'
 
+# Strip all comments from a file and display it
+alias stripcomments="sed 's/#.*$//;/^[ 	]*$/d' $*"
+
 # X11 Auth update
 #rxauth() { xauth extract - `uname -n`:0 | rsh $* xauth merge - }
 # Setup root xauth
