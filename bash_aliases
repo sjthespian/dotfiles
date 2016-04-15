@@ -20,8 +20,6 @@ fi
 # Use the Berkeley Mail program
 alias mail='Mail'
 
-alias addpath='set path = (`pwd` $path) ; echo "path now includes `pwd`"'
-
 alias al='ls -al'
 alias su='su -'
 
@@ -30,6 +28,9 @@ alias bye='clear; logout'
 
 # Strip all comments from a file and display it
 alias stripcomments="sed 's/#.*$//;/^[ 	]*$/d' $*"
+
+# Monit summary failed services
+alias monitbad="sudo monit summary | egrep -v 'Accessible|Running'"
 
 # X11 Auth update
 #rxauth() { xauth extract - `uname -n`:0 | rsh $* xauth merge - }
