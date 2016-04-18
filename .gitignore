@@ -1,14 +1,14 @@
 *~
 \#*\#
-/keyrings/live/pubring.gpg~
-/keyrings/live/pubring.kbx~
 /keyrings/live/secring.gpg
 /keys/gpg/public/25716A2D.asc
 /keys/gpg/public/C938A5B3.asc
 /keys/gpg/private/25716A2D.asc
 /keys/gpg/private/C938A5B3.asc
+/emacs.d/lisp/nxhtml/
 /emacs.d/ac-comphist.dat
 /emacs.d/elpa/
 /emacs.d/eproject.lst
 /emacs.d/ido.last
+/emacs.d/tutorial/
 /keys/gpg/public/65D0FD58.asc
