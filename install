@@ -39,7 +39,7 @@ cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-	if [ $VERBOSE != "Q" ]; then
+	if [ "$VERBOSE" != "Q" ]; then
 		echo -e "\nInstalling $conf..."
 	fi
 	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" ${DOTBOTOPTS} -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
