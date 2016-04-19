@@ -12,3 +12,7 @@
 /emacs.d/ido.last
 /emacs.d/tutorial/
 /keys/gpg/public/65D0FD58.asc
+/vim/.netrwhist
+# Work-specific files to keep out of git
+/bashrc.d/98-disney.sh
+/ssh/conf.d/50-disney.conf
