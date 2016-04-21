@@ -7,14 +7,13 @@
 (add-to-list 'load-path lisp-directory)
 
 (custom-set-variables
- '(ldap-host-parameters-alist (quote (("ldaprr.pdi.com" base "dc=pdi,dc=dreamworks,dc=com"))))
  '(default-input-method "latin-1-prefix")
  '(load-home-init-file t t)
  '(focus-follows-mouse t)
  '(case-fold-search t)
  '(global-font-lock-mode t nil (font-lock))
  '(current-language-environment "Latin-1" t)
- '(user-mail-address "drich@pdi.com" t)
+ '(user-mail-address "drich@employees.org" t)
  '(query-user-mail-address nil))
 (custom-set-faces
  '(default ((t (:size "12pt"))) t))
