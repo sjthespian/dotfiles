@@ -27,3 +27,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 if [ -d ~/.chefvm ]; then
   eval "$(~/.chefvm/bin/chefvm init -)"
 fi
+
+# Android SDK settings from brew
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
