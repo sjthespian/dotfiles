@@ -31,3 +31,10 @@ fi
 # Android SDK settings from brew
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+# Syntax highlighting in less on OSX
+# http://funkworks.blogspot.com/2013/01/syntax-highlighting-in-less-on-osx.html
+LESSPIPE=`which src-hilite-lesspipe.sh`
+if [ -n "$LESSPIPE" ]; then
+  export LESSOPEN="| ${LESSPIPE} %s"
+  export LESS='-R'
+fi
