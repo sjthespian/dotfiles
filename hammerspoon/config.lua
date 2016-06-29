@@ -18,7 +18,7 @@ cfg.global.paths = {}
 cfg.global.paths.base  = os.getenv('HOME')
 cfg.global.paths.tmp   = os.getenv('TMPDIR')
 cfg.global.paths.bin   = ufile.toPath(cfg.global.paths.base, 'bin')
-cfg.global.paths.cloud = ufile.toPath(cfg.global.paths.base, 'Dropbox')
+cfg.global.paths.cloud = ufile.toPath(cfg.global.paths.base, 'Box')
 cfg.global.paths.hs    = ufile.toPath(cfg.global.paths.base, '.hammerspoon')
 cfg.global.paths.data  = ufile.toPath(cfg.global.paths.hs,   'data')
 cfg.global.paths.media = ufile.toPath(cfg.global.paths.hs,   'media')
@@ -41,6 +41,19 @@ cfg.caffeine = {
   icons = {
     on  = ufile.toPath(cfg.global.paths.media, 'caffeine-on.pdf'),
     off = ufile.toPath(cfg.global.paths.media, 'caffeine-off.pdf'),
+  },
+}
+
+------------------
+--  cheatsheet  --
+------------------
+cfg.cheatsheet = {
+  defaultName = 'default',
+  chooserWidth = 50,
+  path = {
+    dir    = ufile.toPath(cfg.global.paths.cloud, 'cheatsheets'),
+    css    = ufile.toPath(cfg.global.paths.media, 'cheatsheet.min.css'),
+    pandoc = ufile.toPath(cfg.global.paths.ulbin, 'pandoc'),
   },
 }
 

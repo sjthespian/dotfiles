@@ -83,6 +83,10 @@ function bindings.bind()
 		    hs.alert.show('Config loaded')
   end)
 
+  hs.hotkey.bind(mod.hyper, 'c',  hsm.cheatsheet.toggle)
+  hs.hotkey.bind(mod.hyper, 'x',  hsm.cheatsheet.chooserToggle)
+  hs.hotkey.bind(mod.hyper, 'y',  hs.toggleConsole)
+
 end
 
 return bindings
