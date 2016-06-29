@@ -23,7 +23,7 @@ log = hs.logger.new(hs.host.localizedName(), LOGLEVEL)
 local modules = {
   'battery',
   'caffeine',
-  'weather',
+  'cheatsheet',
   'wifi'
 }
 
