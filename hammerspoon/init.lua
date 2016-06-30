@@ -77,17 +77,20 @@ caffeine = require('modules/caffeine')
 -- Find host domain name to determine what layout to load
 -- layouts are in ~/.hammerspoon/layouts/domain.lua
 -- (domain has dots replaced with _)
-domainname = ''
+domainname = nil
 for i,hname in ipairs(hs.host.names()) do
+   hname_clean = string.gsub(hname,'%.','_')
+   if file_exists(os.getenv('HOME') .. '/.hammerspoon/layouts/' .. hname .. '.lua') then
+      domainname = hname_fname
+   end
    domainname = string.match(hname,'%.([^.]+%..*)$')
    if domainname then
       domainname = string.gsub(domainname,'%.','_')
---       hs.alert.show(domainname)
    end
    if domainname and file_exists(os.getenv('HOME') .. '/.hammerspoon/layouts/' .. domainname .. '.lua') then
       break
    else
-      domainname = ''
+      domainname = nil
    end
 end
 require('layout_functions')
