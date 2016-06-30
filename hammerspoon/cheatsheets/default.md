@@ -1,15 +1,20 @@
 Hammerspoon Global Bindings
 ===========================
 
-    ⌘⌃⌥C        Show/hide cheat sheet
-    ⌘⌃⌥X        Cheat sheet chooser
-    ⌘⌃⌥M        Find mouse
-    ⌘⌃⌥L        Lock screen
+    ⌘ ⌃ ⌥ C  Show/hide cheat sheet
+    ⌘ ⌃ ⌥ X  Cheat sheet chooser
+    ⌘ ⌃ ⌥ M  Find mouse
+    ⌘ ⌃ ⌥ L  Lock screen
 
-    ⌘⌃⌥1        Move current window to monitor 1
-    ⌘⌃⌥2        Move current window to monitor 2
-    ⌘⌃⌥3        Reapply default window layout
-    ⌘⌃⌥4        Reapply default window layout to current window
+    ⌘ ⌥ ▶  Move window right
+    ⌘ ⌥ ◀  Move window left
+    ⌘ ⌥ ▲  Move window up
+    ⌘ ⌥ ▼  Move window down
+
+    ⌘ ⌃ ⌥ 1  Move current window to monitor 1
+    ⌘ ⌃ ⌥ 2  Move current window to monitor 2
+    ⌘ ⌃ ⌥ 3  Reapply default window layout
+    ⌘ ⌃ ⌥ 4  Reapply default window layout to current window
 
 Hammerspoon Quick Links
 =======================

@@ -231,7 +231,7 @@ end
 -- create a new webview with the given html and title
 local function createView(html, title)
   local screen = hs.screen.mainScreen()
-  local viewRect = screen:frame():scale(0.94):move({x=0, y=-20})
+  local viewRect = screen:frame():scale(0.60):move({x=0, y=-20})
   view = hs.webview.new(viewRect, {
     javaScriptEnabled=false,
     -- developerExtrasEnabled=true,
@@ -241,7 +241,6 @@ local function createView(html, title)
     masks.borderless |
     masks.utility |
     masks.HUD |
-    masks.titled |
     masks.nonactivating
   )
   view:windowTitle(title)

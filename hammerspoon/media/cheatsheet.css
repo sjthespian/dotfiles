@@ -34,7 +34,8 @@ div#TOC, nav#TOC {
 /* ---- Headers and sections ---- */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Helvetica, "Liberation Sans", Calibri, Arial, sans-serif;
+  font-family: "Lucida Grande", "Helvetica Neue", Helvetica, "Liberation Sans", Calibri, Arial, sans-serif;
+  font-size: 13px;
 }
 
 /* Pandoc with --section-divs option */
@@ -51,17 +52,17 @@ html, body {
   height: 99%;
   margin: 0;
   padding: 0;
-  background-color: #333;
-  color: #bbb;
-  font-family: Verdana, sans-serif;
-  font-size: 16px;
+  background-color: #ddd;
+  color: #333;
+  font-family: "Lucida Grande", Verdana, sans-serif;
+  font-size: 10px;
   line-height: 1.5em;
 }
 
 body {
-  border: 6px solid #444;
+  border: 6px solid #aaa;
   column-count: 2;
-  column-rule: 3px solid #444;
+  column-rule: 3px solid #aaa;
   column-gap: 0;
   column-fill: auto;
 }
@@ -128,7 +129,7 @@ a {
 
 a:link {
   text-decoration: none;
-  color: #ddd;
+  color: #222;
   border-color: #888;
   border-width: 0 0 1px 0;
   border-style: none none solid none;
@@ -146,7 +147,7 @@ a:visited {
 }
 
 a:hover {
-  color: #fff;
+  color: #88f;
   text-decoration: none;
   background-color: #606060;
   border-color: #606060;
@@ -179,7 +180,7 @@ p.caption {
 /* ---- Code blocks and spans ---- */
 
 pre, code {
-  background-color: #202020;
+  background-color: #d0d0d0;
   /* This will override the overflow:auto if present */
   white-space: pre-wrap; /* css-3 */
   font-family: "Fira Mono", "Source Code Pro", "Menlo", monospace;
@@ -201,7 +202,7 @@ pre {
   /* Use an auto scroll box for long lines, unless word-wrap is enabled */
   white-space: pre;
   overflow: auto;
-  font-size: 14px;
+  font-size: 10px;
 }
 
 /* All inline code spans */
