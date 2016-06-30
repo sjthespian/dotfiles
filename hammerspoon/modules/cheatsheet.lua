@@ -245,7 +245,6 @@ local function createView(html, title)
     masks.nonactivating
   )
   view:windowTitle(title)
-  view:setLevel(hs.drawing.windowLevels.overlay)
   view:html(html)
 end
 
@@ -389,7 +388,7 @@ end
 function m.stop()
   if chooser then chooser:delete() end
   hideCheatsheet()
-  if type(cheat_sheets) == "table" then
+  if (cheat_sheets and type(cheat_sheets) == "table") then
     for name,_ in pairs(cheat_sheets) do
       cheat_sheets[name] = nil
       last_changed[name] = nil
