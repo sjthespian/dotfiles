@@ -33,7 +33,6 @@
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
     ~/.dircolors: dircolors-dark
-    ~/.hammerspoon: hammerspoon
     ~/.gitignore_global: gitignore_global
     ~/.gnupg/gpg.conf:
       create: true

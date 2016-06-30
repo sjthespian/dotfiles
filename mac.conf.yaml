@@ -1,0 +1,11 @@
+- defaults:
+    link:
+      relink: true
+#      relative: true
+
+- clean: ['~']
+
+- link:
+    ~/.hammerspoon: hammerspoon
+
+- shell:
