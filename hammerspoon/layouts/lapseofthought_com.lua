@@ -12,7 +12,7 @@
 --
 -- It searches for application "name" and call "func" for each window object
 --------------------------------------------------------------------------------
-layouts = {
+local layouts = {
    {
       name = {"Emacs"},
       func = function(index, win)
@@ -30,7 +30,7 @@ layouts = {
 	    -- first empty space
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
-	 win:moveTopLeft()
+	 hsm.windows.moveTopLeft(win)
       end
    },
    {
@@ -41,7 +41,9 @@ layouts = {
 	    -- second space on 1st monitor
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[2])
 	 end
-	 win:moveTopLeft()
+	 hsm.windows.moveTopLeft(win)
       end
    },
 }
+
+return layouts

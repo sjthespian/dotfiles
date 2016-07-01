@@ -88,6 +88,7 @@ for i,hname in ipairs(hs.host.names()) do
 end
 require('layout_functions')
 if domainname then
+  hs.alert.show('Loaded layouts for ' .. domainname)
   layouts = require('layouts/' .. domainname)
 else
   layouts = {}
