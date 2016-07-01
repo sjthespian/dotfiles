@@ -95,7 +95,15 @@ fixssh() {
   ssh $sshfqdn
 }
 alias sshnokey='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
-
+sshinstallkeys() {
+  if [ -z "$1" ]; then
+    echo "usage: sshinstallkeys hostname"
+  else
+    cat ~/.ssh/id_dsa.pub | ssh $1 "umask 077 && mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+#    ssh $1 "mkdir .ssh && chmod 700 .ssh"
+#    scp ~/.ssh/authorized_keys $1:.ssh/
+  fi
+}
 
 if [ -n "`which xxdiff 2>/dev/null`" ]; then
   alias xdiff="xxdiff"
