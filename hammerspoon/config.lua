@@ -44,6 +44,19 @@ cfg.caffeine = {
   },
 }
 
+---------------
+--  browser  --
+---------------
+cfg.browser = {
+  apps = {
+    ['com.apple.Safari'] = true,
+    ['com.google.Chrome'] = true,
+    ['org.mozilla.firefox'] = true,
+  },
+}
+
+cfg.browser.defaultApp = cfg.browser.apps.safari
+
 ------------------
 --  cheatsheet  --
 ------------------
@@ -121,6 +134,13 @@ cfg.weather = {
 ------------
 cfg.wifi = {
   icon = ufile.toPath(cfg.global.paths.media, 'airport.png'),
+}
+
+---------------
+--  windows  --
+---------------
+cfg.windows = {
+  movePct = 5,
 }
 
 
