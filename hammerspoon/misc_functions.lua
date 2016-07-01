@@ -29,7 +29,7 @@ function mouseHighlight()
             mouseCircleTimer:stop()
         end
     end
-    mousepoint = hs.mouse.get()
+    mousepoint = hs.mouse.getAbsolutePosition()
     mouseCircle = hs.drawing.circle(hs.geometry.rect(mousepoint.x-30, mousepoint.y-30, 60, 60))
     mouseCircle:setStrokeColor({["red"]=1,["blue"]=0,["green"]=0,["alpha"]=1})
     mouseCircle:setFill(false)
@@ -39,20 +39,6 @@ function mouseHighlight()
     mouseCircleTimer = hs.timer.doAfter(3, function() mouseCircle:delete() end)
 end
 
---
--- Battery monitoring functions
--- 
---local lastBatVal = hs.battery.percentage()
---function batPercentageChangedCallback()
---  currentPercent = hs.battery.percentage()
---  if currentPercent == 15 and lastBatVal > 15 then
---    hs.alert.show("Getting low on juice...")
---  end
---  if currentPercent == 5 and lastBatVal > 5 then
---    hs.alert.show("Captain, she can't take any more!")
---  end
---  lastBatVal = currentPercent
---end
 
 -- File existence test
 function file_exists(name)

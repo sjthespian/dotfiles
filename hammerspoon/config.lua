@@ -55,7 +55,7 @@ cfg.browser = {
   },
 }
 
-cfg.browser.defaultApp = cfg.browser.apps.safari
+cfg.browser.defaultApp = 'com.apple.Safari'
 
 ------------------
 --  cheatsheet  --
@@ -68,6 +68,15 @@ cfg.cheatsheet = {
     css    = ufile.toPath(cfg.global.paths.media, 'cheatsheet.min.css'),
     pandoc = ufile.toPath(cfg.global.paths.ulbin, 'pandoc'),
   },
+}
+
+-------------
+--  songs  --
+-------------
+cfg.songs = {
+  -- set this to the path of the track binary if you're using it
+  trackBinary = ufile.toPath(cfg.global.paths.bin, 'track'),
+  -- trackBinary = nil
 }
 
 ---------------
@@ -149,8 +158,10 @@ hs.window.animationDuration = 0.3
 -- eliminate errors from apps that don't play well with hammerspoon filtering
 hs.window.filter.ignoreAlways['nplastpass'] = true
 hs.window.filter.ignoreAlways['ARDAgent'] = true
+hs.window.filter.ignoreAlways['BlueJeans Media'] = true
 hs.window.filter.ignoreAlways['Little Snitch Agent'] = true
 hs.window.filter.ignoreAlways['Little Snitch Network Monitor'] = true
+hs.window.filter.ignoreAlways['Parallels Desktop'] = true
 hs.window.filter.ignoreAlways['Remember The Milk Networking'] = true
 hs.window.filter.ignoreAlways['Remember The Milk Database Storage'] = true
 

@@ -16,6 +16,19 @@ Hammerspoon Global Bindings
     ⌘ ⌃ ⌥ 3  Reapply default window layout
     ⌘ ⌃ ⌥ 4  Reapply default window layout to current window
 
+Music Bindings
+==============
+    ⌘ ⇧ ⌃ ⌥ 0  Rate song 0 stars
+    ⌘ ⇧ ⌃ ⌥ 1  Rate song 1 star
+    ⌘ ⇧ ⌃ ⌥ 2  Rate song 2 stars
+    ⌘ ⇧ ⌃ ⌥ 3  Rate song 3 stars
+    ⌘ ⇧ ⌃ ⌥ 4  Rate song 4 stars
+    ⌘ ⇧ ⌃ ⌥ 5  Rate song 5 stars
+    ⌘ ⇧ ⌃ ⌥ LEFT   Previous song
+    ⌘ ⇧ ⌃ ⌥ RIGHT  Next song
+    ⌘ ⇧ ⌃ ⌥ p  Play/pause
+    ⌘ ⇧ ⌃ ⌥ i  Get song info
+
 Hammerspoon Quick Links
 =======================
 

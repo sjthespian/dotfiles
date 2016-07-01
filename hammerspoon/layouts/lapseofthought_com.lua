@@ -14,23 +14,33 @@
 --------------------------------------------------------------------------------
 local layouts = {
    {
-      name = {"Emacs"},
+      name = "Emacs",
       func = function(index, win)
-	 win:moveToScreen(monitor_1)
+	 win:moveToScreen(monitor_2)
       end
    },
    {
-      name = {"Slack"},
+      name = "Slack",
       func = function(index, win)
 	 if (#hs.screen.allScreens() > 1) then
 	    -- first space on 2nd monitor
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[1])
-	    win:moveToScreen(monitor_2)
+	    win:moveToScreen(monitor_1)
 	 else
 	    -- first empty space
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
-	 hsm.windows.moveTopLeft(win)
+	 hsm.windows.moveTopRight(win)
+      end
+   },
+   {
+      name = "Adium",
+      func = function(index, win)
+	 if (#hs.screen.allScreens() > 1) then
+	    -- second space on 1st monitor
+	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[2]:spaces()[1])
+	 end
+	 hsm.windows.moveBottomLeft(win)
       end
    },
    {
@@ -42,6 +52,12 @@ local layouts = {
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[2])
 	 end
 	 hsm.windows.moveTopLeft(win)
+      end
+   },
+   {
+      name = "Zoiper",
+      func = function(index, win)
+	 hsm.windows.moveTopLeft(win,150,0)
       end
    },
 }

@@ -30,12 +30,79 @@ local mod = {
 function bindings.bind()
   -- bind keys, if no modifier specified use shyper
   hs.fnutils.each({
-      {mod = mod.hyper, key = 'h',  fn = hs.hints.windowHints},
-      {mod = mod.hyper, key = 'l',  fn = hs.caffeinate.lockScreen},
-      {mod = mod.hyper, key = 'm',  fn = mouseHighlight},
-      {mod = mod.hyper, key = 'c',  fn = hsm.cheatsheet.toggle},
-      {mod = mod.hyper, key = 'x',  fn = hsm.cheatsheet.chooserToggle},
-      {mod = mod.hyper, key = 'y',  fn = hs.toggleConsole},
+      -- Music bindings
+      {mod = mod.shyper, key = '0',  fn = hsm.songs.rateSong0},
+      {mod = mod.shyper, key = '1',  fn = hsm.songs.rateSong1},
+      {mod = mod.shyper, key = '2',  fn = hsm.songs.rateSong2},
+      {mod = mod.shyper, key = '3',  fn = hsm.songs.rateSong3},
+      {mod = mod.shyper, key = '4',  fn = hsm.songs.rateSong4},
+      {mod = mod.shyper, key = '5',  fn = hsm.songs.rateSong5},
+      {mod = mod.shyper, key = ']',  fn = hs.itunes.next},
+      {mod = mod.shyper, key = 'left',  fn = function()
+	 if hs.itunes.isRunning() then
+	   hs.itunes.previous()
+	 end
+	 if hs.spotify.isRunning() then
+	   hs.spotify.previous()
+	 end
+      end},
+      {mod = mod.shyper, key = 'right',  fn = function()
+	 if hs.itunes.isRunning() then
+	   hs.itunes.next()
+	 end
+	 if hs.spotify.isRunning() then
+	   hs.spotify.next()
+	 end
+      end},
+      {mod = mod.shyper, key = 'p',  fn = function()
+	 if hs.itunes.isRunning() then
+	   hs.itunes.playpause()
+	 end
+	 if hs.spotify.isRunning() then
+	   hs.spotify.playpause()
+	 end
+      end},
+      {mod = mod.shyper, key = 'i',  fn = function()
+	 if hs.itunes.isRunning() then
+	   hs.itunes.displayCurrentTrack()
+	 end
+	 if hs.spotify.isRunning() then
+	   hs.spotify.displayCurrentTrack()
+	 end
+      end},
+      
+      {mod = mod.hyper, key = 'h', fn = hs.hints.windowHints},
+      {mod = mod.hyper, key = 'l', fn = hs.caffeinate.lockScreen},
+      {mod = mod.hyper, key = 'm', fn = mouseHighlight},
+      {mod = mod.hyper, key = 'c', fn = hsm.cheatsheet.toggle},
+      {mod = mod.hyper, key = 'x', fn = hsm.cheatsheet.chooserToggle},
+      {mod = mod.hyper, key = 'y', fn = hs.toggleConsole},
+      {mod = mod.hyper, key = '1', fn = function()
+	 local win = hs.window.focusedWindow()
+	 if (win) then
+	   win:moveToScreen(monitor_1)
+	 end
+      end},
+      {mod = mod.hyper, key = '2', fn = function()
+	 local win = hs.window.focusedWindow()
+	 if (win) then
+	   win:moveToScreen(monitor_2)
+	 end
+      end},
+      {mod = mod.hyper, key = "3", fn = function()
+	 applyLayouts(layouts)
+      end},
+      {mod = mod.hyper, key = '4', fn = function()
+	 local focusedWindow = hs.window.focusedWindow()
+	 local app = focusedWindow:application()
+	 if (app) then
+	   applyLayout(layouts, app)
+	 end
+      end},
+      {mod = mod.hyper, key = 'R', fn = function()
+	 hs.reload()
+	 hs.alert.show('Config loaded')
+      end},
 
       {mod = mod.ca,    key = 'right', fn = hsm.windows.moveRight},
       {mod = mod.ca,    key = 'left',  fn = hsm.windows.moveLeft},
@@ -48,37 +115,7 @@ function bindings.bind()
 	hs.hotkey.bind(mod.shyper, obj.key, obj.fn)
       end
   end)
-  
-  hs.hotkey.bind(mod.hyper, '1', function()
-		    local win = hs.window.focusedWindow()
-		    if (win) then
-		       win:moveToScreen(monitor_1)
-		    end
-  end)
 
-  hs.hotkey.bind(mod.hyper, '2', function()
-		    local win = hs.window.focusedWindow()
-		    if (win) then
-		       win:moveToScreen(monitor_2)
-		    end
-  end)
-
-  hs.hotkey.bind(mod.hyper, "3", function()
-		    applyLayouts(layouts)
-  end)
-
-  hs.hotkey.bind(mod.hyper, '4', function()
-		    local focusedWindow = hs.window.focusedWindow()
-		    local app = focusedWindow:application()
-		    if (app) then
-		       applyLayout(layouts, app)
-		    end
-  end)
-
-  hs.hotkey.bind(mod.hyper, 'R', function()
-		    hs.reload()
-		    hs.alert.show('Config loaded')
-  end)
 
 end
 
