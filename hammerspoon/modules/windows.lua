@@ -101,56 +101,56 @@ end
 --
 -- Window movement to various screen positions
 --
-function m.moveTopLeft(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
-  local minFrame = minFrame(win:screen(), false)
+function m.moveTopLeft(win,offx,offy)
+  win = win or hs.window.focusedWindow()
+  offx = offx or 0
+  offy = offy or 0
+
   win:setFrame({
-	x = minFrame.x,
-	y = minFrame.y,
-	w = win:frame().w,
-	h = win:frame().h,
-	})
+      x = win:screen():frame().x + offx,
+      y = win:screen():frame().y + offy,
+      w = win:frame().w,
+      h = win:frame().h,
+  })
 end
 
-function m.moveBottomLeft(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
-  local minFrame = minFrame(win:screen(), false)
+function m.moveBottomLeft(win,offx,offy)
+  win = win or hs.window.focusedWindow()
+  offx = offx or 0
+  offy = offy or 0
+
   win:setFrame({
-	x = minFrame.x,
-	y = minFrame.y + win:screen():frame().h - win:frame().h,
-	w = win:frame().w,
-	h = win:frame().h,
-	})
+      x = win:screen():frame().x + offx,
+      y = win:screen():frame().y + win:screen():frame().h - win:frame().h + offy,
+      w = win:frame().w,
+      h = win:frame().h,
+  })
 end
 
-function m.moveTopRight(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
-  local minFrame = minFrame(win:screen(), false)
+function m.moveTopRight(win, offx, offy)
+  win = win or hs.window.focusedWindow()
+  offx = offx or 0
+  offy = offy or 0
+
   win:setFrame({
-	x = minFrame.x + win:screen():frame().w - win:frame().w,
-	y = minFrame.y,
-	w = win:frame().w,
-	h = win:frame().h,
-	})
+      x = win:screen():frame().x + win:screen():frame().w - win:frame().w + offx,
+      y = win:screen():frame().y + offy,
+      w = win:frame().w,
+      h = win:frame().h,
+  })
 end
 
-function m.moveBottomRight(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
-  local minFrame = minFrame(win:screen(), false)
+function m.moveBottomRight(win, offx, offy)
+  win = win or hs.window.focusedWindow()
+  offx = offx or 0
+  offy = offy or 0
+
   win:setFrame({
-	x = minFrame.x + win:screen():frame().w - win:frame().w,
-	y = minFrame.y + win:screen():frame().h - win:frame().h,
-	w = win:frame().w,
-	h = win:frame().h,
-	})
+      x = win:screen():frame().x + win:screen():frame().w - win:frame().w + offx ,
+      y = win:screen():frame().y + win:screen():frame().h - win:frame().h + offy,
+      w = win:frame().w,
+      h = win:frame().h,
+  })
 end
 
 --
@@ -162,6 +162,7 @@ end
 -- |        |        |
 -- +-----------------+
 function m.right(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   minFrame.x = minFrame.x + (minFrame.w/2)
   minFrame.w = minFrame.w/2
@@ -174,6 +175,7 @@ end
 -- |        |        |
 -- +-----------------+
 function m.left(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   minFrame.w = minFrame.w/2
   win:setFrame(minFrame)
@@ -185,6 +187,7 @@ end
 -- |                 |
 -- +-----------------+
 function m.up(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   minFrame.h = minFrame.h/2
   win:setFrame(minFrame)
@@ -196,6 +199,7 @@ end
 -- |      HERE       |
 -- +-----------------+
 function m.down(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   minFrame.y = minFrame.y + minFrame.h/2
   minFrame.h = minFrame.h/2
@@ -208,6 +212,7 @@ end
 -- |                 |
 -- +-----------------+
 function m.upLeft(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   minFrame.w = minFrame.w/2
   minFrame.h = minFrame.h/2
@@ -220,6 +225,7 @@ end
 -- |  HERE  |        |
 -- +-----------------+
 function m.downLeft(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   win:setFrame({
     x = minFrame.x,
@@ -235,6 +241,7 @@ end
 -- |        |  HERE  |
 -- +-----------------+
 function m.downRight(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   win:setFrame({
     x = minFrame.x + minFrame.w/2,
@@ -250,6 +257,7 @@ end
 -- |                 |
 -- +-----------------+
 function m.upRight(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   win:setFrame({
     x = minFrame.x + minFrame.w/2,
@@ -269,6 +277,7 @@ end
 -- Where the window's size is equal to
 -- the smaller available screen size
 function m.fullscreenCenter(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   win:setFrame(minFrame)
 end
@@ -281,6 +290,7 @@ end
 -- |                  |
 -- +------------------+
 function m.fullscreenAlmostCenter(win)
+  win = win or hs.window.focusedWindow()
   local offsetW = minX(win:screen()) - almostMinX(win:screen())
   win:setFrame({
     x = almostMinX(win:screen()),
@@ -299,6 +309,7 @@ end
 -- |                  |
 -- +------------------+
 function m.fullscreenWidth(win)
+  win = win or hs.window.focusedWindow()
   local minFrame = minFrame(win:screen(), false)
   win:setFrame({
     x = win:screen():frame().x,
@@ -313,9 +324,8 @@ end
 -- Window moving by percentage of screen size
 --
 function m.moveLeft(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
+  win = win or hs.window.focusedWindow()
+
   win:setFrame({
       x = win:frame().x - win:screen():frame().w * (m.cfg.movePct / 100.0),
       y = win:frame().y,
@@ -325,9 +335,8 @@ function m.moveLeft(win)
 end
 
 function m.moveRight(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
+  win = win or hs.window.focusedWindow()
+
   win:setFrame({
       x = win:frame().x + win:screen():frame().w * (m.cfg.movePct / 100.0),
       y = win:frame().y,
@@ -337,9 +346,8 @@ function m.moveRight(win)
 end
 
 function m.moveUp(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
+  win = win or hs.window.focusedWindow()
+
   win:setFrame({
       x = win:frame().x,
       y = win:frame().y - win:screen():frame().h * (m.cfg.movePct / 100.0),
@@ -349,9 +357,8 @@ function m.moveUp(win)
 end
 
 function m.moveDown(win)
-  if not win then
-    win = hs.window.focusedWindow()
-  end
+  win = win or hs.window.focusedWindow()
+
   win:setFrame({
       x = win:frame().x,
       y = win:frame().y + win:screen():frame().h * (m.cfg.movePct / 100.0),

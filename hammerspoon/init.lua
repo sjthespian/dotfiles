@@ -25,6 +25,7 @@ local modules = {
   'browser', 
   'caffeine',
   'cheatsheet',
+  'songs',
   'wifi',
   'windows'
 }
