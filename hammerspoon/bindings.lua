@@ -37,39 +37,10 @@ function bindings.bind()
       {mod = mod.shyper, key = '3',  fn = hsm.songs.rateSong3},
       {mod = mod.shyper, key = '4',  fn = hsm.songs.rateSong4},
       {mod = mod.shyper, key = '5',  fn = hsm.songs.rateSong5},
-      {mod = mod.shyper, key = ']',  fn = hs.itunes.next},
-      {mod = mod.shyper, key = 'left',  fn = function()
-	 if hs.itunes.isRunning() then
-	   hs.itunes.previous()
-	 end
-	 if hs.spotify.isRunning() then
-	   hs.spotify.previous()
-	 end
-      end},
-      {mod = mod.shyper, key = 'right',  fn = function()
-	 if hs.itunes.isRunning() then
-	   hs.itunes.next()
-	 end
-	 if hs.spotify.isRunning() then
-	   hs.spotify.next()
-	 end
-      end},
-      {mod = mod.shyper, key = 'p',  fn = function()
-	 if hs.itunes.isRunning() then
-	   hs.itunes.playpause()
-	 end
-	 if hs.spotify.isRunning() then
-	   hs.spotify.playpause()
-	 end
-      end},
-      {mod = mod.shyper, key = 'i',  fn = function()
-	 if hs.itunes.isRunning() then
-	   hs.itunes.displayCurrentTrack()
-	 end
-	 if hs.spotify.isRunning() then
-	   hs.spotify.displayCurrentTrack()
-	 end
-      end},
+      {mod = mod.shyper, key = 'left',  fn = hsm.songs.prevTrack},
+      {mod = mod.shyper, key = 'right', fn = hsm.songs.nextTrack},
+      {mod = mod.shyper, key = 'p',  fn = hsm.songs.playPause},
+      {mod = mod.shyper, key = 'i',  fn = hsm.songs.getInfo},
       
       {mod = mod.hyper, key = 'h', fn = hs.hints.windowHints},
       {mod = mod.hyper, key = 'l', fn = hs.caffeinate.lockScreen},
