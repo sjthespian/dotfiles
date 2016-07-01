@@ -75,8 +75,8 @@ cfg.cheatsheet = {
 -------------
 cfg.songs = {
   -- set this to the path of the track binary if you're using it
-  trackBinary = ufile.toPath(cfg.global.paths.bin, 'track'),
-  -- trackBinary = nil
+  -- trackBinary = ufile.toPath(cfg.global.paths.bin, 'track'),
+  trackBinary = nil
 }
 
 ---------------
