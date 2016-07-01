@@ -28,26 +28,27 @@ local mod = {
 --  R - reload hammerspoon config
 
 function bindings.bind()
-   hs.hotkey.bind(mod.ca, 'right', function()
-		     local win = hs.window.focusedWindow()
-		     win:moveRight()	     
-   end)
+  -- bind keys, if no modifier specified use shyper
+  hs.fnutils.each({
+      {mod = mod.hyper, key = 'h',  fn = hs.hints.windowHints},
+      {mod = mod.hyper, key = 'l',  fn = hs.caffeinate.lockScreen},
+      {mod = mod.hyper, key = 'm',  fn = mouseHighlight},
+      {mod = mod.hyper, key = 'c',  fn = hsm.cheatsheet.toggle},
+      {mod = mod.hyper, key = 'x',  fn = hsm.cheatsheet.chooserToggle},
+      {mod = mod.hyper, key = 'y',  fn = hs.toggleConsole},
 
-   hs.hotkey.bind(mod.ca, 'left', function()
-		     local win = hs.window.focusedWindow()
-		     win:moveLeft()	     
-   end)
-
-   hs.hotkey.bind(mod.ca, 'up', function()
-		     local win = hs.window.focusedWindow()
-		     win:moveUp()	     
-   end)
-
-   hs.hotkey.bind(mod.ca, 'down', function()
-		     local win = hs.window.focusedWindow()
-		     win:moveDown()	     
-   end)
-
+      {mod = mod.ca,    key = 'right', fn = hsm.windows.moveRight},
+      {mod = mod.ca,    key = 'left',  fn = hsm.windows.moveLeft},
+      {mod = mod.ca,    key = 'up',    fn = hsm.windows.moveUp},
+      {mod = mod.ca,    key = 'down',  fn = hsm.windows.moveDown}
+		  }, function(obj)
+      if obj.mod then
+	hs.hotkey.bind(obj.mod, obj.key, obj.fn)
+      else
+	hs.hotkey.bind(mod.shyper, obj.key, obj.fn)
+      end
+  end)
+  
   hs.hotkey.bind(mod.hyper, '1', function()
 		    local win = hs.window.focusedWindow()
 		    if (win) then
@@ -74,18 +75,10 @@ function bindings.bind()
 		    end
   end)
 
-  hs.hotkey.bind(mod.hyper, 'h', hs.hints.windowHints)
-  hs.hotkey.bind(mod.hyper, 'l', hs.caffeinate.lockScreen)
-  hs.hotkey.bind(mod.hyper, 'm', mouseHighlight)
-
   hs.hotkey.bind(mod.hyper, 'R', function()
 		    hs.reload()
 		    hs.alert.show('Config loaded')
   end)
-
-  hs.hotkey.bind(mod.hyper, 'c',  hsm.cheatsheet.toggle)
-  hs.hotkey.bind(mod.hyper, 'x',  hsm.cheatsheet.chooserToggle)
-  hs.hotkey.bind(mod.hyper, 'y',  hs.toggleConsole)
 
 end
 

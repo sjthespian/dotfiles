@@ -71,6 +71,9 @@
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+;; Lua mode settings
+(setq lua-indent-level 2)
+
 ;; Perl mode settings
 ;(autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (setq cperl-hairy t)

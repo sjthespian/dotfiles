@@ -11,7 +11,7 @@
 --
 -- It searches for application "name" and call "func" for each window object
 --------------------------------------------------------------------------------
-layouts = {
+local layouts = {
    {
       name = {"Emacs"},
       func = function(index, win)
@@ -77,3 +77,5 @@ layouts = {
       end
    },
 }
+
+return layouts
