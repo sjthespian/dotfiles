@@ -18,6 +18,35 @@
 (custom-set-faces
  '(default ((t (:size "12pt"))) t))
 
+;; Default window size and position
+(if window-system
+    (progn
+      ; if height/width < .5, assume multiple monitors
+      ; I want my Emacs window to be roughly 2/3 of the way across the
+      ; first monitor
+      (setq default-frame-alist
+	    '((top . 100) (left . 100)
+	      (width . 80) (height . 45)
+	      (menu-bar-lines . 1)))
+      (setq frameheight 45)
+      (setq framewidth 80)
+      (setcdr (assq 'height default-frame-alist) frameheight)
+      (setcdr (assq 'width default-frame-alist) framewidth)
+      (if (< (/ (float (display-pixel-height)) (display-pixel-width)) 0.5)
+	  (progn
+	    (setq frametop (- (/ (display-pixel-height) 2) (/ (* 14 frameheight) 2)))
+	    (setq frameleft (- (/ (display-pixel-width) 2) (* 12 framewidth)))
+	    )
+	(progn
+	    (setq frametop (- (/ (display-pixel-height) 2) (/ (* 14 frameheight) 2)))
+	    (setq frameleft (- (display-pixel-width) (* 12 framewidth)))
+	  )
+	)
+      (setcdr (assq 'top default-frame-alist) frametop)
+      (setcdr (assq 'left default-frame-alist) frameleft)
+      )
+  )
+
 ;; Visual Basic mode settings
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.vbs\\'" . visual-basic-mode))
@@ -41,6 +70,9 @@
 ;(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;; Lua mode settings
+(setq lua-indent-level 2)
 
 ;; Perl mode settings
 ;(autoload 'perl-mode "cperl-mode" "alternate mode for editing Perl programs" t)

@@ -36,3 +36,10 @@ if [ -d /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/ ]; th
   export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/
 fi
 
+# Syntax highlighting in less on OSX
+# http://funkworks.blogspot.com/2013/01/syntax-highlighting-in-less-on-osx.html
+LESSPIPE=`which src-hilite-lesspipe.sh`
+if [ -n "$LESSPIPE" ]; then
+  export LESSOPEN="| ${LESSPIPE} %s"
+  export LESS='-R'
+fi
