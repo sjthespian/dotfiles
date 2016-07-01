@@ -149,6 +149,8 @@ hs.window.animationDuration = 0.3
 -- eliminate errors from apps that don't play well with hammerspoon filtering
 hs.window.filter.ignoreAlways['nplastpass'] = true
 hs.window.filter.ignoreAlways['ARDAgent'] = true
+hs.window.filter.ignoreAlways['Little Snitch Agent'] = true
+hs.window.filter.ignoreAlways['Little Snitch Network Monitor'] = true
 hs.window.filter.ignoreAlways['Remember The Milk Networking'] = true
 hs.window.filter.ignoreAlways['Remember The Milk Database Storage'] = true
 
