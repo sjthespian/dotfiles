@@ -33,15 +33,15 @@ local modules = {
 -- global modules namespace (short for easy console use)
 hsm = {}
 
--- load module configuration
-cfg = require('config')
-hsm.cfg = cfg.global
-
 --
 -- Load my functions
 --
 --require('window_functions')
 require('misc_functions')
+
+-- load module configuration
+cfg = require('config')
+hsm.cfg = cfg.global
 
 -- load, configure, and start each module
 hs.fnutils.each(modules, loadModuleByName)
@@ -56,11 +56,6 @@ bindings.bind()
 --
 -- Watchers for various things
 --
-
--- Reload config on change
-configWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
-configWatcher:start()
-hs.alert.show("Config change, reloaded")
 
 -- Watch for monitor changes
 monWatcher = hs.screen.watcher.new(monitorWatcher)
@@ -89,7 +84,7 @@ for i,hname in ipairs(hs.host.names()) do
 end
 require('layout_functions')
 if domainname then
-  hs.alert.show('Loaded layouts for ' .. domainname)
+--  hs.alert.show('Loaded layouts for ' .. domainname)
   layouts = require('layouts/' .. domainname)
 else
   layouts = {}
