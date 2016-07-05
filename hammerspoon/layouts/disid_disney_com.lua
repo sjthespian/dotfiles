@@ -29,7 +29,7 @@ local layouts = {
 	    -- first empty space
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
-	 win:moveTopLeft()
+	 hsm.windows.moveTopLeft(win)
       end
    },
    {
@@ -42,7 +42,7 @@ local layouts = {
 	    -- first empty space
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
-	 win:moveBottomRight()
+	 hsm.windows.moveBottomRight(win)
       end
    },
    {
@@ -55,7 +55,7 @@ local layouts = {
 	    -- first empty space
 --	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
-	 win:moveTopRight()
+	 hsm.windows.moveTopRight(win)
       end
    },
    {
@@ -66,7 +66,7 @@ local layouts = {
 	    -- second space on 1st monitor
 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[2])
 	 end
-	 win:moveTopLeft()
+	 hsm.windows.moveTopLeft(win)
       end
    },
    {
