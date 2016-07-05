@@ -1,5 +1,5 @@
 -- module: Cheatsheet - show markdown file popup overlays on-demand
--- (Inspired by the CheatSheet app by Stefan Fürst, but rather than
+-- (Inspired by the CheatSheet app by Stefan FÃ¼rst, but rather than
 -- automatically showing an app's hotkeys, this renders custom markdown files
 -- based on the current app.)
 --
@@ -289,11 +289,60 @@ local function hideCheatsheet()
   visible = false
 end
 
+-- Walk application menus to auto-populate new cheatsheet
+-- Original code from https://github.com/dharmapoudel/hammerspoon-config
+
+-- Map modifiers to MenuBarItem modifier indicies
+local commandEnum = {
+        [0] = '⌘',
+        [1] = '⇧ ⌘',
+        [2] = '⌥ ⌘',
+        [3] = '⌥ ⇧ ⌘',
+        [4] = '⌃ ⌘',
+        [5] = '⇧ ⌃ ⌘',
+        [6] = '⌃ ⌥ ⌘',
+        [7] = '',
+        [8] = '⌦',
+        [9] = '',
+        [10] = '⌥',
+        [11] = '⌥ ⇧',
+        [12] = '⌃',
+        [13] = '⌃ ⇧',
+        [14] = '⌃ ⌥',
+    }
+
+local function getAllMenuItems(app)
+  local menu = ''
+  for pos,val in pairs(app) do
+    if(type(val)=='table') then
+      -- do not include help menu for now until I find best way to remove menubar items with no shortcuts in them
+      if(val['AXRole'] =='AXMenuBarItem' and type(val['AXChildren']) == 'table') and val['AXTitle'] ~='Help' then
+	menu = menu..val['AXTitle']..'\n'..string.rep('=',string.len(val['AXTitle']))..'\n\n'
+	menu = menu..'|  |  |\n'
+	menu = menu..'| ---: | ------------------------------------------------------- |\n'
+	menu = menu.. getAllMenuItems(val['AXChildren'][1])
+	menu = menu..'\n'
+      elseif(val['AXRole'] =='AXMenuItem' and not val['AXChildren']) then
+	if( val['AXMenuItemCmdModifiers'] ~='0' and val['AXMenuItemCmdChar'] ~='') then
+	  menu = menu..'| '..commandEnum[val['AXMenuItemCmdModifiers']]..' '..val['AXMenuItemCmdChar']..' | '..val['AXTitle']..' |\n'
+	end 
+      elseif(val['AXRole'] =='AXMenuItem' and type(val['AXChildren']) == 'table') then
+	menu = menu..getAllMenuItems(val['AXChildren'][1])
+      end
+    end
+  end
+  return menu
+end
+
 -- edit a cheatsheet
 local function editCheatsheet(name)
   if not name then return end
   local file = toPath(name)
-  if not ufile.exists(file) then ufile.create(file) end
+  if not ufile.exists(file) then
+    ufile.create(file)
+    -- Populate file with application menus
+    ufile.append(file, getAllMenuItems(hs.application.frontmostApplication():getMenuItems()))
+  end
   hs.task.new('/usr/bin/open', nil, {'-t', file}):start()
 end
 

@@ -1,33 +1,38 @@
 Hammerspoon Global Bindings
 ===========================
 
-    ⌘ ⌃ ⌥ C  Show/hide cheat sheet
-    ⌘ ⌃ ⌥ X  Cheat sheet chooser
-    ⌘ ⌃ ⌥ M  Find mouse
-    ⌘ ⌃ ⌥ L  Lock screen
-
-    ⌘ ⌥ ▶  Move window right
-    ⌘ ⌥ ◀  Move window left
-    ⌘ ⌥ ▲  Move window up
-    ⌘ ⌥ ▼  Move window down
-
-    ⌘ ⌃ ⌥ 1  Move current window to monitor 1
-    ⌘ ⌃ ⌥ 2  Move current window to monitor 2
-    ⌘ ⌃ ⌥ 3  Reapply default window layout
-    ⌘ ⌃ ⌥ 4  Reapply default window layout to current window
+|  |  |
+| -----: | ----- |
+| **⌃ ⌥ ⌘ C**  | Show/hide cheat sheet |
+| **⌃ ⌥ ⌘ X**  | Cheat sheet chooser |
+| **⌃ ⌥ ⌘ M**  | Find mouse  |
+| **⌃ ⌥ ⌘ L**  | Lock screen |
+|  |  |
+| **⌥ ⌘ ▶** | Move window right |
+| **⌥ ⌘ ◀** | Move window left |
+| **⌥ ⌘ ▲** | Move window up |
+| **⌥ ⌘ ▼** | Move window down |
+|  |  |
+| **⌃ ⌥ ⌘ 1** | Move current window to monitor 1 |
+| **⌃ ⌥ ⌘ 2** | Move current window to monitor 2 |
+| **⌃ ⌥ ⌘ 3** | Reapply default window layout |
+| **⌃ ⌥ ⌘ 4** | Reapply default window layout to current window |
 
 Music Bindings
 ==============
-    ⌘ ⇧ ⌃ ⌥ 0  Rate song 0 stars
-    ⌘ ⇧ ⌃ ⌥ 1  Rate song 1 star
-    ⌘ ⇧ ⌃ ⌥ 2  Rate song 2 stars
-    ⌘ ⇧ ⌃ ⌥ 3  Rate song 3 stars
-    ⌘ ⇧ ⌃ ⌥ 4  Rate song 4 stars
-    ⌘ ⇧ ⌃ ⌥ 5  Rate song 5 stars
-    ⌘ ⇧ ⌃ ⌥ LEFT   Previous song
-    ⌘ ⇧ ⌃ ⌥ RIGHT  Next song
-    ⌘ ⇧ ⌃ ⌥ p  Play/pause
-    ⌘ ⇧ ⌃ ⌥ i  Get song info
+
+|  |  |
+| -----: | ----- |
+| **⇧ ⌃ ⌥ ⌘ 0** | Rate song 0 stars |
+| **⇧ ⌃ ⌥ ⌘ 1** | Rate song 1 star |
+| **⇧ ⌃ ⌥ ⌘ 2** | Rate song 2 stars |
+| **⇧ ⌃ ⌥ ⌘ 3** | Rate song 3 stars |
+| **⇧ ⌃ ⌥ ⌘ 4** | Rate song 4 stars |
+| **⇧ ⌃ ⌥ ⌘ 5** | Rate song 5 stars |
+| **⇧ ⌃ ⌥ ⌘ ◀** | Previous Song |
+| **⇧ ⌃ ⌥ ⌘ ▶** | Next song |
+| **⇧ ⌃ ⌥ ⌘ p** | Play/pause |
+| **⇧ ⌃ ⌥ ⌘ i** | Get song info |
 
 Hammerspoon Quick Links
 =======================
