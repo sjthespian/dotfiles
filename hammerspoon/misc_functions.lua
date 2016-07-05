@@ -4,17 +4,17 @@
 
 -- Auto-reload configuration on change
 function reloadConfig(files)
-   hs.fnutils.each(hsm, stopModule)
-   
-   doReload = false
-   for _,file in pairs(files) do
-      if file:sub(-4) == ".lua" then
-	 doReload = true
-      end
-   end
-   if doReload then
-      hs.reload()
-   end
+  local doReload = false
+  for _,file in pairs(files) do
+    if file:sub(-4) == ".lua" then
+      doReload = true
+    end
+  end
+  if doReload then
+    hs.fnutils.each(hsm, stopModule)
+    hs.reload()
+    hs.alert.show("Config change, reloaded")
+  end
 
 end
 

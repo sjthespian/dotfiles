@@ -8,6 +8,10 @@ local ufile = require('utils.file')
 --local E = require('hs.application.watcher')   -- appwindows events
 --local A = require('appactions')               -- appwindows actions
 
+-- Reload config on change
+cfgWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
+cfgWatcher:start()
+
 -- Monospace font used in multiple modules
 local MONOFONT = 'Fira Mono'
 
