@@ -83,16 +83,29 @@ alias homeforward='endforward && ssh -f -N morpheus-forward && echo "Proxy start
 alias homeproxyforward='endforward && ssh -f -N morpheus-forward-proxy && echo "Proxy started"'
 
 fixssh() {
- sshfqdn=`host $1 | awk '{print $1}'`
-  sshaddr=`host $1 | awk '{print $NF}'`
+  if [ -z "$1" ]; then
+    echo "usage: fixssh [user@]host"
+  fi
+  # deal with user@host
+  IFS=@ read sshuser sshhost <<< "$1"
+  if [ -z "$sshhost" ]; then
+    sshhost=$sshuser
+    sshuser=''
+  fi
+  sshfqdn=`host $sshhost | awk '{print $sshhost}'`
+  sshaddr=`host $sshhost | awk '{print $NF}'`
   #sshhost=`nslookup $1 | sed -n '/Name:/,/Address:/p' | awk '{print $2}'`
-  for sshhost in $1 $sshfqdn $sshaddr; do
-    exists=`ssh-keygen -F $sshhost | wc -c`
+  for sshhostall in $sshhost $sshfqdn $sshaddr; do
+    exists=`ssh-keygen -F $sshhostall | wc -c`
     if [ "$exists" != 0 ]; then
-      echo $sshhost | sed 's/,/ /g' | xargs -n1 ssh-keygen -R
+      echo $sshhostall | sed 's/,/ /g' | xargs -n1 ssh-keygen -R
     fi
   done
-  ssh $sshfqdn
+  if [ -n "$sshuser" ]; then
+    ssh $sshuser@$sshfqdn
+  else
+    ssh $sshfqdn
+  fi
 }
 alias sshnokey='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
 sshinstallkeys() {
