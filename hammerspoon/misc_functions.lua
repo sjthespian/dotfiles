@@ -50,10 +50,10 @@ end
 -- If reduced to a single monitor, move monitor2 applications to
 -- additional spaces instead of onto the main monitor
 -- Restore apps to proper monitor when it comes back
-function monitorWatcher()
-   print("monitor change")
-   applyLayouts(layouts)
-end
+--function monitorWatcher()
+--   print("monitor change")
+--   applyLayouts(layouts)
+--end
 
 
 -- Module functions from

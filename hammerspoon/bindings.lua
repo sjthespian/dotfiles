@@ -61,13 +61,13 @@ function bindings.bind()
 	 end
       end},
       {mod = mod.hyper, key = "3", fn = function()
-	 applyLayouts(layouts)
+	 hsm.layouts.apply()
       end},
       {mod = mod.hyper, key = '4', fn = function()
 	 local focusedWindow = hs.window.focusedWindow()
 	 local app = focusedWindow:application()
 	 if (app) then
-	   applyLayout(layouts, app)
+	   hsm.layouts.apply(app)
 	 end
       end},
       {mod = mod.hyper, key = 'R', fn = function()
