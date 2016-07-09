@@ -25,6 +25,7 @@ local modules = {
   'browser', 
   'caffeine',
   'cheatsheet',
+  'layouts',
   'songs',
   'wifi',
   'windows'
@@ -52,41 +53,3 @@ hs.fnutils.each(hsm, startModule)
 -- load and bind keys
 local bindings = require('bindings')
 bindings.bind()
-
---
--- Watchers for various things
---
-
--- Watch for monitor changes
-monWatcher = hs.screen.watcher.new(monitorWatcher)
-monWatcher:start()
-
-
--- Find host domain name to determine what layout to load
--- layouts are in ~/.hammerspoon/layouts/domain.lua
--- (domain has dots replaced with _)
-domainname = nil
-for i,hname in ipairs(hs.host.names()) do
-  hname_clean = string.gsub(hname,'%.','_')
-  if file_exists(os.getenv('HOME') .. '/.hammerspoon/layouts/' .. hname_clean .. '.lua') then
-    domainname = hname_clean
-    break
-  end
-  domainname = string.match(hname,'%.([^.]+%..*)$')
-  if domainname then
-    domainname = string.gsub(domainname,'%.','_')
-  end
-  if domainname and file_exists(os.getenv('HOME') .. '/.hammerspoon/layouts/' .. domainname .. '.lua') then
-    break
-  else
-    domainname = nil
-  end
-end
-require('layout_functions')
-if domainname then
---  hs.alert.show('Loaded layouts for ' .. domainname)
-  layouts = require('layouts/' .. domainname)
-else
-  layouts = {}
-end
-
