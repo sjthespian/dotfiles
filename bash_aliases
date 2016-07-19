@@ -112,9 +112,11 @@ sshinstallkeys() {
   if [ -z "$1" ]; then
     echo "usage: sshinstallkeys hostname"
   else
-    cat ~/.ssh/id_dsa.pub | ssh $1 "umask 077 && mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
-#    ssh $1 "mkdir .ssh && chmod 700 .ssh"
-#    scp ~/.ssh/authorized_keys $1:.ssh/
+    if [ -x '/usr/bin/ssh-copy-id' ]; then
+      echo "$1..." && ssh-copy-id -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1
+    else
+      echo "$1..." && cat ~/.ssh/id_dsa.pub | ssh -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1 "umask 077 && mkdir ~/.ssh 2>/dev/null; cat >> ~/.ssh/authorized_keys"
+    fi
   fi
 }
 
