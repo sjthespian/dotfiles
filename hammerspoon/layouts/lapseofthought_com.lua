@@ -22,13 +22,10 @@ local layouts = {
    {
       name = "Slack",
       func = function(index, win)
+	 -- first space on 2nd monitor
+	 -- spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[1])
 	 if (#hs.screen.allScreens() > 1) then
-	    -- first space on 2nd monitor
-	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[1])
 	    win:moveToScreen(monitor_1)
-	 else
-	    -- first empty space
-	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
 	 hsm.windows.moveTopRight(win)
       end
