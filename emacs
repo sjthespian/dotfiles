@@ -36,7 +36,8 @@ Return a list of installed packages or nil for every skipped package."
 (ensure-package-installed `cedet `dash `color-theme-sanityinc-solarized
 			  `dockerfile-mode
 			  `flycheck `flymake-easy `flymake-puppet `flymake-ruby
-			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode)
+			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode
+			  `groovy-mode)
 
 ;; enable visual feedback on selections
 ;(setq transient-mark-mode t)

@@ -195,3 +195,9 @@ alias sickbeard-stop='sshstop 8081:xbmc.lapseofthought.com:8081'
 alias subsonic-stop='sshstop 4040:xbmc.lapseofthought.com:4040'
 alias utorrent-stop='sshstop 8082:xbmc.lapseofthought.com:8082'
 alias xbmc-stop='sshstop 8080:xbmc.lapseofthought.com:8080'
+
+# iTerm2
+# Change iterm2 profile. Usage it2prof ProfileName (case sensitive)
+it2prof() {
+  echo -e "\033]50;SetProfile=$1\a"
+}
