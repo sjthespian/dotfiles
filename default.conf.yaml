@@ -32,6 +32,7 @@
     ~/.bash_functions: bash_functions
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
+    ~/.iterm2_shell_integration.bash: iterm2_shell_integration.bash
     ~/.dircolors: dircolors-dark
     ~/.gitignore_global: gitignore_global
     ~/.gnupg/gpg.conf:
