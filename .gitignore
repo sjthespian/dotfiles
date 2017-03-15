@@ -16,3 +16,8 @@
 # Work-specific files to keep out of git
 /bashrc.d/98-disney.sh
 /ssh/conf.d/50-disney.conf
+# Emacs droppings
+emacs.d/chef-mode/
+emacs.d/emacs-for-python/
+emacs.d/git-modes/
+emacs.d/nxhtml/
