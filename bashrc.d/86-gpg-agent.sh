@@ -1,6 +1,6 @@
 # Use cached gpg-agent data if it exists, otherwise start a new agent
 
-AGENTOPTS='--enable-ssh-support'
+AGENTOPTS='--enable-ssh-support --disable-scdaemon'
 
 # See if we have pinentry
 # Special case for mac

@@ -31,7 +31,7 @@ function lib.makeParentDir(path)
   local parent, _, _ = lib.splitPath(path)
   local ok, err = hs.fs.mkdir(parent)
   if ok == nil then
-    if err == "File exists" then
+    if err == 'File exists' then
       ok = true
     end
   end
@@ -144,6 +144,53 @@ function lib.withExtension(filePath, ext)
   local extMatch = '%.'..ext..'$'
   if not string.find(path, extMatch) then path = path..'.'..ext end
   return path
+end
+
+-- load a json file into a lua table and return it
+function lib.loadJSON(file)
+  local data = nil
+  local f = io.open(file, 'r')
+  if f then
+    local content = f:read('*all')
+    f:close()
+    if content then
+      ok, data = pcall(function() return hs.json.decode(content) end)
+      if not ok then
+        hsm.log.e('loadJSON:', data)
+        data = nil
+      end
+    end
+  end
+  return data
+end
+
+-- Find the most recent path in a directory
+-- attr should be one of: access, change, modification, creation
+function lib.mostRecent(parent, attr)
+  if not lib.exists(parent) then return nil end
+
+  -- make sure attr is valid and default to modification
+  local attrs = {access=true, change=true, modification=true, creation=true}
+  if not attrs[attr] then attr = 'modification' end
+
+  local max = 0
+  local mostRecent = nil
+  local iterFn, dirObj = hs.fs.dir(parent)
+  local child = iterFn(dirObj)
+  while child do
+    -- ignore dotfiles
+    if string.find(child, '^[^%.]') then
+      local path = lib.toPath(parent, child)
+      local last = hs.fs.attributes(path, attr)
+      if last > max then
+        mostRecent = path
+        max = last
+      end
+    end
+    child = iterFn(dirObj)
+  end
+
+  return mostRecent
 end
 
 return lib
