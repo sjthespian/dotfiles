@@ -53,6 +53,9 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
+    ~/bin/imgls: bin/imgls
+    ~/bin/imgcat: bin/imgcat
+    ~/bin/divider: bin/divider
 
 - shell:
   - [ git submodule update --init --recursive, Installing submodules]
