@@ -1,11 +1,14 @@
 --
 -- Key bindings
 --
-
 local bindings = {}
+
+local uapp = require('utils.app')
 
 -- define some modifier key combinations
 local mod = {
+  s      = {'shift'},
+  a      = {'alt'},
   cc     = {'cmd', 'ctrl'},
   ca     = {'cmd', 'alt'},
   as     = {'alt', 'shift'},
@@ -13,6 +16,20 @@ local mod = {
   hyper  = {'cmd', 'alt', 'ctrl'},  -- mapped to L_CTRL with Karabiner and Seil
   shyper = {'cmd', 'alt', 'ctrl', 'shift'},
 }
+
+---- This requires karabiner-elements, so not using it for now
+---- Hyper key in Sierra
+--local hyper = hs.hotkey.modal.new({}, 'F17')
+--
+---- Enter/Exit Hyper Mode when F18 is pressed/released
+--local pressedF18 = function()  hyper:enter() end
+--local releasedF18 = function() hyper:exit() end
+--
+---- Bind the Hyper key
+---- Also requires Karabiner-Elements to bind left_control to F18
+--hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+--hs.hotkey.bind(mod.s, 'F18', pressedF18, releasedF18)
+---- End of karabiner-elements requirement
 
 -- cmd alt bindings
 --  arrow keys - move window
@@ -28,53 +45,72 @@ local mod = {
 --  R - reload hammerspoon config
 
 function bindings.bind()
-  -- bind keys, if no modifier specified use shyper
+  -- shyper binds
   hs.fnutils.each({
       -- Music bindings
-      {mod = mod.shyper, key = '0',  fn = hsm.songs.rateSong0},
-      {mod = mod.shyper, key = '1',  fn = hsm.songs.rateSong1},
-      {mod = mod.shyper, key = '2',  fn = hsm.songs.rateSong2},
-      {mod = mod.shyper, key = '3',  fn = hsm.songs.rateSong3},
-      {mod = mod.shyper, key = '4',  fn = hsm.songs.rateSong4},
-      {mod = mod.shyper, key = '5',  fn = hsm.songs.rateSong5},
-      {mod = mod.shyper, key = 'left',  fn = hsm.songs.prevTrack},
-      {mod = mod.shyper, key = 'right', fn = hsm.songs.nextTrack},
-      {mod = mod.shyper, key = 'p',  fn = hsm.songs.playPause},
-      {mod = mod.shyper, key = 'i',  fn = hsm.songs.getInfo},
-      
-      {mod = mod.hyper, key = 'h', fn = hs.hints.windowHints},
-      {mod = mod.hyper, key = 'l', fn = hs.caffeinate.lockScreen},
-      {mod = mod.hyper, key = 'm', fn = mouseHighlight},
-      {mod = mod.hyper, key = 'c', fn = hsm.cheatsheet.toggle},
-      {mod = mod.hyper, key = 'x', fn = hsm.cheatsheet.chooserToggle},
-      {mod = mod.hyper, key = 'y', fn = hs.toggleConsole},
-      {mod = mod.hyper, key = '1', fn = function()
+      {key = '0',  fn = hsm.songs.rateSong0},
+      {key = '1',  fn = hsm.songs.rateSong1},
+      {key = '2',  fn = hsm.songs.rateSong2},
+      {key = '3',  fn = hsm.songs.rateSong3},
+      {key = '4',  fn = hsm.songs.rateSong4},
+      {key = '5',  fn = hsm.songs.rateSong5},
+      {key = 'left',  fn = hsm.songs.prevTrack},
+      {key = 'right', fn = hsm.songs.nextTrack},
+      {key = 'p',  fn = hsm.songs.playPause},
+      {key = 'i',  fn = hsm.songs.getInfo},
+      }, function(obj)
+      if obj.mod then
+	hs.hotkey.bind(obj.mod, obj.key, obj.fn)
+      else
+	hs.hotkey.bind(mod.shyper, obj.key, obj.fn)
+      end
+--    hs.hotkey.bind(mod.shyper, obj.key, obj.fn)
+  end)
+  
+  -- bind keys, if no modifier specified use hyper
+  hs.fnutils.each({
+      {key = 'h', fn = hs.hints.windowHints},
+      {key = 'l', fn = hs.caffeinate.lockScreen},
+      {key = 'm', fn = mouseHighlight},
+      {key = 'c', fn = hsm.cheatsheet.toggle},
+      {key = 'x', fn = hsm.cheatsheet.chooserToggle},
+      {key = 'y', fn = hs.toggleConsole},
+      {key = '1', fn = function()
 	 local win = hs.window.focusedWindow()
 	 if (win) then
 	   win:moveToScreen(monitor_1)
 	 end
       end},
-      {mod = mod.hyper, key = '2', fn = function()
+      {key = '2', fn = function()
 	 local win = hs.window.focusedWindow()
 	 if (win) then
 	   win:moveToScreen(monitor_2)
 	 end
       end},
-      {mod = mod.hyper, key = "3", fn = function()
+      {key = "3", fn = function()
 	 hsm.layouts.apply()
       end},
-      {mod = mod.hyper, key = '4', fn = function()
+      {key = '4', fn = function()
 	 local focusedWindow = hs.window.focusedWindow()
 	 local app = focusedWindow:application()
 	 if (app) then
 	   hsm.layouts.apply(app)
 	 end
       end},
-      {mod = mod.hyper, key = 'R', fn = function()
+      {key = 'R', fn = function()
 	 hs.reload()
 	 hs.alert.show('Config loaded')
-      end},
-
+      end}
+      }, function(obj)
+      if obj.mod then
+	hs.hotkey.bind(obj.mod, obj.key, obj.fn)
+      else
+	hs.hotkey.bind(mod.hyper, obj.key, obj.fn)
+      end
+--    hyper:bind({}, obj.key, obj.fn)
+  end)
+  
+  hs.fnutils.each({
       {mod = mod.ca,    key = 'right', fn = hsm.windows.moveRight},
       {mod = mod.ca,    key = 'left',  fn = hsm.windows.moveLeft},
       {mod = mod.ca,    key = 'up',    fn = hsm.windows.moveUp},
@@ -83,7 +119,7 @@ function bindings.bind()
       if obj.mod then
 	hs.hotkey.bind(obj.mod, obj.key, obj.fn)
       else
-	hs.hotkey.bind(mod.shyper, obj.key, obj.fn)
+	hs.hotkey.bind({}, obj.key, obj.fn)
       end
   end)
 
