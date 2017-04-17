@@ -1,5 +1,5 @@
 -- module: weather
--- Use the forecast.io API to grab local weather info and display it in a
+-- Use the darksky.net API to grab local weather info and display it in a
 -- menubar item.
 --
 local m = {}
@@ -10,9 +10,11 @@ local utime = require('utils.time')
 local next = next
 
 -- constants
-local OPENURLBASE = 'http://forecast.io/#/f/'
-local APIURL = 'https://api.forecast.io/forecast'
+local OPENURLBASE = 'http://darksky.net/#/f/'
+local APIURL = 'https://api.darksky.net/forecast'
 local APICALLSHEADER = 'X-Forecast-API-Calls'
+local GEOAPIURL = 'https://maps.googleapis.com/maps/api/geocode/json?'
+local GEOAPICALLSHEADER = 'X-API-Calls'
 local DUMMYITEM = {title='...', disabled=true}
 
 local menu = nil
@@ -23,17 +25,27 @@ local pathWatcher = nil
 
 -- get a styledtext style based on the given temperature
 local function getStyle(temp)
-  local style = m.cfg.styles.default
-  if temp > m.cfg.tempThresholds.alert then
+  local style = m.cfg.styles.tooDamnCold
+  -- round our temp
+  temp = math.floor(temp + 0.5)
+  if temp >= m.cfg.tempThresholds.alert then
     style = m.cfg.styles.alert
-  elseif temp > m.cfg.tempThresholds.tooDamnHot then
+  elseif temp >= m.cfg.tempThresholds.tooDamnHot then
     style = m.cfg.styles.tooDamnHot
-  elseif temp > m.cfg.tempThresholds.tooHot then
+  elseif temp >= m.cfg.tempThresholds.tooHot then
     style = m.cfg.styles.tooHot
-  elseif temp > m.cfg.tempThresholds.hot then
+  elseif temp >= m.cfg.tempThresholds.hot then
     style = m.cfg.styles.hot
-  elseif temp > m.cfg.tempThresholds.warm then
+  elseif temp >= m.cfg.tempThresholds.warm then
     style = m.cfg.styles.warm
+  elseif temp >= m.cfg.tempThresholds.default then
+    style = m.cfg.styles.default
+  elseif temp >= m.cfg.tempThresholds.cool then
+    style = m.cfg.styles.cool
+  elseif temp >= m.cfg.tempThresholds.cold then
+    style = m.cfg.styles.cold
+  elseif temp >= m.cfg.tempThresholds.tooCold then
+    style = m.cfg.styles.tooCold
   end
   return style
 end
@@ -50,7 +62,7 @@ local function toprecip(dataPoint)
     dataPoint.precipType)
 end
 
--- open the forecast.io web page with the current location
+-- open the darksky.net web page with the current location
 local function openForecast()
   if loc == nil then return end
 
@@ -238,6 +250,23 @@ local function getIconPath(icon)
   return nil
 end
 
+-- update the menu item tooltip
+local function updateMenuTooltip()
+  if menu == nil then return end
+
+  local tip = 'Location Unknown'
+
+  if loc ~= nil then
+    if loc.name ~= nil then
+      tip = string.format('%s', loc.name)
+    else
+      tip = string.format('%s,%s', loc.latitude, loc.longitude)
+    end
+  end
+
+  menu:setTooltip(tip)
+end
+
 -- update the menu item
 local function updateMenu(data)
   if menu == nil then return end
@@ -268,11 +297,12 @@ local function updateMenu(data)
   if nowtemp ~= nil then
     local style = getStyle(nowtemp)
     menu:setTitle(hs.styledtext.new(string.format('%s%-7s', prefix, totemp(nowtemp)), style))
-    menu:setTooltip(string.format('%s%s %s', prefix, totemp(nowtemp), nowsumm))
   end
+
+  updateMenuTooltip()
 end
 
--- asynchronously contact the forecast.io api to get new weather data via http
+-- asynchronously contact the darksky.net api to get new weather data via http
 local function onAsyncGet(status, body, headers)
   if headers[APICALLSHEADER] then
     local calls = tonumber(headers[APICALLSHEADER])
@@ -299,6 +329,30 @@ local function onAsyncGet(status, body, headers)
   end
 end
 
+local function onAsyncReverseGeo(status, body, headers)
+  -- Unfortunately, no way to currently get number of queries from headers,
+  -- but since we only call after calling darksky.net, and google's api is much
+  -- more generous, we shouldn't run into trouble. Right??
+  -- m.log.d('hs.inspect(headers)', hs.inspect(headers))
+
+  if status < 0 then
+    m.log.e(body)
+    return
+  end
+
+  -- save location (find longest formatted address)
+  local data = hs.json.decode(body)
+  local longest = ''
+  for i,result in ipairs(data.results) do
+    if result.formatted_address ~= nil then
+      if string.len(result.formatted_address) > string.len(longest) then
+        longest = result.formatted_address
+      end
+    end
+  end
+  if longest ~= '' then loc.name = longest end
+end
+
 -- callback called when we want to download new weather data
 local function onFetchTick()
   if loc == nil then return end
@@ -307,6 +361,11 @@ local function onFetchTick()
   url = url..'/'..loc.latitude..','..loc.longitude
   url = url..'?exclude=flags'
   hs.http.asyncGet(url, nil, onAsyncGet)
+
+  url = GEOAPIURL..'latlng='
+  url = url..loc.latitude..','..loc.longitude
+  url = url..'&key='..m.cfg.geoapi.key
+  hs.http.asyncGet(url, nil, onAsyncReverseGeo)
 end
 
 -- callback called when we want to grab our current latitude/longitude
@@ -318,6 +377,7 @@ local function onLocTick()
     loc = hs.location.get()
     if loc == nil then m.log.w('Location not found!') end
     hs.location.stop()
+    updateMenuTooltip()
   end):start()
 end
 
@@ -334,19 +394,10 @@ local function onDataChanged(files)
     return
   end
 
-  local data = {}
-  local f = io.open(files[1], 'r')
-  if f then
-    local content = f:read('*all')
-    f:close()
-    if content then
-      ok, data = pcall(function() return hs.json.decode(content) end)
-      if not ok then
-        m.log.e('could not decode json, perhaps bad api key?')
-        m.log.e(data)
-        data = {}
-      end
-    end
+  local data = ufile.loadJSON(files[1])
+  if not data then
+    m.log.e('could not decode json, perhaps bad api key?')
+    data = {}
   end
   updateMenu(data)
 end
