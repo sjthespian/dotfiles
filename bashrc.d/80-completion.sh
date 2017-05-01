@@ -15,8 +15,10 @@ fi
 
 # Additional bash completion
 _personal_completion_loader() {
-    for i in ~/.bash_completion.d/*.sh; do
-        . $i >/dev/null 2>&1 || echo "WARNING: include of $script failed!" 1>&2
+    for i in /usr/local/etc/bash_completion ~/.bash_completion.d/*.sh; do
+	if [ -e $i ]; then
+            . $i >/dev/null 2>&1 || echo "WARNING: include of $script failed!" 1>&2
+	fi
     done
 }
 _personal_completion_loader
