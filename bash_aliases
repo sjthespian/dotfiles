@@ -201,6 +201,8 @@ alias xbmc-stop='sshstop 8080:xbmc.lapseofthought.com:8080'
 it2prof() {
   echo -e "\033]50;SetProfile=$1\a"
 }
+alias it2profdark='it2prof "Solarized Dark"'
+alias it2proflight='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
   alias tmux='tmux -CC'
