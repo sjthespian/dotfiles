@@ -124,6 +124,7 @@
 ;;  '(progn (info-initialize)
 ;;          (add-to-list 'Info-directory-list (concat home-directory "/Lisp/magit"))))
 ;;(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; RCS
 ;; automatically check-in check-out when under rcs
