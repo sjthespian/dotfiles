@@ -203,6 +203,8 @@ it2prof() {
 }
 alias it2profdark='it2prof "Solarized Dark"'
 alias it2proflight='it2prof "Solarized Light"'
+alias it2pd='it2prof "Solarized Dark"'
+alias it2pl='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
   alias tmux='tmux -CC'
