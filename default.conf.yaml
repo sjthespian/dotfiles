@@ -29,6 +29,7 @@
       create: true
       path: bashrc.d/99-misc.sh
     ~/.bash_aliases: bash_aliases
+    ~/.bash_completion.d: bash_completion.d
     ~/.bash_functions: bash_functions
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
