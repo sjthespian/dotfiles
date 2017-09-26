@@ -7,4 +7,7 @@
 
 - link:
     ~/.hammerspoon: hammerspoon
-
+    ~/bin/imgls: bin/imgls
+    ~/bin/imgcat: bin/imgcat
+    ~/bin/divider: bin/divider
+    ~/bin/it2cmd: bin/it2cmd
