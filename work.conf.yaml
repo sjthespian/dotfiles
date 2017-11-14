@@ -13,6 +13,9 @@
     ~/.bashrc.d/98-disney.sh:
       create: true
       path: bashrc.d/98-disney.sh
+    ~/.iterm2rc/com.googlecode.iterm2.plist:
+      create: true
+      path: iterm2rc/com.googlecode.iterm2.plist-work
 
 
 - shell:
