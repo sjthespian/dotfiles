@@ -46,7 +46,7 @@ local layouts = {
       end
    },
    {
-      name = {"Todist"},
+      name = {"Todoist"},
       func = function(index, win)
 	 if (#hs.screen.allScreens() > 1) then
 	    win:moveToScreen(monitor_2)

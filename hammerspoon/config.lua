@@ -15,6 +15,9 @@ cfgWatcher:start()
 -- Monospace font used in multiple modules
 local MONOFONT = 'Fira Mono'
 
+-- enable spotlight for application alternate names 
+hs.application.enableSpotlightForNameSearches(true)
+
 --------------------
 --  global paths  --
 --------------------
