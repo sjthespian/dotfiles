@@ -46,14 +46,19 @@ local layouts = {
       end
    },
    {
+      name = {"Todist"},
+      func = function(index, win)
+	 if (#hs.screen.allScreens() > 1) then
+	    win:moveToScreen(monitor_2)
+	 end
+	 hsm.windows.moveTopRight(win)
+      end
+   },
+   {
       name = {"Remember The Milk"},
       func = function(index, win)
 	 if (#hs.screen.allScreens() > 1) then
---	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[2]:spaces()[1])
 	    win:moveToScreen(monitor_2)
-	 else
-	    -- first empty space
---	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[3])
 	 end
 	 hsm.windows.moveTopRight(win)
       end
