@@ -49,6 +49,8 @@ seticonname () {
 }
 
 alias wake_dream="sudo ether-wake 00:60:08:20:CF:34"
+alias wake_sandman="sudo ether-wake 60:33:4b:29:ba:5b"
+alias wake_kodi="sudo ether-wake c4:54:44:77:10:d9"
 
 # Compiz startup -- update in /usr/bin/compiz-gtk
 function runCompiz() {
