@@ -113,6 +113,8 @@ function bindings.bind()
   end)
   
   hs.fnutils.each({
+      {mod = mod.ca, key = 'home',  fn = hsm.windows.moveTopLeft},
+      {mod = mod.ca, key = 'end',  fn = hsm.windows.moveBottomRight},
       {mod = mod.ca, key = 'right', fn = hsm.windows.moveRight},
       {mod = mod.ca, key = 'left',  fn = hsm.windows.moveLeft},
       {mod = mod.ca, key = 'up',    fn = hsm.windows.moveUp},
