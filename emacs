@@ -12,6 +12,8 @@
 (add-to-list 'package-archives
 	'("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
 (package-initialize)
+;; Uncomment to refresh packages cache -- slows startup
+;;(package-refresh-contents)
 
 ;; Install needed packages
 (defun ensure-package-installed (&rest packages)
@@ -33,11 +35,15 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
+# removed `flymake-easy `flymake-puppet `flymake-ruby -- moving to flycheck
 (ensure-package-installed `cedet `dash `color-theme-sanityinc-solarized
 			  `dockerfile-mode
-			  `flycheck `flymake-easy `flymake-puppet `flymake-ruby
+			  `flycheck
+			  `go-mode
 			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode
 			  `groovy-mode)
+;; enable flycheck everywhere
+(global-flycheck-mode)
 
 ;; enable visual feedback on selections
 ;(setq transient-mark-mode t)
