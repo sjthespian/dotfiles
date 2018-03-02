@@ -35,7 +35,7 @@ Return a list of installed packages or nil for every skipped package."
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-# removed `flymake-easy `flymake-puppet `flymake-ruby -- moving to flycheck
+; removed `flymake-easy `flymake-puppet `flymake-ruby -- moving to flycheck
 (ensure-package-installed `cedet `dash `color-theme-sanityinc-solarized
 			  `dockerfile-mode
 			  `flycheck
