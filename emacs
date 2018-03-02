@@ -3,6 +3,10 @@
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
 
+;; Make sure /usr/local/bin is in the path
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ;; package management
 (require 'package)
 (add-to-list 'package-archives
