@@ -106,7 +106,7 @@
 
 ;;
 ;; Load nxhtml for jsp editing
-(load-file (concat lisp-directory "/nxhtml/autostart.el"))
+;(load-file (concat lisp-directory "/nxhtml/autostart.el"))
 
 ;;
 ;; Puppet automation
