@@ -1,0 +1,18 @@
+#!/bin/bash
+
+read -r -d '' script <<'EOF'
+on run argv
+tell application "iTerm"
+    activate
+    set newWindow to (create window with default profile)
+        tell current session of newWindow
+            set args to "exec "
+            repeat with arg in argv
+               set args to args & arg & " "
+            end repeat
+            write text args
+        end tell
+end tell
+end run
+EOF
+echo "$script" | osascript ``-'' $@
