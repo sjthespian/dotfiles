@@ -54,6 +54,31 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
+    # 
+    # Mac files
+    ~/.hammerspoon:
+      path: hammerspoon
+      if: '[ -f "/Applications/Hammerspoon.app" ]'
+    ~/bin/imgls:
+      path: bin/imgls
+      if: '[ -f "/Applications/iTerm.app" ]'
+    ~/bin/imgcat:
+      path: bin/imgcat
+      if: '[ -f "/Applications/iTerm.app" ]'
+    ~/bin/divider:
+      path: bin/divider
+      if: '[ -f "/Applications/iTerm.app" ]'
+    ~/bin/it2cmd:
+      path: bin/it2cmd
+      if: '[ -f "/Applications/iTerm.app" ]'
+    #
+    # Emacs
+    ~/.emacs: 
+      path: emacs
+      if: '[ "$(which emacs)" != "" ]'
+    ~/.emacs.d:
+      path: emacs.d
+      if: '[ "$(which emacs)" != "" ]'
 
 - shell:
   - [ git submodule update --init --recursive, Installing submodules]
