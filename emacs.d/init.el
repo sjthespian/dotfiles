@@ -180,7 +180,8 @@ calls vc-diff)"
 
 ;; Emacs-for-python
 ;; https://github.com/gabrielelanaro/emacs-for-python
-(load-file (concat lisp-directory "/emacs-for-python/epy-init.el"))
+;; no longer maintained...
+;;;;(load-file (concat lisp-directory "/emacs-for-python/epy-init.el"))
 
 ;;
 ;; Markdown mode
