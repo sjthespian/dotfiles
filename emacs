@@ -81,6 +81,7 @@ Return a list of installed packages or nil for every skipped package."
  '(package-selected-packages
    (quote
     (elpy-enable yaml-mode markdown-mode magit lua-mode json-mode groovy-mode go-mode flymake-ruby flymake-puppet flymake-go flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit)))
+;;;;;    (groovy-mode go-mode dockerfile-mode yaml-mode markdown-mode magit lua-mode json-mode flymake-ruby flymake-puppet flycheck color-theme-sanityinc-solarized)))
  '(query-user-mail-address nil)
  '(user-mail-address "drich@employees.org"))
 (custom-set-faces
