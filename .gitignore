@@ -1,4 +1,5 @@
 *~
+*.elc
 \#*\#
 /keyrings/live/secring.gpg
 /keys/gpg/public/25716A2D.asc
@@ -21,3 +22,6 @@ emacs.d/chef-mode/
 emacs.d/emacs-for-python/
 emacs.d/git-modes/
 emacs.d/nxhtml/
+emacs.d/network-security.data
+# Hammerspoon 
+hammerspoon/hs/_asm/undocumented/hs._asm.undocumented.spaces/
