@@ -173,3 +173,9 @@ if [ -e ~/.bash-git-prompt ]; then
 #        fixcolor ${ColorNames[$i]}
 #    done
 fi
+
+# Temporary workaround for the interations defined in
+# https://github.com/magicmonty/bash-git-prompt/issues/348
+function setLastCommandState() {
+  GIT_PROMPT_LAST_COMMAND_STATE=$__bp_last_ret_value
+}
