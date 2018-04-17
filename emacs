@@ -43,6 +43,7 @@ Return a list of installed packages or nil for every skipped package."
 (ensure-package-installed `cedet `dash `color-theme-sanityinc-solarized
 			  `dockerfile-mode
 			  `elpy
+			  `exec-path-from-shell
 			  `flycheck
 			  `go-mode
 			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode
@@ -90,3 +91,8 @@ Return a list of installed packages or nil for every skipped package."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:size "12pt")))))
+
+;; ensure we can talk to ssh agent for magit
+(require 'exec-path-from-shell)
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
