@@ -192,6 +192,14 @@ calls vc-diff)"
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;;
+;; ensure we can talk to ssh agent for magit
+(require 'exec-path-from-shell)
+(when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
 ;; Don't start the server unless we can verify that it isn't running.
 (require 'server)
 (when (and (functionp 'server-running-p) (not (server-running-p)))
