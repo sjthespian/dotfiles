@@ -91,8 +91,3 @@ Return a list of installed packages or nil for every skipped package."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:size "12pt")))))
-
-;; ensure we can talk to ssh agent for magit
-(require 'exec-path-from-shell)
-(exec-path-from-shell-copy-env "SSH_AGENT_PID")
-(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
