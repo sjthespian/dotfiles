@@ -9,16 +9,21 @@ alias list='more -l'
 alias wa='who -a'
 alias h='history'
 alias lo='logout'
-gnomeopen=`which gnome-open 2>/dev/null`
-if [ -n "`which gnome-open 2>/dev/null`" ]; then
+if hash gnome-open 2>/dev/null; then
   alias open='gnome-open'
 fi
 if [ -x /usr/bin/vim ]; then
   alias vi=vim
 fi
 
+if hash hub 2>/dev/null; then
+  alias git='hub'
+fi
+
 # Use the Berkeley Mail program
-alias mail='Mail'
+if hash Mail 2>/dev/null; then
+  alias mail='Mail'
+fi
 
 alias al='ls -al'
 alias su='su -'
@@ -48,6 +53,7 @@ seticonname () {
   echo -n -e "\033]1;$*\007"
 }
 
+# WOL hosts
 alias wake_dream="sudo ether-wake 00:60:08:20:CF:34"
 alias wake_sandman="sudo ether-wake 60:33:4b:29:ba:5b"
 alias wake_kodi="sudo ether-wake c4:54:44:77:10:d9"
@@ -129,7 +135,7 @@ sshinstallkeys() {
   fi
 }
 
-if [ -n "`which xxdiff 2>/dev/null`" ]; then
+if hash xxdiff 2>/dev/null; then
   alias xdiff="xxdiff"
 fi
 
@@ -138,7 +144,7 @@ fi
 alias rdesktop='rdesktop -a16 -g1280x1024'
 
 # VNC is vinagre
-if [ -n "`which vinagre 2>/dev/null`" ]; then
+if hash vinagre 2>/dev/null; then
   alias vncviewer="vinagre"
 fi
 # Start/stop remove VNC
