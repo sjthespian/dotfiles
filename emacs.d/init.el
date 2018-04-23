@@ -63,6 +63,7 @@
 (autoload 'dash "dash" "Dash" t)
 (autoload 'rubocop-mode "rubocop" "Rubocop syntax checking" t)
 (add-hook 'ruby-mode-hook 'rubocop-mode)
+(add-hook 'ruby-mode-hook 'flycheck-mode)
 ;;(require 'flymake-ruby)
 ;;(add-hook 'ruby-mode-hook (lambda () (flymake-ruby-load)))
 
