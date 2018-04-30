@@ -1,3 +1,11 @@
+;;; init.el --- Emacs init file
+
+;;; Commentary:
+;; init file for drich
+;;
+
+;;; Code:
+
 (defvar autosave 500
   "The interval between file autosaves")
 
@@ -47,9 +55,12 @@
       )
   )
 
+;;; Settings for various languages
+
 ;; Visual Basic mode settings
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.vbs\\'" . visual-basic-mode))
+
 ;; Javascript
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -59,18 +70,23 @@
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 
 ;; Ruby
-;(add-to-list 'load-path (concat lisp-directory "/dash.el"))
 (autoload 'dash "dash" "Dash" t)
-(autoload 'rubocop-mode "rubocop" "Rubocop syntax checking" t)
-(add-hook 'ruby-mode-hook 'rubocop-mode)
 (add-hook 'ruby-mode-hook 'flycheck-mode)
-;;(require 'flymake-ruby)
-;;(add-hook 'ruby-mode-hook (lambda () (flymake-ruby-load)))
+(flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
 
 ;; YAML
 ;(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;;
+;; Markdown mode
+;(add-to-list 'load-path (concat lisp-directory "/markdown-mode"))
+(autoload 'markdown-mode "markdown-mode"
+	     "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; Lua mode settings
 (setq lua-indent-level 2)
@@ -105,57 +121,11 @@
 
 (turn-on-font-lock)
 
-;;
 ;; Load nxhtml for jsp editing
 ;(load-file (concat lisp-directory "/nxhtml/autostart.el"))
 
-;;
-;; Puppet automation
-(autoload 'puppet-mode "puppet-mode" "Major mode for editing puppet manifests")
-(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
-(require 'flymake-puppet)
-(add-hook 'puppet-mode-hook (lambda () (flymake-puppet-load)))
-
-;;;; requires emacs 23.2 :-(
-;;;;
 ;;;; magit for git
-;;(add-to-list 'load-path (concat home-directory "/Lisp/git-modes"))
-;;(add-to-list 'load-path (concat home-directory "/Lisp/magit"))
-;;(eval-after-load 'info
-;;  '(progn (info-initialize)
-;;          (add-to-list 'Info-directory-list (concat home-directory "/Lisp/magit"))))
-;;(require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
-
-;; RCS
-;; automatically check-in check-out when under rcs
-(load-library "vc-rcs")
-(defun rcs-ci-co nil
-  "check in check out the file if it is under vc with rcs
-        with a prefix other than 1 only check-in"
-  (when (eq (vc-backend (buffer-file-name)) 'RCS)
-    (if (= args 1)
-	    (save-window-excursion 
-	      (vc-toggle-read-only)
-	      (call-interactively 'log-edit-done)
-	      (vc-toggle-read-only))
-	  (vc-toggle-read-only))))
-
-(add-hook 'after-save-hook 'rcs-ci-co)
-
-(defun my-vc-diff (historic &optional not-urgent)
-  "my vc diff, sames as vc-diff but in case of rcs, display the 
-diffs between current version and previous one (with a prefix 
-calls vc-diff)"
-  (interactive (list current-prefix-arg t))
-  (let ((file (buffer-file-name)))
-  (if historic
-      (call-interactively 'vc-version-diff)
-    (if (eq (vc-backend file) 'RCS)
-	(vc-version-diff file  (vc-previous-version (vc-working-version file)) (vc-working-version file))
-      (call-interactively 'vc-diff)))))
-
-(global-set-key  (kbd "C-x v=") 'my-vc-diff)
 
 ;; speedbar - http://cedet.sourceforge.net/speedbar.shtml
 ;(add-to-list 'load-path (concat lisp-directory "/cedet"))
@@ -179,20 +149,6 @@ calls vc-diff)"
     ))
 ;; -- end of emacs 23
 
-;; Emacs-for-python
-;; https://github.com/gabrielelanaro/emacs-for-python
-;; no longer maintained...
-;;;;(load-file (concat lisp-directory "/emacs-for-python/epy-init.el"))
-
-;;
-;; Markdown mode
-;(add-to-list 'load-path (concat lisp-directory "/markdown-mode"))
-(autoload 'markdown-mode "markdown-mode"
-	     "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ;;
 ;; ensure we can talk to ssh agent for magit
 (require 'exec-path-from-shell)
@@ -205,3 +161,5 @@ calls vc-diff)"
 (require 'server)
 (when (and (functionp 'server-running-p) (not (server-running-p)))
 (server-start))
+
+;;; init.el ends here

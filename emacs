@@ -1,4 +1,9 @@
-;; .emacs
+;;; .emacs --- emacs init
+
+;;; Commentary:
+;; emacs init file
+
+;;; Code:
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
@@ -23,13 +28,15 @@
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
 
+PACKAGES contains the package to install if not already installed
+
 Return a list of installed packages or nil for every skipped package."
   (mapcar
    (lambda (package)
      ;; (package-installed-p 'evil)
      (if (package-installed-p package)
          nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+       (if (y-or-n-p (format "Package %s is missing - install it? " package))
            (package-install package)
          package)))
    packages))
@@ -91,3 +98,7 @@ Return a list of installed packages or nil for every skipped package."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:size "12pt")))))
+
+(provide 'emacs)
+
+;;; emacs ends here
