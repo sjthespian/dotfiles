@@ -40,3 +40,6 @@
 [submodule "emacs.d/nxhtml"]
 	path = emacs.d/lisp/nxhtml
 	url = https://github.com/jwiegley/nxhtml.git
+[submodule "dotbot-robobenklein"]
+	path = dotbot-robobenklein
+	url = https://github.com/robobenklein/dotbot.git
