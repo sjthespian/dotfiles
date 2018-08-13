@@ -54,8 +54,6 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
-
-- linkif:
     # 
     # Mac files
     ~/.hammerspoon:

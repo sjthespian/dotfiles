@@ -5,6 +5,8 @@ set -e
 DEFAULT_CONFIG_PREFIX="default"
 CONFIG_SUFFIX=".conf.yaml"
 DOTBOT_DIR="dotbot"
+#DOTBOT_DIR="dotbot-robobenklein"
+#DOTBOT_BRANCH="linkif"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -37,6 +39,12 @@ done
 
 cd "${BASEDIR}"
 git submodule update --init --recursive "${DOTBOT_DIR}"
+if [ -n "$DOTBOT_BRANCH" ]; then
+	OPWD=`pwd`
+	cd $DOTBOT_DIR
+	git checkout $DOTBOT_BRANCH
+	cd $OPWD
+fi
 
 for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
 	if [ "$VERBOSE" != "Q" ]; then
