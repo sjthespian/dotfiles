@@ -4,6 +4,8 @@ local actions = {
   maximize = 'maximize',
   toFront = 'bringToFront',
   activate = 'activate',
+  fullVolume = 'fullvolume',
+  restoreVolume = 'restorevolume',
   debug = 'DEBUG',
 }
 
