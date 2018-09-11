@@ -5,8 +5,6 @@ cfg.global = {}  -- this will be accessible via hsm.cfg in modules
 ----------------------------------------------------------------------------
 
 local ufile = require('utils.file')
-local E = require('hs.application.watcher')   -- appwindows events
-local A = require('appactions')               -- appwindows actions
 
 -- Reload config on change
 cfgWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
@@ -37,10 +35,15 @@ cfg.global.paths.ulbin = ufile.toPath(cfg.global.paths.ul,   'bin')
 ------------------
 -- Each app name points to a list of rules, which are event/action pairs.
 -- See hs.application.watcher for events, and appactions.lua for actions.
+local E = require('hs.application.watcher')   -- appwindows events
+local A = require('appactions')               -- appwindows actions
+
 cfg.appwindows = {
   rules = {
-    Finder              = {{evt = E.activated,    act = A.toFront}},
-    ['Blue Jeans']      = {{evt = E.launched,     act = A.toFront}},
+    Finder              = {{evt = E.activated,    act = 'DEBUG'}},
+    ['Citrix Viewer']   = {{evt = E.launched,     act = 'fullscreen'}},
+    ['Blue Jeans']      = {{evt = E.launched,     act = 'fullvolume'},
+                           {evt = E.terminated,   act = 'restorevolume'}},
   },
 }
 

@@ -17,6 +17,9 @@ local DEBUG = {
 
 local watcher = nil
 
+-- Get audio libraries
+local audio = require 'hs.audiodevice'
+
 -- appwatcher callback
 local function watch(appName, eventType, appObject)
   -- see config.appwindows for rule configuration
@@ -41,11 +44,23 @@ local function watch(appName, eventType, appObject)
         elseif rule.act == A.toFront then
           -- bring the application windows to the front
           appObject:selectMenuItem({'Window', 'Bring All to Front'})
-        elseif rule.act == A.activate then
-          -- activate (focus) the app
-          appObject:activate()
+        elseif rule.act == A.fullVolume then
+          -- set volulme to 100%, saving the old level
+	  local audioDev = audio.defaultOutputDevice()
+	  m.saveVolume = audioDev:volume()
+	  audioDev:setVolume(100)
+        elseif rule.act == A.restoreVolume then
+          -- restore volume to the prior level
+	  local audioDev = audio.defaultOutputDevice()
+	  if m.saveVolume then
+	    audioDev:setVolume(m.saveVolume)
+	  end
         elseif rule.act == A.debug then
           -- print some debugging information about the app and events
+          print(
+            'appName:', appName,
+            ', bundleID:', appObject:bundleID(),
+            ', eventType:', DEBUG[eventType])
           m.log.d(
             'appName:', appName,
             ', bundleID:', appObject:bundleID(),

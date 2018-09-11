@@ -21,6 +21,7 @@ log = hs.logger.new(hs.host.localizedName(), LOGLEVEL)
 
 -- List of modules to load (found in modules/ dir)
 local modules = {
+  'appwindows',
   'battery',
   'browser', 
   'caffeine',
@@ -48,7 +49,6 @@ hsm.cfg = cfg.global
 hs.fnutils.each(modules, loadModuleByName)
 hs.fnutils.each(hsm, configModule)
 hs.fnutils.each(hsm, startModule)
-
 
 -- load and bind keys
 local bindings = require('bindings')
