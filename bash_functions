@@ -30,7 +30,8 @@ _load_bashrc_d() {
     [ -d ~/.bashrc.d ] || return
 
     for script in ~/.bashrc.d/*.sh; do
-        . $script >/dev/null 2>&1 || echo "WARNING: include of $script failed!" 1>&2
+#        . $script >/dev/null 2>&1 || echo "WARNING: include of $script failed!" 1>&2
+        . $script || echo "WARNING: include of $script failed!" 1>&2
     done
 }
 
