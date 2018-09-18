@@ -4,7 +4,7 @@ AGENTOPTS='--enable-ssh-support --disable-scdaemon'
 
 # See if we have pinentry
 # Special case for mac
-PINENTRY=`which pinentry-mac`
+PINENTRY=`type pinentry-mac 2>/dev/null | awk '{print $3}'`
 [[ -z "$PINENTRY" ]] && PINENTRY=`which pinentry`
 if [ -n "$PINENTRY" ]; then
     AGENTOPTS="${AGENTOPTS} --pinentry-program $PINENTRY"
