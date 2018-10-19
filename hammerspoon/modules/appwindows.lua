@@ -55,6 +55,10 @@ local function watch(appName, eventType, appObject)
 	  if m.saveVolume then
 	    audioDev:setVolume(m.saveVolume)
 	  end
+        elseif rule.act == A.iTermZoomIn then
+	  hs.eventtap.keyStroke({"cmd", "shift"}, "=")
+        elseif rule.act == A.iTermZoomOut then
+	  hs.eventtap.keyStroke({"cmd"}, "-")
         elseif rule.act == A.debug then
           -- print some debugging information about the app and events
           print(

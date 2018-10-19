@@ -6,6 +6,8 @@ local actions = {
   activate = 'activate',
   fullVolume = 'fullvolume',
   restoreVolume = 'restorevolume',
+  iTermZoomIn = 'zoomin',
+  iTermZoomOut = 'zoomout',
   debug = 'DEBUG',
 }
 

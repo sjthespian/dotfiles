@@ -16,7 +16,7 @@ local function getWindows(appName, appTitle)
    end
 end
 
-local function applyAppLayout(layout, appName)
+local function applyAppLayout(layout, appName, counter)
   local wins = getWindows(appName, layout.title)
   if wins then
     for j, win in ipairs(wins) do
@@ -37,7 +37,7 @@ function m.apply(app)
     for i, appName in ipairs(appTable) do
       if app then
 	if appName == app:title() then
-	  applyAppLayout(layout, appName)
+	  applyAppLayout(layout, appName, counter)
 	  counter = counter + 1
 	end
       elseif (hs.application.find(appName)) then
