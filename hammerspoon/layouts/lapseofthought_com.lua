@@ -16,7 +16,7 @@ local layouts = {
    {
       name = "Emacs",
       func = function(index, win)
-	 win:moveToScreen(monitor_2)
+	 win:moveToScreen(monitor_2, false, true)
       end
    },
    {
@@ -25,7 +25,7 @@ local layouts = {
 	 -- first space on 2nd monitor
 	 -- spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[1])
 	 if (#hs.screen.allScreens() > 1) then
-	    win:moveToScreen(monitor_1)
+	    win:moveToScreen(monitor_1, false, true)
 	 end
 	 hsm.windows.moveTopRight(win)
       end

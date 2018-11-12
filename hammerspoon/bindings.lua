@@ -80,13 +80,13 @@ function bindings.bind()
       {key = '1', fn = function()
 	 local win = hs.window.focusedWindow()
 	 if (win) then
-	   win:moveToScreen(monitor_1)
+	   win:moveToScreen(monitor_1, false, true)
 	 end
       end},
       {key = '2', fn = function()
 	 local win = hs.window.focusedWindow()
 	 if (win) then
-	   win:moveToScreen(monitor_2)
+	   win:moveToScreen(monitor_2, false, true)
 	 end
       end},
       {key = "3", fn = function()
