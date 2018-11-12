@@ -22,6 +22,7 @@ local audio = require 'hs.audiodevice'
 
 -- appwatcher callback
 local function watch(appName, eventType, appObject)
+  -- print('watch(', appName, ', ', eventType, ', ', appObject, ')')
   -- see config.appwindows for rule configuration
   if m.cfg.rules[appName] then
 
