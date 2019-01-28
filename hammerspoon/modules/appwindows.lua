@@ -46,10 +46,10 @@ local function watch(appName, eventType, appObject)
           -- bring the application windows to the front
           appObject:selectMenuItem({'Window', 'Bring All to Front'})
         elseif rule.act == A.fullVolume then
-          -- set volulme to 100%, saving the old level
+          -- set volulme to 80%, saving the old level
 	  local audioDev = audio.defaultOutputDevice()
 	  m.saveVolume = audioDev:volume()
-	  audioDev:setVolume(100)
+	  audioDev:setVolume(80)
         elseif rule.act == A.restoreVolume then
           -- restore volume to the prior level
 	  local audioDev = audio.defaultOutputDevice()
