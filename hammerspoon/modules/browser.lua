@@ -23,6 +23,15 @@ local function httpCallback(scheme, _, _, fullURL)
     return
   end
 
+  -- Check for urls with specific browsers
+  for k, v in pairs(m.cfg.urlmap) do
+    match = string.match(fullURL , tostring(k))
+    if string.find(fullURL, k, 1, true) then
+      print(k)
+      handler = v
+    end
+  end
+ 
   hs.urlevent.openURLWithBundle(fullURL, handler)
 end
 
