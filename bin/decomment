@@ -28,5 +28,9 @@ shift $((OPTIND -1))
 
 # Loop through files
 for file in $*; do
-  sed -e "s/${comment}.*$//" -e '/^[ 	]*$/d' ${file}
+  if [ ${comment} == "@" ]; then
+    sed -e "s/${comment}.*\$//" -e '/^[ 	]*$/d' ${file}
+  else
+    sed -e "s@${comment}.*\$@@" -e '/^[ 	]*$/d' ${file}
+  fi
 done
