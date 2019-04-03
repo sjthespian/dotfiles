@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Strip comments and blnak lines from a file and display it
+#
+
+comment="#"
+
+usage() {
+  if [ -n "$1" ]; then
+    echo $1
+  fi
+  echo "usage: $0 [-c commentstring ] file [...]"
+  exit 1
+}
+
+# Parse command line (if anything)
+while getopts "c:" opt; do
+  case ${opt} in
+    c)
+      comment=$OPTARG
+      ;;
+    \?)
+      usage "Invalid option: $OPTARG"
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# Loop through files
+for file in $*; do
+  sed -e "s/${comment}.*$//" -e '/^[ 	]*$/d' ${file}
+done

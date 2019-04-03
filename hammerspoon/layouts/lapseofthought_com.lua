@@ -26,8 +26,10 @@ local layouts = {
 	 -- spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[1]:spaces()[1])
 	 if (#hs.screen.allScreens() > 1) then
 	    win:moveToScreen(monitor_1, false, true)
+	    hsm.windows.moveTopLeft(win)
+	 else
+	    hsm.windows.moveTopRight(win)
 	 end
-	 hsm.windows.moveTopRight(win)
       end
    },
    {

@@ -54,6 +54,10 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim
     ~/.vimrc: vimrc
+    #
+    # Utils
+    ~/bin/decomment:
+      path: bin/decomment
     # 
     # Mac files
     ~/.hammerspoon:
