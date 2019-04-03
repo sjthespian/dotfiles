@@ -84,6 +84,7 @@ cfg.browser = {
     ['disney.service-now.com'] = 'com.apple.Safari',
     ['help.disney.network'] = 'com.apple.Safari',
     ['.wdig.com'] = 'com.apple.Safari',
+    ['yammer.com'] = 'com.apple.Safari',
   },
 }
 
