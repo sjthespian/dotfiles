@@ -6,6 +6,8 @@
 	<true/>
 	<key>AboutToPasteTabsWithCancel_selection</key>
 	<integer>0</integer>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -24,10 +26,8 @@
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
-	<key>NSFontPanelAttributes</key>
-	<string>1, 0</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.dotfiles/iterm2rc</string>
+	<string>~/.iterm2rc</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -67,15 +67,25 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>760 787 400 129 0 0 1920 1177 </string>
+	<string>3093 906 400 129 2880 56 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2570 588 620 392 1920 0 1920 1177 </string>
+	<string>3850 824 620 392 2880 56 2560 1417 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>3149 182 606 469 2880 56 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1956 87 796 473 1920 0 1920 1177 </string>
+	<string>3542 573 796 486 2880 56 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>155 593 592 584 0 0 1920 1177 </string>
+	<string>516 692 592 584 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1233 590 570 587 0 0 1920 1177 </string>
+	<string>3550 285 1774 587 2880 56 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>-673 371 570 587 -2560 141 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>-2049 971 1305 587 -2560 141 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>-1909 971 570 587 -2560 141 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>-2517 287 570 587 -2560 141 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4063,28 +4073,18 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<key>NoSyncHaveUsedCopyMode</key>
 	<true/>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
-	<integer>0</integer>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
-	<true/>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
-	<integer>0</integer>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
-	<key>NoSyncInstallUtilitiesPackage</key>
-	<true/>
-	<key>NoSyncInstallUtilitiesPackage_selection</key>
-	<integer>2</integer>
 	<key>NoSyncInstallationId</key>
-	<string>EBFE92CD-09D3-496D-A93C-1D4CD467C9E4</string>
+	<string>5479BF13-1136-4D43-AE38-B2EC025B9D5B</string>
 	<key>NoSyncLastTipTime</key>
-	<real>528252069.94122601</real>
+	<real>528392036.85382301</real>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>510164747.89160597</real>
+	<real>510254904.50602698</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
@@ -4197,7 +4197,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/richd140/.dotfiles/iterm2rc</string>
+	<string>/Users/drich/.iterm2rc</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -4205,11 +4205,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=36</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=84</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-14T17:35:41Z</date>
+	<date>2018-10-06T07:07:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -4229,18 +4229,22 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<true/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1510680960</real>
+	<real>1534984192</real>
 	<key>WindowNumber</key>
 	<false/>
+	<key>WordCharacters</key>
+	<string>/-+\~_.</string>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5</string>
+	<string>3.2.2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
 	<false/>
+	<key>moveToApplicationsFolderAlertSuppress</key>
+	<true/>
 </dict>
 </plist>
