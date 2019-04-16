@@ -20,9 +20,10 @@
 	'("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
 	'("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
+(setq package-check-signature nil)
 (package-initialize)
 ;; Uncomment to refresh packages cache -- slows startup
-;;(package-refresh-contents)
+(package-refresh-contents)
 
 ;; Install needed packages
 (defun ensure-package-installed (&rest packages)
@@ -88,8 +89,7 @@ Return a list of installed packages or nil for every skipped package."
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (elpy-enable yaml-mode markdown-mode magit lua-mode json-mode groovy-mode go-mode flymake-ruby flymake-puppet flymake-go flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit)))
-;;;;;    (groovy-mode go-mode dockerfile-mode yaml-mode markdown-mode magit lua-mode json-mode flymake-ruby flymake-puppet flycheck color-theme-sanityinc-solarized)))
+    (groovy-mode elpy-enable yaml-mode markdown-mode magit lua-mode json-mode go-mode flymake-ruby flymake-puppet flymake-go flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit)))
  '(query-user-mail-address nil)
  '(user-mail-address "drich@employees.org"))
 (custom-set-faces
