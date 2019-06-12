@@ -39,6 +39,9 @@ fi
 # Syntax highlighting in less on OSX
 # http://funkworks.blogspot.com/2013/01/syntax-highlighting-in-less-on-osx.html
 if `hash src-hilite-lesspipe.sh > /dev/null 2>&1`; then
-  export LESSOPEN="| ${LESSPIPE} %s"
-  export LESS='-R'
+  LESSPIPE=`which src-hilite-lesspipe.sh`
+  if [ -n "$LESSPIPE" ]; then
+    export LESSOPEN="| ${LESSPIPE} %s"
+    export LESS='-R'
+  fi
 fi
