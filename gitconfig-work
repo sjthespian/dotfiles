@@ -1,6 +1,9 @@
 [user]
 	email = daniel.rich@disney.com
 	name = Daniel Rich
+[credential "https://github.disney.com"]
+    username = richd140
+    helper = store
 [color]
 	ui = true
 [alias]
