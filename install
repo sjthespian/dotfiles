@@ -6,7 +6,7 @@ DEFAULT_CONFIG_PREFIX="default"
 CONFIG_SUFFIX=".conf.yaml"
 DOTBOT_DIR="dotbot"
 #DOTBOT_DIR="dotbot-robobenklein"
-#DOTBOT_BRANCH="linkif"
+DOTBOT_BRANCH="master"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
