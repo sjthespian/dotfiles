@@ -62,6 +62,9 @@ Return a list of installed packages or nil for every skipped package."
 ;; enable visual feedback on selections
 ;(setq transient-mark-mode t)
 
+;; Make next/prev line behave logically
+(setq line-move-visual nil)
+
 ;; default to better frame titles
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
