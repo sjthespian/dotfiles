@@ -32,6 +32,17 @@ fi
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export GOPATH="${HOME}/go/"
+export PATH=$PATH:$GOPATH/bin
+# Make sure some common go utils are installed
+installgoutil() {
+  if [ ! -f $GOPATH/bin/$1 ]; then
+    go get $2
+  fi
+}
+installgoutil godef github.com/rogpeppe/godef
+installgoutil gocode github.com/nsf/gocode
+installgoutil goimports golang.org/x/tools/cmd/goimports
+installgoutil guru golang.org/x/tools/cmd/guru
 
 # JAVA_HOME settings on the Mac
 if [ -d /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/ ]; then

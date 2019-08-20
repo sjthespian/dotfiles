@@ -54,7 +54,7 @@ Return a list of installed packages or nil for every skipped package."
 			  `elpy
 			  `exec-path-from-shell
 			  `flycheck
-			  `go-mode
+			  `go-mode `go-autocomplete `go-guru
 			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode
 			  `groovy-mode `terraform-mode)
 ;; enable flycheck everywhere
