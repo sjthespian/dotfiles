@@ -22,5 +22,5 @@ _load_bashrc_d
 
 export PATH
 
-export GOPATH="/usr/share/go/"
+export GOPATH="${HOME}/go/"
 
