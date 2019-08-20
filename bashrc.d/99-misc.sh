@@ -31,6 +31,8 @@ fi
 # Android SDK settings from brew
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+export GOPATH="${HOME}/go/"
+
 # JAVA_HOME settings on the Mac
 if [ -d /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/ ]; then
   export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/

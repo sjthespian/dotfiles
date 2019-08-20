@@ -21,6 +21,3 @@ _load_bashrc_d
 [[ -n "$CONFIG_GUESS" && -d "$HOME/bin/$CONFIG_GUESS" ]] && prepend PATH $HOME/bin/$CONFIG_GUESS
 
 export PATH
-
-export GOPATH="${HOME}/go/"
-
