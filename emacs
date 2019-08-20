@@ -11,13 +11,14 @@
 ;; Make sure /usr/local/bin is in the path
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
+(setenv "GOPATH" (concat (getenv "HOME") "/go"))
 
 ;; package management
 (require 'package)
 (add-to-list 'package-archives
 	 '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
-	'("melpa-stable" . "http://stable.melpa.org/packages/") t)
+	'("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
 	'("org" . "http://orgmode.org/elpa/") t) ; Org-mode's repository
 (setq package-check-signature nil)
