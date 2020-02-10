@@ -21,7 +21,9 @@ if [ -n "$DISPLAY" -a -d ~/.fonts ]; then
 fi
 
 # Groovy
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
+if [ -d /usr/local/opt/groovy/libexec ]; then
+  export GROOVY_HOME=/usr/local/opt/groovy/libexec
+fi
 
 # ChefVM init (https://github.com/trobrock/chefvm)
 if [ -d ~/.chefvm ]; then
@@ -29,7 +31,9 @@ if [ -d ~/.chefvm ]; then
 fi
 
 # Android SDK settings from brew
-export ANDROID_HOME=/usr/local/opt/android-sdk
+if [ -d /usr/local/opt/android-sdk ]; then
+  export ANDROID_HOME=/usr/local/opt/android-sdk
+fi
 
 # Python
 if [ -d ~/.virtualenvs ]; then
@@ -38,18 +42,21 @@ if [ -d ~/.virtualenvs ]; then
 fi
 
 # Go
-export GOPATH="${HOME}/go/"
-export PATH=$PATH:$GOPATH/bin
-# Make sure some common go utils are installed
-installgoutil() {
-  if [ ! -f $GOPATH/bin/$1 ]; then
-    go get $2
-  fi
-}
-installgoutil godef github.com/rogpeppe/godef
-installgoutil gocode github.com/nsf/gocode
-installgoutil goimports golang.org/x/tools/cmd/goimports
-installgoutil guru golang.org/x/tools/cmd/guru
+which go > /dev/null 2>&1
+if [ $? == 0 ]; then
+  export GOPATH="${HOME}/go/"
+  export PATH=$PATH:$GOPATH/bin
+  # Make sure some common go utils are installed
+  installgoutil() {
+    if [ ! -f $GOPATH/bin/$1 ]; then
+      go get $2
+    fi
+  }
+  installgoutil godef github.com/rogpeppe/godef
+  installgoutil gocode github.com/nsf/gocode
+  installgoutil goimports golang.org/x/tools/cmd/goimports
+  installgoutil guru golang.org/x/tools/cmd/guru
+fi
 
 # JAVA_HOME settings on the Mac
 if [ -d /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/ ]; then
