@@ -31,6 +31,13 @@ fi
 # Android SDK settings from brew
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+# Python
+if [ -d ~/.virtualenvs ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+# Go
 export GOPATH="${HOME}/go/"
 export PATH=$PATH:$GOPATH/bin
 # Make sure some common go utils are installed
