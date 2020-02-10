@@ -35,6 +35,12 @@ if [ -d /usr/local/opt/android-sdk ]; then
   export ANDROID_HOME=/usr/local/opt/android-sdk
 fi
 
+# Python
+if [ -d ~/.virtualenvs ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+
 # Go
 which go > /dev/null 2>&1
 if [ $? == 0 ]; then
