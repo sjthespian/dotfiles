@@ -4,7 +4,7 @@
 #
 
 PlexBase="/volume1/Plex/Library/Application Support/Plex Media Server"
-alias pms="/volume1/@appstore/Plex Media Server/Plex Media Scanner"
+pms="/volume1/@appstore/Plex Media Server/Plex Media Scanner"
 
 usage() {
   if [ -n "$1" ]; then
@@ -57,7 +57,7 @@ cleanbundles() {
 
 scanitem() {
   for i in $*; do
-    pms --refresh --force --item $i
+    "$pms" --refresh --force --item $i
   done
 }
 
