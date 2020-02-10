@@ -8,12 +8,13 @@ if [ -n "$DISPLAY" ]; then
 else
     DISPLAYISLOCALHOST=0
 fi
-if [ -z "$DISPLAY" -o "$DISPLAYISLOCALHOST" -gt 0 ]; then
+# Don't worry about X11 any longer - drich 2020-Feb-07
+#if [ -z "$DISPLAY" -o "$DISPLAYISLOCALHOST" -gt 0 ]; then
     if `which emacs > /dev/null 2>&1` && `emacs --version > /dev/null 2>&1`; then
 	EDITOR=emacs
 	VISUAL=emacs
     fi
-else
+#else
     if `which gnuclient > /dev/null 2>&1` && `gnuclient --batch -f 'emacs-version()' > /dev/null 2>&1`; then
 	EDITOR=gnuclient
 	VISUAL=gnuclient
@@ -22,6 +23,6 @@ else
 	EDITOR=emacsclient
 	VISUAL=emacsclient
     fi
-fi
+#fi
 
 export EDITOR
