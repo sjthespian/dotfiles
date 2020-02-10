@@ -1,0 +1,136 @@
+#!/bin/bash
+#
+# Plex Management script for CLI commmands on Synology
+#
+
+PlexBase="/volume1/Plex/Library/Application Support/Plex Media Server"
+alias pms="/volume1/@appstore/Plex Media Server/Plex Media Scanner"
+
+usage() {
+  if [ -n "$1" ]; then
+    echo $1
+  fi
+  echo "usage: $0 [status|start|stop|restart|optimize|optimizestoped|scan|scanitem itemid [...]|emptytrash"
+  echo -e "\tscanitem takes one or more item IDs as arguments"
+}
+
+synonpkg() {
+  sudo /usr/syno/bin/synopkg $1 "Plex Media Server"
+}
+
+getsections() {
+  # Request section list XML and parse for key="xxx" in each Directory block
+  data=$(curl -s -X PUT -H "X-Plex-Token: $token" "http://127.0.0.1:32400/library/sections")
+  OFIS=${IFS}
+  IFS="<"
+  for i in $data; do
+    if [[ "$i" == "Directory"* ]]; then
+      echo "$i" | sed 's/^.*key="//;s/".*$//'
+    fi
+  done
+  IFS=${OIFS}
+  unset OIFS
+}
+
+emptytrash() {
+  # Get library sections
+  sections=$(getsections)
+  
+  # Empty trash for each section
+  for section in $sections; do
+	echo "Emptying trash for section $section..."
+    curl -s -X PUT -H "X-Plex-Token: $token" "http://127.0.0.1:32400/library/sections/${section}/emptyTrash"
+  done
+}
+
+cleanbundles() {
+  # Get library sections
+  sections=$(getsections)
+
+  # Clean bundles for each section
+  for section in $sections; do
+	echo "Cleaning bundles for section $section..."
+	echo "No CLI known for clean bundles...."
+    #curl -s -X PUT -H "X-Plex-Token: $token" "http://127.0.0.1:32400/library/sections/${section}/emptyTrash"
+  done
+}
+
+scanitem() {
+  for i in $*; do
+    pms --refresh --force --item $i
+  done
+}
+
+scan() {
+  # Get library sections
+  sections=$(getsections)
+  
+  # Empty trash for each one
+  for section in $sections; do
+	echo "Scaning section $section..."
+    curl -s -X PUT -H "X-Plex-Token: $token" "http://127.0.0.1:32400/library/sections/{$section}/refresh"
+  done
+}
+
+optimize() {
+  curl -s -X PUT -H "X-Plex-Token: $token" 'http://127.0.0.1:32400/library/optimize?async=1'
+}
+
+optimizestopped() {
+  # https://forums.plex.tv/t/manual-database-optimization-using-command-line/197335
+
+  synopkg stop
+  cd "$PlexBase/Plug-in Support/Databases"
+  mv com.plexapp.plugins.library.db com.plexapp.plugins.library.db.O
+  rm com.plexapp.plugins.library.db-???
+
+  sqlite3 com.plexapp.plugins.library.prev.db .dump > dbdump.sql
+  sqlite3 com.plexapp.plugins.library.db < dbdump.sql
+  chown plex:plex com.plexapp.plugins.library.db
+
+  synopkg start
+}
+
+if [ -z "$1" ]; then
+  usage
+fi
+
+command=$1
+shift
+
+# Fetch token from config
+token=$(sudo grep PlexOnlineToken "$PlexBase/Preferences.xml" | sed 's/^.*PlexOnlineToken="//;s/".*$//')
+
+case "$command" in
+  status)
+	synopkg status
+	;;
+  start)
+	synopkg start
+	;;
+  restart)
+	synopkg restart
+	;;
+  stop)
+	synopkg stop
+	;;
+  emptytrash)
+	emptytrash
+    ;;
+  scan)
+	scan
+    ;;
+  scanitem)
+	scanitem $*
+    ;;
+  optimize)
+    optimize
+	emptytrash
+	;;
+  optimizestopped)
+    optimizestopped
+	;;
+  *)
+    usage "Unknown command $command"
+	;;
+esac
