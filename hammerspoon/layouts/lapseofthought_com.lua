@@ -32,16 +32,16 @@ local layouts = {
 	 end
       end
    },
-   {
-      name = "Adium",
-      func = function(index, win)
-	 if (#hs.screen.allScreens() > 1) then
-	    -- second space on 1st monitor
-	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[2]:spaces()[1])
-	 end
-	 hsm.windows.moveBottomLeft(win)
-      end
-   },
+--    {
+--       name = "Adium",
+--       func = function(index, win)
+-- 	 if (#hs.screen.allScreens() > 1) then
+-- 	    -- second space on 1st monitor
+-- 	    spaces.moveWindowToSpace(win:id(), hs.screen.allScreens()[2]:spaces()[1])
+-- 	 end
+-- 	 hsm.windows.moveBottomLeft(win)
+--       end
+--    },
    {
       name = "Adium",
       title = "Contacts",
