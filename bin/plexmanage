@@ -10,11 +10,12 @@ usage() {
   if [ -n "$1" ]; then
     echo $1
   fi
-  echo "usage: $0 [status|start|stop|restart|optimize|optimizestoped|scan|scanitem itemid [...]|emptytrash"
+  echo "usage: $0 [status|start|stop|restart|optimize|optimizestoped|dbcheck|dbrepair|scan|scanitem itemid [...]|emptytrash"
   echo -e "\tscanitem takes one or more item IDs as arguments"
 }
 
 synonpkg() {
+  echo "Plex Media Server will be ${1}ed..."
   sudo /usr/syno/bin/synopkg $1 "Plex Media Server"
 }
 
@@ -57,6 +58,7 @@ cleanbundles() {
 
 scanitem() {
   for i in $*; do
+    echo "Scanning item $i..."
     "$pms" --refresh --force --item $i
   done
 }
@@ -72,13 +74,24 @@ scan() {
   done
 }
 
+dbcheck() {
+  echo "Running database checks..."
+  cd "$PlexBase/Plug-in Support/Databases"
+  cp com.plexapp.plugins.library.db com.plexapp.plugins.library.db.O
+  sqlite3 com.plexapp.plugins.library.db "DROP index 'index_title_sort_naturalsort'"
+  sqlite3 com.plexapp.plugins.library.db "DELETE from schema_migrations where version='20180501000000'"
+  sqlite3 com.plexapp.plugins.library.db "PRAGMA integrity_check"
+}
+
 optimize() {
+  echo "Optimizing database..."
   curl -s -X PUT -H "X-Plex-Token: $token" 'http://127.0.0.1:32400/library/optimize?async=1'
 }
 
 optimizestopped() {
   # https://forums.plex.tv/t/manual-database-optimization-using-command-line/197335
 
+  echo "Optimizing and rebuilding database..."
   synopkg stop
   cd "$PlexBase/Plug-in Support/Databases"
   mv com.plexapp.plugins.library.db com.plexapp.plugins.library.db.O
@@ -95,6 +108,13 @@ if [ -z "$1" ]; then
   usage
 fi
 
+# Make sure we have root privs
+if [[ $(id -u) != 0 ]]; then
+  echo "This script must be run as root, re-executing with root permissions."
+  exec sudo bash $0 $*
+  exit 1	# We had better never get here...
+fi
+
 command=$1
 shift
 
@@ -103,34 +123,42 @@ token=$(sudo grep PlexOnlineToken "$PlexBase/Preferences.xml" | sed 's/^.*PlexOn
 
 case "$command" in
   status)
-	synopkg status
-	;;
+    synopkg status
+    ;;
   start)
-	synopkg start
-	;;
+    synopkg start
+    ;;
   restart)
-	synopkg restart
-	;;
+    synopkg restart
+    ;;
   stop)
-	synopkg stop
-	;;
+    synopkg stop
+    ;;
   emptytrash)
-	emptytrash
+    emptytrash
     ;;
   scan)
-	scan
+    scan
     ;;
   scanitem)
-	scanitem $*
+    scanitem $*
+    ;;
+  dbcheck)
+    dbcheck
+    ;;
+  dbrepair)
+    dbcheck
+    optimizestopped
+    emptytrash
     ;;
   optimize)
     optimize
-	emptytrash
-	;;
+    emptytrash
+    ;;
   optimizestopped)
     optimizestopped
-	;;
+    ;;
   *)
     usage "Unknown command $command"
-	;;
+    ;;
 esac
