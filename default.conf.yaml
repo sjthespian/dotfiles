@@ -25,6 +25,9 @@
     ~/.bashrc.d/86-gpg-agent.sh:
       create: true
       path: bashrc.d/86-gpg-agent.sh
+    ~/.bashrc.d/99-gcloud.sh:
+      create: true
+      path: bashrc.d/99-gcloud.sh
     ~/.bashrc.d/99-misc.sh:
       create: true
       path: bashrc.d/99-misc.sh
