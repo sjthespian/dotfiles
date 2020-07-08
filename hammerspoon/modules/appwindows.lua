@@ -45,6 +45,45 @@ local function watch(appName, eventType, appObject)
         elseif rule.act == A.toFront then
           -- bring the application windows to the front
           appObject:selectMenuItem({'Window', 'Bring All to Front'})
+        elseif rule.act == A.videoLightOn then
+	  -- Call HA to turn on video lighting
+          hs.loadSpoon("Keychain")
+          hatoken = spoon.Keychain:getItem{
+            label = 'hassio_hammerspoon'
+          }['password']
+	  hs.http.doRequest(
+            'https://hassio.lapseofthought.com:8123/api/services/light/turn_on',
+	    'POST',
+            '{"entity_id":"light.dan_video_light","brightness_pct":"100","color_name":"white"}',
+	    {
+                ['Content-type'] = 'application-json',
+                ['Authorization'] = 'Bearer ' .. hatoken
+            }
+          )
+          -- set volulme to 80%, saving the old level
+	  local audioDev = audio.defaultOutputDevice()
+	  m.saveVolume = audioDev:volume()
+	  audioDev:setVolume(80)
+        elseif rule.act == A.videoLightOff then
+	  -- Call HA to turn off video lighting
+          hs.loadSpoon("Keychain")
+          hatoken = spoon.Keychain:getItem{
+            label = 'hassio_hammerspoon'
+          }['password']
+	  hs.http.doRequest(
+            'https://hassio.lapseofthought.com:8123/api/services/light/turn_off',
+	    'POST',
+            '{"entity_id":"light.dan_video_light"}',
+	    {
+                ['Content-type'] = 'application-json',
+                ['Authorization'] = 'Bearer ' .. hatoken
+            }
+          )
+          -- restore volume to the prior level
+	  local audioDev = audio.defaultOutputDevice()
+	  if m.saveVolume then
+	    audioDev:setVolume(m.saveVolume)
+	  end
         elseif rule.act == A.fullVolume then
           -- set volulme to 80%, saving the old level
 	  local audioDev = audio.defaultOutputDevice()
