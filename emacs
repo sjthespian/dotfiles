@@ -50,12 +50,12 @@ Return a list of installed packages or nil for every skipped package."
 
 ; removed `flymake-easy `flymake-puppet `flymake-ruby -- moving to flycheck
 (ensure-package-installed `cedet `dash `color-theme-sanityinc-solarized
-			  `dockerfile-mode
+			  `dockerfile-mode `better-defaults
 			  `elpy
 			  `exec-path-from-shell
 			  `flycheck
 			  `go-mode `go-autocomplete `go-guru
-			  `json-mode `magit `markdown-mode `lua-mode `yaml-mode
+			  `json-mode `magit 'transient 'forge `markdown-mode `lua-mode `yaml-mode
 			  `groovy-mode `terraform-mode)
 ;; enable flycheck everywhere
 (global-flycheck-mode)
@@ -93,7 +93,7 @@ Return a list of installed packages or nil for every skipped package."
  '(load-home-init-file t t)
  '(package-selected-packages
    (quote
-    (terraform-mode groovy-mode elpy-enable yaml-mode markdown-mode magit lua-mode json-mode go-mode flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit)))
+    (better-defaults transient transient-dwim forge terraform-mode groovy-mode elpy-enable yaml-mode markdown-mode magit lua-mode json-mode go-mode flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit)))
  '(query-user-mail-address nil)
  '(user-mail-address "drich@employees.org"))
 (custom-set-faces

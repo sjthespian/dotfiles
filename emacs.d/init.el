@@ -6,6 +6,10 @@
 
 ;;; Code:
 
+;; Turn on better defaults
+(require 'better-defaults)
+(setq visible-bell nil)                 ; I hate visible bell
+
 (defvar autosave 500
   "The interval between file autosaves")
 
@@ -56,6 +60,13 @@
   )
 
 ;;; Settings for various languages
+
+;; Python
+;; Some of this from https://realpython.com/emacs-the-best-python-editor/
+(elpy-enable)
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; Visual Basic mode settings
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic editing mode" t)
@@ -148,6 +159,14 @@
 
 ;;;; magit for git
 (global-set-key (kbd "C-x g") 'magit-status)
+;(with-eval-after-load 'magit
+;  (require 'forge)
+;  ;; See https://logc.github.io/blog/2019/08/23/setting-up-magit-forge-with-github-enterprise-server/ for info on these settings
+;  (push '("github.wdig.com" "github.wdig.com/api/v3"
+;          forge-github-repository)
+;        forge-alist)
+;  )
+  
 
 ;; speedbar - http://cedet.sourceforge.net/speedbar.shtml
 ;(add-to-list 'load-path (concat lisp-directory "/cedet"))
