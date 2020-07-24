@@ -42,7 +42,8 @@ cfg.appwindows = {
   rules = {
     Finder              = {{evt = E.activated,    act = 'DEBUG'}},
     ['Citrix Viewer']   = {{evt = E.launched,     act = 'fullscreen'}},
-    ['BlueJeans']       = {{evt = E.launched,     act = 'fullvolume'},
+    --['BlueJeans']       = {{evt = E.launched,     act = 'fullvolume'},
+    ['BlueJeans']       = {{evt = E.launched,     act = 'videolighton'},
                            {evt = E.terminated,   act = 'restorevolume'}},
 --    iTerm2              = {{evt = E.activated,    act = 'zoomin'},
 --                           {evt = E.deactivated,  act = 'zoomout'},
