@@ -70,6 +70,11 @@
 (setq elpy-rpc-python-command "python3" ;default to python3 
       python-shell-interpreter "python3"
       elpy-rpc-timeout 10)
+;; prefer black for formatting
+(add-hook 'elpy-mode-hook (lambda ()
+                            (add-hook 'before-save-hook
+                                      'elpy-black-fix-code nil t)))
+
 ;; Visual Basic mode settings
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic editing mode" t)
 (add-to-list 'auto-mode-alist '("\\.vbs\\'" . visual-basic-mode))
