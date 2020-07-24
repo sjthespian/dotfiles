@@ -8,6 +8,8 @@ local actions = {
   restoreVolume = 'restorevolume',
   iTermZoomIn = 'zoomin',
   iTermZoomOut = 'zoomout',
+  videoLightOn = 'videolighton',
+  videoLightOff = 'videolightoff',
   debug = 'DEBUG',
 }
 
