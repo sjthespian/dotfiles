@@ -67,6 +67,7 @@
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
+(setq elpy-rpc-python-command "python3")
 
 ;; Visual Basic mode settings
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic editing mode" t)
