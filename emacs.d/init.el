@@ -67,8 +67,11 @@
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
-(setq elpy-rpc-python-command "python3" ;default to python3 
-      python-shell-interpreter "python3"
+(setq elpy-rpc-python-command (or (executable-find "python3")
+                                  (executable-find "python"))
+      python-check-command (executable-find "flake8")
+      python-shell-interpreter (or (executable-find "python3")
+                                   (executable-find "python"))
       elpy-rpc-timeout 10)
 ;; prefer black for formatting
 (add-hook 'elpy-mode-hook (lambda ()
