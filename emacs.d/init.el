@@ -63,16 +63,16 @@
 
 ;; Python
 ;; Some of this from https://realpython.com/emacs-the-best-python-editor/
+(setenv "WORKON_HOME" "/Users/richd140/.virtualenvs")
 (elpy-enable)
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
-(setq elpy-rpc-python-command (or (executable-find "python3")
-                                  (executable-find "python"))
-      python-check-command (executable-find "flake8")
-      python-shell-interpreter (or (executable-find "python3")
-                                   (executable-find "python"))
-      elpy-rpc-timeout 10)
+(setq elpy-rpc-python-command "python3"
+      python-check-command "flake8"
+      python-shell-interpreter "python3"
+      elpy-rpc-timeout 10
+      elpy-remove-modeline-lighter t)
 ;; prefer black for formatting
 (add-hook 'elpy-mode-hook (lambda ()
                             (add-hook 'before-save-hook
