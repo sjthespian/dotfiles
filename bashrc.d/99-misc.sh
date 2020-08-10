@@ -72,3 +72,6 @@ if `hash src-hilite-lesspipe.sh > /dev/null 2>&1`; then
     export LESS='-R'
   fi
 fi
+
+# Postfix aliases
+alias cleanqueue="mailq| grep MAILER-DAEMON| awk '{print $1}' | sed 's/\*$//' | xargs -r -n1 sudo postsuper -d"
