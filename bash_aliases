@@ -219,11 +219,11 @@ if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
 fi
 
 # Mac
-checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
-checksmc="sudo powermetrics | sed -n '/SMC sensors/,/GPU2/p'"
-checkdisk="sudo powermetrics | sed -n '/Network activity/,/in:/p'"
-checknetwork="sudo powermetrics | sed -n '/Disk activity/,/write:/p'"
-watchistats="watch --color istats"
+alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
+alias checksmc="sudo powermetrics | sed -n '/SMC sensors/,/GPU2/p'"
+alias checkdisk="sudo powermetrics | sed -n '/Network activity/,/in:/p'"
+alias checknetwork="sudo powermetrics | sed -n '/Disk activity/,/write:/p'"
+alias watchistats="watch --color istats"
 
 # Postfix
 alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
