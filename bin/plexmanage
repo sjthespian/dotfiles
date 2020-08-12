@@ -14,7 +14,7 @@ usage() {
   echo -e "\tscanitem takes one or more item IDs as arguments"
 }
 
-synonpkg() {
+synopkg() {
   echo "Plex Media Server will be ${1}ed..."
   sudo /usr/syno/bin/synopkg $1 "Plex Media Server"
 }
@@ -94,7 +94,7 @@ optimizestopped() {
   echo "Optimizing and rebuilding database..."
   synopkg stop
   cd "$PlexBase/Plug-in Support/Databases"
-  mv com.plexapp.plugins.library.db com.plexapp.plugins.library.db.O
+  mv com.plexapp.plugins.library.db com.plexapp.plugins.library.prev.db
   rm com.plexapp.plugins.library.db-???
 
   sqlite3 com.plexapp.plugins.library.prev.db .dump > dbdump.sql
