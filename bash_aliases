@@ -217,3 +217,6 @@ alias it2pl='it2prof "Solarized Light"'
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
   alias tmux='tmux -CC'
 fi
+
+# Postfix
+alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
