@@ -218,5 +218,12 @@ if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
   alias tmux='tmux -CC'
 fi
 
+# Mac
+alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
+alias checksmc="sudo powermetrics | sed -n '/SMC sensors/,/GPU2/p'"
+alias checkdisk="sudo powermetrics | sed -n '/Network activity/,/in:/p'"
+alias checknetwork="sudo powermetrics | sed -n '/Disk activity/,/write:/p'"
+alias watchistats="watch --color istats"
+
 # Postfix
 alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
