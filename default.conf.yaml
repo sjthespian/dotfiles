@@ -57,7 +57,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.tmux-local.conf:
       path: tmux-linux-local.conf
-      if: '[ -f "/etc/os-release" ]'
+      if: '[ `uname` = Linux ]`
     ~/.vim: vim
     ~/.vimrc: vimrc
     #
