@@ -8,7 +8,7 @@ NoBold="$(tput sgr0)"
     
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    ansi|xterm*|rxvt*|screen*|linux)
+    ansi|xterm*|rxvt*|screen*|tmux*|linux)
 	export CLICOLOR=1
 	export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 	color_prompt=yes;;
@@ -85,6 +85,9 @@ case "$TERM" in
         ;;
     screen*)
 	PS1PRE="\[\ek\w\e\\]"
+	;;
+    tmux*)
+	PS1PRE="\[\e]2;\u@\h: \w\a\e\\\]"
 	;;
     iris-ansi|iris-ansi-net)
         #export PROMPT_COMMAND='echo -n -e "\033P1.y"${LOGNAME}@${HOST}:$PWD"\033\\"'
