@@ -55,6 +55,9 @@
       create: true
       path: ssh/conf.d/99-wildcard.conf
     ~/.tmux.conf: tmux.conf
+    ~/.tmux-local.conf:
+      path: tmux-linux-local.conf
+      if: '[ -f "/etc/os-release" ]'
     ~/.vim: vim
     ~/.vimrc: vimrc
     #
@@ -77,6 +80,9 @@
       if: '[ -d "/Applications/iTerm.app" ]'
     ~/bin/it2cmd:
       path: bin/it2cmd
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/.tmux-local.conf:
+      path: tmux-mac-local.conf
       if: '[ -d "/Applications/iTerm.app" ]'
     #
     # Emacs
