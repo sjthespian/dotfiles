@@ -57,7 +57,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.tmux-local.conf:
       path: tmux-linux-local.conf
-      if: '[ `uname` = Linux ]`
+      if: '[ `uname` = Linux ]'
     ~/.vim: vim
     ~/.vimrc: vimrc
     #
