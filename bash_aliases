@@ -215,7 +215,18 @@ alias it2pd='it2prof "Solarized Dark"'
 alias it2pl='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
-  alias tmux='tmux -CC'
+  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+  alias tmux='tmux -CC new'
+  rtmux() {
+    usage() {
+      echo "usage: rtumx hostname"
+    }
+    if [ -z "$1" ]; then
+      usage
+    else
+      ssh -t $1 'tmux -CC new'
+    fi
+  }
 fi
 
 # Mac
