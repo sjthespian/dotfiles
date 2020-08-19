@@ -215,5 +215,39 @@ alias it2pd='it2prof "Solarized Dark"'
 alias it2pl='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
-  alias tmux='tmux -CC'
+  export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
+  #alias tmux='tmux -CC new'
 fi
+
+# Remote tmux
+rtmux() {
+  usage() {
+    echo "usage: rtumx hostname [session]"
+  }
+  if [ -z "$1" ]; then
+    usage
+  else
+    sessargs=""
+    if [ -n "$2" ]; then
+      sessargs="-s $2"
+    fi
+    # Support for iterm integration
+    if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
+      #ssh -t $1 "tmux -CC new -A $sessargs"
+      ssh -t $1 "tmux new -A $sessargs"
+    else
+      ssh -t $1 "tmux new -A $sessargs"
+    fi
+  fi
+}
+
+# Mac
+alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
+alias checksmc="sudo powermetrics | sed -n '/SMC sensors/,/GPU2/p'"
+alias checkdisk="sudo powermetrics | sed -n '/Network activity/,/in:/p'"
+alias checknetwork="sudo powermetrics | sed -n '/Disk activity/,/write:/p'"
+alias watchistats="watch --color istats"
+
+# Postfix
+alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
+>>>>>>> a6b63507bd36b24d12d9fec0a6e0016f2d2c7101

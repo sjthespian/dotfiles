@@ -36,7 +36,6 @@
     ~/.bash_functions: bash_functions
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
-    ~/.iterm2_shell_integration.bash: iterm2_shell_integration.bash
     ~/.dircolors: dircolors-dark
     ~/.gitignore_global: gitignore_global
     ~/.gnupg/gpg.conf:
@@ -55,29 +54,16 @@
       create: true
       path: ssh/conf.d/99-wildcard.conf
     ~/.tmux.conf: tmux.conf
+    ~/.tmux-local.conf:
+      path: tmux-linux-local.conf
+      if: '[ `uname` = Linux ]'
     ~/.vim: vim
     ~/.vimrc: vimrc
     #
     # Utils
     ~/bin/decomment:
       path: bin/decomment
-    # 
-    # Mac files
-    ~/.hammerspoon:
-      path: hammerspoon
-      if: '[ -d "/Applications/Hammerspoon.app" ]'
-    ~/bin/imgls:
-      path: bin/imgls
-      if: '[ -d "/Applications/iTerm.app" ]'
-    ~/bin/imgcat:
-      path: bin/imgcat
-      if: '[ -d "/Applications/iTerm.app" ]'
-    ~/bin/divider:
-      path: bin/divider
-      if: '[ -d "/Applications/iTerm.app" ]'
-    ~/bin/it2cmd:
-      path: bin/it2cmd
-      if: '[ -d "/Applications/iTerm.app" ]'
+
     #
     # Emacs
     ~/.emacs: 
@@ -103,6 +89,31 @@
       create: true
       path: iterm2rc/com.googlecode.iterm2.plist-home
       if: '[[ $(hostname -f) =~ lapseofthought.com$ ]]'
+
+- link:
+    # 
+    # Mac files
+    ~/.hammerspoon:
+      path: hammerspoon
+      if: '[ -d "/Applications/Hammerspoon.app" ]'
+    ~/bin/imgls:
+      path: bin/imgls
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/bin/imgcat:
+      path: bin/imgcat
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/bin/divider:
+      path: bin/divider
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/bin/it2cmd:
+      path: bin/it2cmd
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/.tmux-local.conf:
+      path: tmux-mac-local.conf
+      if: '[ -d "/Applications/iTerm.app" ]'
+    ~/.iterm2_shell_integration.bash: 
+      path: iterm2_shell_integration.bash
+      if: '[ -d "/Applications/iTerm.app" ]'
 
 - shell:
   - [ chmod 700 ~/.ssh && chmod 700 ~/.ssh/conf.d && chmod 600 ~/.ssh/config, Updating ssh file permissions]

@@ -4,6 +4,7 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot.git
+	branch = master
 [submodule "blackbox"]
 	path = blackbox
 	url = https://github.com/StackExchange/blackbox
