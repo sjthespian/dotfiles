@@ -216,18 +216,31 @@ alias it2pl='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
 if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
-  alias tmux='tmux -CC new'
-  rtmux() {
-    usage() {
-      echo "usage: rtumx hostname"
-    }
-    if [ -z "$1" ]; then
-      usage
-    else
-      ssh -t $1 'tmux -CC new'
-    fi
-  }
+  #alias tmux='tmux -CC new'
 fi
+
+# Remote tmux
+rtmux() {
+  usage() {
+    echo "usage: rtumx hostname [session]"
+  }
+  if [ -z "$1" ]; then
+    usage
+  else
+    sessargs=""
+    if [ -n "$2" ]; then
+      sessargs="-s $2"
+    fi
+    # Support for iterm integration
+    if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
+      #ssh -t $1 "tmux -CC new -A $sessargs"
+      ssh -t $1 "tmux new -A $sessargs"
+    else
+      ssh -t $1 "tmux new -A $sessargs"
+    fi
+  fi
+}
+>>>>>>> a6b63507bd36b24d12d9fec0a6e0016f2d2c7101
 
 # Mac
 alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
