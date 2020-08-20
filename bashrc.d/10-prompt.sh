@@ -89,8 +89,8 @@ case "$TERM" in
         PS1PRE="\[\e]0;\u@\h: \w\a\]"
 	;;
     tmux*)
-	# not needed, tmux sets the title via. tmux.conf
-	#PS1PRE="\[\e]2;\u@\h: \w\a\e\\\]"
+        #PS1PRE="\[\e]0;\u@\h: \w\a\]"
+	PS1PRE="\[\e]2;\u@\h: \w\a\e\\\]"
 	;;
     iris-ansi|iris-ansi-net)
         #export PROMPT_COMMAND='echo -n -e "\033P1.y"${LOGNAME}@${HOST}:$PWD"\033\\"'
