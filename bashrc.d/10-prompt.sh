@@ -3,6 +3,7 @@
 #
 # Set the prompt, use color if possible
 PS1PRE=''
+PS1POST=''
 Bold="$(tput bold)"
 NoBold="$(tput sgr0)"
     
@@ -84,7 +85,7 @@ case "$TERM" in
         PS1PRE="\[\e]0;\u@\h: \w\a\]"
         ;;
     screen*)
-	PS1PRE="\[\ek\w\e\\]"
+	PS1PRE="\[\ek\w\e\\\]"
 	;;
     tmux*)
 	PS1PRE="\[\e]2;\u@\h: \w\a\e\\\]"
@@ -133,6 +134,9 @@ fi
 if [ -n "$PS1PRE" ]; then
     PS1=${PS1PRE}${PS1}
 fi
+if [ -n "$PS1PRE" ]; then
+    PS1=${PS1}${PS1POST}
+fi
 export PS1
 unset color_prompt force_color_prompt
 
@@ -149,9 +153,9 @@ if [ -e ~/.bash-git-prompt ]; then
 
     # If chefvm is installed, add it to the prompt
     if [ -d ~/.chefvm ]; then
-	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}"
+	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}${PS1POST}"
     else
-	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}"
+	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${PS1POST}"
     fi
     GIT_PROMPT_END="${BoldWhite}>${ResetColor} "
 
