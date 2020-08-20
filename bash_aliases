@@ -250,4 +250,3 @@ alias watchistats="watch --color istats"
 
 # Postfix
 alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
->>>>>>> a6b63507bd36b24d12d9fec0a6e0016f2d2c7101
