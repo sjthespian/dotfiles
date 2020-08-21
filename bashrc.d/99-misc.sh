@@ -62,6 +62,8 @@ fi
 if [ -d /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/ ]; then
   export JAVA_HOME=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/
 fi
+# And stop the annoying zsh message
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Syntax highlighting in less on OSX
 # http://funkworks.blogspot.com/2013/01/syntax-highlighting-in-less-on-osx.html
