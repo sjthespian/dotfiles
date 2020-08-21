@@ -240,7 +240,6 @@ rtmux() {
     fi
   fi
 }
->>>>>>> a6b63507bd36b24d12d9fec0a6e0016f2d2c7101
 
 # Mac
 alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
