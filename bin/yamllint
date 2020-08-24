@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'pp'
+
+begin
+  test=YAML.load_file(ARGV[0])
+rescue Exception => e
+  puts e.message
+  exit 1
+end
+
+pp(test)
