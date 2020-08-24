@@ -63,6 +63,10 @@
     # Utils
     ~/bin/decomment:
       path: bin/decomment
+    ~/bin/yamllint:
+      path: bin/yamllint
+    ~/bin/yamlextract:
+      path: bin/yamlextract
 
     #
     # Emacs

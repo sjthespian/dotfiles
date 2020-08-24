@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+import sys
+import yaml
+from dotted.collection import DottedCollection
+
+def usage(msg=None):
+    if msg:
+        print(msg)
+
+    print("usage: %s file [path]" % sys.argv[0])
+    sys.exit(1)
+
+
+# Check number of args
+if len(sys.argv) < 2:
+    usage()
+
+try:
+    with open(sys.argv[1], 'r') as fh:
+        data = yaml.load(fh, Loader=yaml.FullLoader)
+except ImportError as e:
+    usage(str(e))
+except OSError as e:
+    usage(str(e))
+
+if len(sys.argv) == 3:
+    dotyaml = DottedCollection.factory(data)
+    print(eval("dotyaml['" + sys.argv[2] + "']"))
+else:
+    print(yaml.dump(data))
