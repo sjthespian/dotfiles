@@ -250,3 +250,7 @@ alias watchistats="watch --color istats"
 
 # Postfix
 alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo postsuper -d"
+learnspamham () {
+  sa-learn --no-sync --spam ~/Maildir/.spam/{cur,new}
+  sa-learn --no-sync --ham ~/Maildir/{cur,new}
+}
