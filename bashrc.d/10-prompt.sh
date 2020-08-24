@@ -91,6 +91,7 @@ case "$TERM" in
     tmux*)
         #PS1PRE="\[\e]0;\u@\h: \w\a\]"
 	PS1PRE="\[\e]2;\u@\h: \w\a\e\\\\\]"
+	stty erase ^?
 	;;
     iris-ansi|iris-ansi-net)
         #export PROMPT_COMMAND='echo -n -e "\033P1.y"${LOGNAME}@${HOST}:$PWD"\033\\"'
