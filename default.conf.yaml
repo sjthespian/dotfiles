@@ -53,8 +53,9 @@
     ~/.ssh/conf.d/99-wildcard.conf:
       create: true
       path: ssh/conf.d/99-wildcard.conf
+    ~/.tmux: tmux
     ~/.tmux.conf: tmux.conf
-    ~/.tmux-local.conf:
+    ~/.tmux/local.conf:
       path: tmux-linux-local.conf
       if: '[ `uname` = Linux ]'
     ~/.vim: vim
