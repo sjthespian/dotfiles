@@ -87,6 +87,7 @@ case "$TERM" in
     screen*)
 	#PS1PRE="\[\ek\w\e\\\]"
         PS1PRE="\[\e]0;\u@\h: \w\a\]"
+	stty erase ^?
 	;;
     tmux*)
         #PS1PRE="\[\e]0;\u@\h: \w\a\]"
