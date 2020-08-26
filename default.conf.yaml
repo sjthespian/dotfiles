@@ -113,7 +113,7 @@
     ~/bin/it2cmd:
       path: bin/it2cmd
       if: '[ -d "/Applications/iTerm.app" ]'
-    ~/.tmux-local.conf:
+    ~/.tmux/local.conf:
       path: tmux-mac-local.conf
       if: '[ -d "/Applications/iTerm.app" ]'
     ~/.iterm2_shell_integration.bash: 
