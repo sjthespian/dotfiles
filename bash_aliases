@@ -277,6 +277,7 @@ tmw() { # New window, may use existing session or create named window
   fi
   tmux new-window ${args}
 }
+alias tml='tmux list-sessions'
 
 # Mac
 alias checktemp="sudo powermetrics | egrep -i 'temperature|therm|fan'"
