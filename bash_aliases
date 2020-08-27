@@ -223,6 +223,7 @@ fi
 rtmux() {
   usage() {
     echo "usage: rtumx hostname [session]"
+    return 1
   }
   if [ -z "$1" ]; then
     usage
@@ -239,6 +240,39 @@ rtmux() {
       ssh -t $1 "tmux new -A $sessargs"
     fi
   fi
+}
+
+tns() {	# New session, attach to existing session if the named one exists
+  usage() {
+    echo "usage: tns [session-name]"
+    return 1
+  }
+  if [ -n "$2" ]; then
+    usage
+    return 1
+  fi
+  args=""
+  if [ -n "$1" ]; then
+    args="-t ${1}:"
+  fi
+  tmux new-session ${args}
+}
+tnw() { # New window, may use existing session or create named window
+  usage() {
+    echo "usage: tnw [session-name [window-name]]"
+    return 1
+  }
+  if [ -n "$3" ]; then
+    usage
+  fi
+  args=""
+  if [ -n "$1" ]; then
+    args="-t ${1}:"
+    if [ -n "$2" ]; then
+      args="${args} -n ${2}"
+    fi
+  fi
+  tmux new-window ${args}
 }
 
 # Mac
