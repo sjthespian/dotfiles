@@ -2,29 +2,33 @@
 *.elc
 \#*\#
 *.swp
-/keyrings/live/secring.gpg
-/keys/gpg/public/25716A2D.asc
-/keys/gpg/public/C938A5B3.asc
-/keys/gpg/private/25716A2D.asc
-/keys/gpg/private/C938A5B3.asc
-/emacs.d/lisp/nxhtml/
-/emacs.d/ac-comphist.dat
-/emacs.d/elpa/
-/emacs.d/eproject.lst
-/emacs.d/ido.last
-/emacs.d/tutorial/
-/keys/gpg/public/65D0FD58.asc
-/vim/.netrwhist
-# Work-specific files to keep out of git
-/bashrc.d/98-disney.sh
-/ssh/conf.d/50-disney.conf
-/gitconfig-work
-# Emacs droppings
+keyrings/live/secring.gpg
+keys/gpg/public/25716A2D.asc
+keys/gpg/public/C938A5B3.asc
+keys/gpg/private/25716A2D.asc
+keys/gpg/private/C938A5B3.asc
+keys/gpg/public/65D0FD58.asc
+vim/.netrwhist
+# Emacs files we don't sync
+emacs.d/lisp/nxhtml/
+emacs.d/ac-comphist.dat
 emacs.d/chef-mode/
+emacs.d/elpa/
+emacs.d/elpy/
 emacs.d/emacs-for-python/
+emacs.d/eproject.lst
+emacs.d/forge-database.sqlite
 emacs.d/git-modes/
-emacs.d/nxhtml/
+emacs.d/ido.last
 emacs.d/network-security.data
+emacs.d/nxhtml/
+emacs.d/places
+emacs.d/transient/
+emacs.d/tutorial/
+# Work-specific files to keep out of git
+bashrc.d/98-disney.sh
+ssh/conf.d/50-disney.conf
+gitconfig-work
 # Hammerspoon 
 hammerspoon/hs/_asm/undocumented/hs._asm.undocumented.spaces/
 # Tmux
