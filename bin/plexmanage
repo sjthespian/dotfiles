@@ -12,6 +12,7 @@ usage() {
   fi
   echo "usage: $0 [status|start|stop|restart|optimize|optimizestoped|dbcheck|dbrepair|scan|scanitem itemid [...]|emptytrash"
   echo -e "\tscanitem takes one or more item IDs as arguments"
+  exit 1
 }
 
 synopkg() {
@@ -99,7 +100,7 @@ optimizestopped() {
 
   sqlite3 com.plexapp.plugins.library.prev.db .dump > dbdump.sql
   sqlite3 com.plexapp.plugins.library.db < dbdump.sql
-  chown plex:plex com.plexapp.plugins.library.db
+  chown plex:users com.plexapp.plugins.library.db
 
   synopkg start
 }
