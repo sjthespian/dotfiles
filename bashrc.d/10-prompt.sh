@@ -4,8 +4,15 @@
 # Set the prompt, use color if possible
 PS1PRE=''
 PS1POST=''
-Bold="$(tput bold)"
-NoBold="$(tput sgr0)"
+# Find terminal commands, not avaialble on all systems
+which tput > /dev/null 2>&1
+if [ $? == 0 ]; then
+  TPUT=$(which tput | head -1)
+else
+  TPUT=/bin/true
+fi
+Bold="$($TPUT bold)"
+NoBold="$($TPUT sgr0)"
     
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -21,7 +28,7 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    if [ -x $TPUT ] && $TPUT setaf 1 >&/dev/null; then
         # We have color support; assume it's compliant with Ecma-48
         # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
         # a case would tend to support setf rather than setaf.)
