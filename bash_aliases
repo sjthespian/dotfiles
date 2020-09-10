@@ -292,3 +292,24 @@ learnspamham () {
   sa-learn --no-sync --spam ~/Maildir/.spam/{cur,new}
   sa-learn --no-sync --ham ~/Maildir/{cur,new}
 }
+
+# SSL utils
+checkcert() {
+  usage() {
+    echo "usage: checkcert host:port [protocol]"
+    return 1
+  }
+
+  if [ -z "$1" ]; then
+    usage
+  fi
+  args=""
+  # Split arg 1 into host and port
+  IFS=':' read -a hostarg <<< $1
+  host=${hostarg[0]}
+  port=${hostarg[1]:-443}
+  if [ -n "$2" ]; then
+    args="-starttls $2"
+  fi
+  openssl s_client -servername $host -connect $host:$port ${args} < /dev/null | openssl x509 -noout -subject -alias -serial -dates
+}

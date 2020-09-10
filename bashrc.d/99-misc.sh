@@ -12,8 +12,11 @@ stty erase '^H' kill '^U' intr '^C' echoe
 export HISTFILE=$HOME/.bash_history.`uname -n`
 export HISTIGNORE="&:[bf]g:exit"
 
-# Make less the default pager
-export PAGER="less -m"
+# Make less the default pager unless it doesn't exist
+which less > /dev/null 2>&1
+if [ $? == 0 ]; then
+  export PAGER="less -m"
+fi
 
 # Add local fonts
 if [ -n "$DISPLAY" -a -d ~/.fonts ]; then
