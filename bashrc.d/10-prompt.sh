@@ -155,11 +155,15 @@ if [ -e ~/.bash-git-prompt ]; then
     # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
     # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
 
-    # If chefvm is installed, add it to the prompt
-    if [ -d ~/.chefvm ]; then
-	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}${PS1POST}"
+    # If knife profiles are configured, use those
+    # otherwise, if chefvm is installed, add it to the prompt
+    GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${PS1POST}"
+    if [ -f ~/.chef/credentials ]; then
+            GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(cat ~/.chef/context 2>/dev/null || echo "default"))${ResetColor}${PS1POST}"
     else
-	GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${PS1POST}"
+        if [ -d ~/.chefvm ]; then
+            GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}${PS1POST}"
+        fi
     fi
     GIT_PROMPT_END="${BoldWhite}>${ResetColor} "
 
