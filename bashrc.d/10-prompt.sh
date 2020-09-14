@@ -166,7 +166,7 @@ if [ -e ~/.bash-git-prompt ]; then
     # otherwise, if chefvm is installed, add it to the prompt
     GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${PS1POST}"
     if [ -f ~/.chef/credentials ]; then
-            GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(cat ~/.chef/context 2>/dev/null || echo "default"))${ResetColor}${PS1POST}"
+        GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(cat ~/.chef/context 2>/dev/null || echo "default"))${ResetColor}${PS1POST}"
     else
         if [ -d ~/.chefvm ]; then
             GIT_PROMPT_START="${PS1PRE}(_LAST_COMMAND_INDICATOR_${ResetColor})${PSCOLOR}\u@\h${ResetColor}${Yellow}(\$(chefvm current))${ResetColor}${PS1POST}"
