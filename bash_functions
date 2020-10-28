@@ -3,7 +3,7 @@
 #
 addtopath() { 
     eval value=\"\$$1\"
-    case $3 in
+    case "$3" in
 	p*) result="$2:${value}" ;;
 	*) case "$value" in
 	    *:$2:*|*:$2|$2:*|$2) result="$value" ;;
@@ -14,15 +14,15 @@ addtopath() {
     # Strip duplicate entries, '//', and '::' (and leading or trailing ':')
     result=`echo $result | awk -F: '{for (i=1; i<=NF; i++) {if (length($i) == 0) continue; if (a[$i] == 0) printf "%s:",$i; a[$i]++}}' | sed 's/:$//'`
     
-    eval $1=$result
+    eval $1=\"$result\"
     unset result value
 }
 
 append() {
-    addtopath $1 $2 append
+    addtopath "$1" "$2" append
 }
 prepend() {
-    addtopath $1 $2 prepend
+    addtopath "$1" "$2" prepend
 }
 
 # Function to load additional bashrc files
