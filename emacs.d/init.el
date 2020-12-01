@@ -208,6 +208,10 @@
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 
+;;
+;; Tramp setup
+(setq tramp-default-method "ssh")
+
 ;; Don't start the server unless we can verify that it isn't running.
 (require 'server)
 (when (and (functionp 'server-running-p) (not (server-running-p)))
