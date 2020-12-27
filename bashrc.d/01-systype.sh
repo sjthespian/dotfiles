@@ -17,7 +17,12 @@ case `uname -s` in
 		;;
     "Linux")
 		SYSTYPE="linux"
-		append PATH /sbin:/usr/sbin;;
+		append PATH /sbin:/usr/sbin
+		# Synology synogear tools
+		if [ -d /var/packages/DiagnosisTool/target/tool/ ]; then
+		    prepend PATH /var/packages/DiagnosisTool/target/tool/
+		fi
+		;;
     "Darwin")
                 SYSTYPE="mac"
                 # Add homebrwew coreutils path
