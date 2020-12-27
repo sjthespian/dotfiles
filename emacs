@@ -24,7 +24,7 @@
 (setq package-check-signature nil)
 (package-initialize)
 ;; Uncomment to refresh packages cache -- slows startup
-(package-refresh-contents)
+;;(package-refresh-contents)
 
 ;; Install needed packages
 (defun ensure-package-installed (&rest packages)
