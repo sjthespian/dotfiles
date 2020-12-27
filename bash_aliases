@@ -130,7 +130,7 @@ sshinstallkeys() {
     if [ -x '/usr/bin/ssh-copy-id' ]; then
       echo "$1..." && ssh-copy-id -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1
     else
-      echo "$1..." && cat ~/.ssh/id_dsa.pub | ssh -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1 "umask 077 && mkdir ~/.ssh 2>/dev/null; cat >> ~/.ssh/authorized_keys"
+      echo "$1..." && cat ~/.ssh/id_ed25519.pub | ssh -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1 "umask 077 && mkdir ~/.ssh 2>/dev/null; cat >> ~/.ssh/authorized_keys"
     fi
   fi
 }
