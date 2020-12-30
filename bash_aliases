@@ -19,6 +19,14 @@ fi
 if hash hub 2>/dev/null; then
   alias git='hub'
 fi
+gitdelbranch () {
+  if [ -z $1 ]; then
+    echo "usage: $0 branchname"
+    return 1
+  fi
+  git branch -d $1
+  git push origin --delete $1
+}
 
 # Use the Berkeley Mail program
 if hash Mail 2>/dev/null; then
