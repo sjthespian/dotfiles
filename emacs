@@ -25,7 +25,7 @@
 (package-initialize)
 ;; Uncomment to refresh packages cache -- slows startup
 (when (not package-archive-contents)
-  (package-refresh-contents)
+  (package-refresh-contents))
 ;; NOTE: to upgrade packages, M-x package-refresh-contents M-X list-packages Ux
 
 ;; Install needed packages
