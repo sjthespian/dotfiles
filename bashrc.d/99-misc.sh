@@ -40,6 +40,13 @@ fi
 
 # Python
 if [ -d ~/.virtualenvs ]; then
+  # Try and find python3
+  for py in /usr/local/bin/python3 /usr/bin/python3; do
+    if [ -e ${py} ]; then
+      export VIRTUALENVWRAPPER_PYTHON=$py
+      break
+    fi
+  done
   export WORKON_HOME=$HOME/.virtualenvs
   source /usr/local/bin/virtualenvwrapper.sh
 fi
