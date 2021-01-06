@@ -63,7 +63,7 @@
 
 ;; Python
 ;; Some of this from https://realpython.com/emacs-the-best-python-editor/
-(setenv "WORKON_HOME" "/Users/richd140/.virtualenvs")
+(setenv "WORKON_HOME" (concat home-directory "/.virtualenvs"))
 (elpy-enable)
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
