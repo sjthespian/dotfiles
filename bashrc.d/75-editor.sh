@@ -16,13 +16,14 @@ fi
     fi
 #else
     if `which gnuclient > /dev/null 2>&1` && `gnuclient --batch -f 'emacs-version()' > /dev/null 2>&1`; then
-	EDITOR=gnuclient
+	EDITOR=gnuclient -t
 	VISUAL=gnuclient
     fi
     if `which emacsclient > /dev/null 2>&1` && `emacsclient -e 'emacs-version()' > /dev/null 2>&1`; then
-	EDITOR=emacsclient
-	VISUAL=emacsclient
+	export ALTERNATE_EDITOR=""
+	EDITOR="emacsclient -t"
+	VISUAL=emc
     fi
 #fi
 
-export EDITOR
+export EDITOR VISUAL

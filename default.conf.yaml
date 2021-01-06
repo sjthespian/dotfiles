@@ -77,6 +77,9 @@
     ~/.emacs.d:
       path: emacs.d
       if: '[[ "$(which emacs)" != "" ]]'
+    ~/bin/emc:
+      path: bin/emc
+      if: '[[ "$(which emacs)" != "" ]]'
     #
     # Home
     ~/.bashrc.d/90-cdrsettings.sh:
