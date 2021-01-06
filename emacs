@@ -24,7 +24,9 @@
 (setq package-check-signature nil)
 (package-initialize)
 ;; Uncomment to refresh packages cache -- slows startup
-;;(package-refresh-contents)
+(when (not package-archive-contents)
+  (package-refresh-contents)
+;; NOTE: to upgrade packages, M-x package-refresh-contents M-X list-packages Ux
 
 ;; Install needed packages
 (defun ensure-package-installed (&rest packages)
