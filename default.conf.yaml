@@ -68,6 +68,8 @@
       path: bin/yamllint
     ~/bin/yamlextract:
       path: bin/yamlextract
+    ~/bin/stripansi:
+      path: bin/stripansi
 
     #
     # Emacs
