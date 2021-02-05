@@ -39,7 +39,7 @@ if [ -d /usr/local/opt/android-sdk ]; then
 fi
 
 # Python
-if [ -d ~/.virtualenvs ]; then
+if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
   # Try and find python3
   for py in /usr/local/bin/python3 /usr/bin/python3; do
     if [ -e ${py} ]; then
