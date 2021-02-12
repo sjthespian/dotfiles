@@ -36,6 +36,13 @@
     ~/.bash_functions: bash_functions
     ~/.bash_profile: bash_profile
     ~/.bash-git-prompt: bash-git-prompt
+    ~/.zshrc: zshrc
+    ~/.zsh_aliases: zsh_aliases
+    ~/.zsh_functions: zsh_functions
+    ~/.zprofile: zprofile
+    ~/.zshrc.d/01-systype.sh:
+      create: true
+      path: zshrc.d/01-systype.sh
     ~/.dircolors: dircolors-dark
     ~/.gitignore_global: gitignore_global
     ~/.gnupg/gpg.conf:
