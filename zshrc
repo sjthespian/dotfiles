@@ -26,7 +26,7 @@ if [ -d $ZSH_CUSTOM/themes/powerlevel10k ]; then
   ZSH_THEME="powerlevel10k/powerlevel10k"
 else    # Setup link to brew install
   if [ -d $(brew --prefix)/opt/powerlevel10k/ ]; then
-    ln -s $(brew --prefix)/opt/powerlevel10k/ $ZSH_CUSTOM/themes/powerlevel10k/
+    ln -s $(brew --prefix)/opt/powerlevel10k $ZSH_CUSTOM/themes/
     ZSH_THEME="powerlevel10k/powerlevel10k"
   fi
 fi
