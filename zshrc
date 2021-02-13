@@ -24,6 +24,11 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 if [ -d $ZSH_CUSTOM/themes/powerlevel10k ]; then
   ZSH_THEME="powerlevel10k/powerlevel10k"
+else    # Setup link to brew install
+  if [ -d $(brew --prefix)/opt/powerlevel10k/ ]; then
+    ln -s $(brew --prefix)/opt/powerlevel10k/ $ZSH_CUSTOM/themes/powerlevel10k/
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+  fi
 fi
 
 # Set list of themes to pick from when loading at random
@@ -71,7 +76,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github docker docker-compose ansible brew cask emacs golang gpg-agent iterm2 rsync sudo systemd tmux ubuntu virtualenv virtualenvwrapper aws gcloud helm kitchen knife kubectl terraform vault)
+plugins=(git github docker docker-compose ansible brew emacs golang gpg-agent iterm2 rsync sudo systemd tmux ubuntu virtualenv virtualenvwrapper aws gcloud helm kitchen knife kubectl terraform vault)
 
 source $ZSH/oh-my-zsh.sh
 
