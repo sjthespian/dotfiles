@@ -22,13 +22,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load --- or random
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-if [ -d $ZSH_CUSTOM/themes/powerlevel10k ]; then
+# PowerLevel10K setup - https://github.com/romkatv/powerlevel10k
+if [ -e $ZSH_CUSTOM/themes/powerlevel10k ]; then
   ZSH_THEME="powerlevel10k/powerlevel10k"
-else    # Setup link to brew install
-  if [ -d $(brew --prefix)/opt/powerlevel10k/ ]; then
-    ln -s $(brew --prefix)/opt/powerlevel10k $ZSH_CUSTOM/themes/
-    ZSH_THEME="powerlevel10k/powerlevel10k"
-  fi
+  POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 fi
 
 # Set list of themes to pick from when loading at random
