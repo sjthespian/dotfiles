@@ -32,7 +32,6 @@ _load_zshrc_d() {
     [ -d ~/.zshrc.d ] || return
 
     for script in ~/.zshrc.d/*.zsh; do
-#        . $script >/dev/null 2>&1 || echo "WARNING: include of $script failed!" 1>&2
         . $script || echo "WARNING: include of $script failed!" 1>&2
     done
 }
