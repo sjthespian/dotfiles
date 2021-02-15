@@ -224,6 +224,7 @@ alias it2pl='it2prof "Solarized Light"'
 if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
   #alias tmux='tmux -CC new'
+  plugins+=(iterm2)
 fi
 
 # Remote tmux
