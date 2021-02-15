@@ -73,7 +73,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(battery git github gpg-agent rsync sudo)
+plugins=(battery git github gpg-agent rsync sudo zsh-autosuggestions)
 # Only install plugins if the software exists
 if hash ansible 2>/dev/null; then
   plugins+=(ansible)
