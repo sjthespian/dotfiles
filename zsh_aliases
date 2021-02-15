@@ -3,7 +3,6 @@
 # interactively remove file -- good for beginners
 alias rm='rm -i'
 
-alias ?='man man'
 alias ls='ls -CF'
 alias list='more -l'
 alias wa='who -a'
@@ -222,7 +221,7 @@ alias it2proflight='it2prof "Solarized Light"'
 alias it2pd='it2prof "Solarized Dark"'
 alias it2pl='it2prof "Solarized Light"'
 # If running iTerm2, enable tmux integration
-if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
   export ITERM_ENABLE_SHELL_INTEGRATION_WITH_TMUX=YES
   #alias tmux='tmux -CC new'
 fi
