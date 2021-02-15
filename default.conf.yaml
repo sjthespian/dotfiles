@@ -46,9 +46,6 @@
     ~/.zshrc.d/75-editor.zsh:
       create: true
       path: zshrc.d/75-editor.zsh
-    ~/.zshrc.d/86-gpg-agent.zsh:
-      create: true
-      path: zshrc.d/86-gpg-agent.zsh
     ~/.zshrc.d/99-misc.zsh:
       create: true
       path: zshrc.d/99-misc.zsh
