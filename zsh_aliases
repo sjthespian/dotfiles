@@ -242,10 +242,10 @@ rtmux() {
     fi
     # Support for iterm integration
     if [ "$TERM_PROGRAM" == "iTerm.app" ]; then
-      #ssh -t $1 "tmux -CC new -A $sessargs"
-      ssh -t $1 "tmux new -A $sessargs"
+      #ssh -t $1 "tmux -CC new -A $=sessargs"
+      ssh -t $1 "tmux new -A $=sessargs"
     else
-      ssh -t $1 "tmux new -A $sessargs"
+      ssh -t $1 "tmux new -A $=sessargs"
     fi
   fi
 }
@@ -263,10 +263,10 @@ tms() {	# New session, attach to existing session if the named one exists
   if [ -n "$1" ]; then
     args="-As ${1}"
     if [ -n "$2" ]; then
-      args="${args} -n ${2}"
+      args+=" -n ${2}"
     fi
   fi
-  tmux new-session ${args}
+  tmux new-session $=args
 }
 tmw() { # New window, may use existing session or create named window
   usage() {
@@ -280,10 +280,10 @@ tmw() { # New window, may use existing session or create named window
   if [ -n "$1" ]; then
     args="-t ${1}:"
     if [ -n "$2" ]; then
-      args="${args} -n ${2}"
+      args+=" -n ${2}"
     fi
   fi
-  tmux new-window ${args}
+  tmux new-window $=args
 }
 alias tml='tmux list-sessions'
 
@@ -319,5 +319,5 @@ checkcert() {
   if [ -n "$2" ]; then
     args="-starttls $2"
   fi
-  openssl s_client -servername $host -connect $host:$port ${args} < /dev/null | openssl x509 -noout -subject -alias -serial -dates
+  openssl s_client -servername $host -connect $host:$port $=args < /dev/null | openssl x509 -noout -subject -alias -serial -dates
 }
