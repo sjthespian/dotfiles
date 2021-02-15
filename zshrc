@@ -125,4 +125,6 @@ _load_zshrc_d
 
 export PATH
 
+# NOTE: zsh-syntax-hilighting must be the last plugin
+plugins+=(zsh-syntax-highlighting)
 . $ZSH/oh-my-zsh.sh
