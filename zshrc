@@ -82,7 +82,7 @@ if hash brew 2>/dev/null; then
   plugins+=(brew)
 fi
 if hash docker 2>/dev/null; then
-  plugins+=(docker docker-componse)
+  plugins+=(docker docker-compose)
 fi
 if hash emacs 2>/dev/null; then
   plugins+=(emacs)
