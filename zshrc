@@ -73,9 +73,44 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github docker docker-compose ansible brew emacs golang gpg-agent iterm2 rsync sudo systemd tmux ubuntu virtualenv virtualenvwrapper aws gcloud helm kitchen knife kubectl terraform vault)
-
-source $ZSH/oh-my-zsh.sh
+plugins=(battery git github gpg-agent rsync sudo)
+# Only install plugins if the software exists
+if hash ansible 2>/dev/null; then
+  plugins+=(ansible)
+fi
+if hash brew 2>/dev/null; then
+  plugins+=(brew)
+fi
+if hash docker 2>/dev/null; then
+  plugins+=(docker docker-componse)
+fi
+if hash emacs 2>/dev/null; then
+  plugins+=(emacs)
+fi
+if hash tmux 2>/dev/null; then
+  plugins+=(tmux)
+fi
+if hash vault 2>/dev/null; then
+  plugins+=(vault)
+fi
+if hash chef 2>/dev/null; then
+  plugins+=(knife kitchen)
+fi
+if hash kubectl 2>/dev/null; then
+  plugins+=(kubectl helm)
+fi
+if hash aws 2>/dev/null; then
+  plugins+=(aws)
+fi
+if hash gcloud 2>/dev/null; then
+  plugins+=(gcloud)
+fi
+if hash terraform 2>/dev/null; then
+  plugins+=(terraform)
+fi
+if hash systemctl 2>/dev/null; then
+  plugins+=(systemd ubuntu)
+fi
 
 # User configuration
 
@@ -89,3 +124,5 @@ _load_zshrc_d
 [[ -n "$CONFIG_GUESS" && -d "$HOME/bin/$CONFIG_GUESS" ]] && prepend PATH $HOME/bin/$CONFIG_GUESS
 
 export PATH
+
+. $ZSH/oh-my-zsh.sh
