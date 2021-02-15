@@ -1,3 +1,10 @@
+# Make sure this is only loaded once
+if [ -n "${LOADED_01_SYSTYPE}" ]; then
+  return
+else
+  LOADED_01_SYSTYPE=1
+fi
+
 # Try and figure out what kind of system we are on
 if [ -e "$HOME/bin/config.guess" ]; then
     CONFIG_GUESS=`$HOME/bin/config.guess`

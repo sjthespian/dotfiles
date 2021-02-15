@@ -1,3 +1,10 @@
+# Make sure this is only loaded once
+if [ -n "${LOADED_99_MISC}" ]; then
+  return
+else
+  LOADED_99_MISC=1
+fi
+
 # Set the TERM environment variable
 if [ -d /usr/lib/terminfo ]
 then
@@ -5,16 +12,15 @@ then
 fi
 
 # Fix bs/del mapping
-stty dec
-stty erase '^H' kill '^U' intr '^C' echoe 
+#stty dec
+#stty erase '^H' kill '^U' intr '^C' echoe 
 
 # History management - history by host
 export HISTFILE=$HOME/.zsh_history.`uname -n`
 export HISTIGNORE="&:[bf]g:exit"
 
 # Make less the default pager unless it doesn't exist
-which less > /dev/null 2>&1
-if [ $? == 0 ]; then
+if hash less 2>/dev/null; then
   export PAGER="less -m"
 fi
 
@@ -50,11 +56,12 @@ if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
   export WORKON_HOME=$HOME/.virtualenvs
   source /usr/local/bin/virtualenvwrapper.sh
   export VIRTUAL_ENV_DISABLE_PROMPT=0
+  # Add zsh plugins
+  plugins+=(virtualenv virtualenvwrapper)
 fi
 
 # Go
-which go > /dev/null 2>&1
-if [ $? == 0 ]; then
+if hash go 2>/dev/null; then
   export GOPATH="${HOME}/go/"
   export PATH=$PATH:$GOPATH/bin
   # Make sure some common go utils are installed
@@ -67,6 +74,7 @@ if [ $? == 0 ]; then
   installgoutil gocode github.com/nsf/gocode
   installgoutil goimports golang.org/x/tools/cmd/goimports
   installgoutil guru golang.org/x/tools/cmd/guru
+  plugins+=(golang)
 fi
 
 # JAVA_HOME settings on the Mac

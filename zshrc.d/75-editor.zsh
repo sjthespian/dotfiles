@@ -1,3 +1,10 @@
+# Make sure this is only loaded once
+if [ -n "${LOADED_75_EDITOR}" ]; then
+  return
+else
+  LOADED_75_EDITOR=1
+fi
+
 # some editor defaults
 EXINIT='set noautoindent showmatch showmode autowrite redraw'
 export EXINIT
