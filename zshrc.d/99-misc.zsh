@@ -16,7 +16,7 @@ fi
 #stty erase '^H' kill '^U' intr '^C' echoe 
 
 # History management - history by host
-export HISTFILE=$HOME/.zsh_history.`uname -n`
+setopt nosharehistory
 export HISTIGNORE="&:[bf]g:exit"
 
 # Make less the default pager unless it doesn't exist
