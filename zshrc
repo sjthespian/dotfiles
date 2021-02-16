@@ -122,6 +122,8 @@ export PATH
 plugins+=(zsh-syntax-highlighting)
 . $ZSH/oh-my-zsh.sh
 
-# Added by vault -autocomplete-install
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/vault vault
+if (( $+commands[vault] )); then
+  # Added by vault -autocomplete-install
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /usr/local/bin/vault vault
+fi
