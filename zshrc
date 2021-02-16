@@ -73,39 +73,34 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(battery git github gpg-agent iterm2 rsync sudo tmux zsh-autosuggestions)
+plugins=(battery emacs gcloud git github gpg-agent iterm2 rsync sudo tmux zsh-autosuggestions)
 # Only install plugins if the software exists
-if hash ansible 2>/dev/null; then
+if (( $+commands[ansible] )); then
   plugins+=(ansible)
 fi
-if hash brew 2>/dev/null; then
+if (( $+commands[brew] )); then
   plugins+=(brew)
 fi
-if hash docker 2>/dev/null; then
+if (( $+commands[docker] )); then
   plugins+=(docker docker-compose)
 fi
-if hash emacs 2>/dev/null; then
-  plugins+=(emacs)
+# Use official auto-completion for vault
+if (( $+commands[vault] )); then
+  vault -autocomplete-install
 fi
-if hash vault 2>/dev/null; then
-  plugins+=(vault)
-fi
-if hash chef 2>/dev/null; then
+if (( $+commands[knife] )); then
   plugins+=(knife kitchen)
 fi
-if hash kubectl 2>/dev/null; then
+if (( $+commands[kubectl] )); then
   plugins+=(kubectl helm)
 fi
-if hash aws 2>/dev/null; then
+if (( $+commands[aws] )); then
   plugins+=(aws)
 fi
-if hash gcloud 2>/dev/null; then
-  plugins+=(gcloud)
-fi
-if hash terraform 2>/dev/null; then
+if (( $+commands[terraform] )); then
   plugins+=(terraform)
 fi
-if hash systemctl 2>/dev/null; then
+if grep 'ID=ubuntu' /etc/os-release > /dev/null 2>&1; then
   plugins+=(systemd ubuntu)
 fi
 
