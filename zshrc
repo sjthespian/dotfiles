@@ -85,12 +85,10 @@ if (( $+commands[docker] )); then
   plugins+=(docker docker-compose)
 fi
 # Use official auto-completion for vault
-if (( $+commands[vault] )); then
-  #vault -autocomplete-install
-  # The above adds these two lines:
-  autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C /usr/local/bin/vault vault
-fi
+# This only needs to be run once, it adds the two lines at the end
+#if (( $+commands[vault] )); then
+#  vault -autocomplete-install
+#fi
 if (( $+commands[knife] )); then
   plugins+=(knife kitchen)
 fi
@@ -123,3 +121,7 @@ export PATH
 # NOTE: zsh-syntax-hilighting must be the last plugin
 plugins+=(zsh-syntax-highlighting)
 . $ZSH/oh-my-zsh.sh
+
+# Added by vault -autocomplete-install
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
