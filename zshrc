@@ -86,7 +86,10 @@ if (( $+commands[docker] )); then
 fi
 # Use official auto-completion for vault
 if (( $+commands[vault] )); then
-  vault -autocomplete-install
+  #vault -autocomplete-install
+  # The above adds these two lines:
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C /usr/local/bin/vault vault
 fi
 if (( $+commands[knife] )); then
   plugins+=(knife kitchen)
