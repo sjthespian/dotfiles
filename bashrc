@@ -21,3 +21,5 @@ _load_bashrc_d
 [[ -n "$CONFIG_GUESS" && -d "$HOME/bin/$CONFIG_GUESS" ]] && prepend PATH $HOME/bin/$CONFIG_GUESS
 
 export PATH
+
+complete -C /usr/local/bin/vault vault
