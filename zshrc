@@ -73,7 +73,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(battery git github gpg-agent iterm2 rsync sudo zsh-autosuggestions)
+plugins=(battery git github gpg-agent iterm2 rsync sudo tmux zsh-autosuggestions)
 # Only install plugins if the software exists
 if hash ansible 2>/dev/null; then
   plugins+=(ansible)
@@ -86,9 +86,6 @@ if hash docker 2>/dev/null; then
 fi
 if hash emacs 2>/dev/null; then
   plugins+=(emacs)
-fi
-if hash tmux 2>/dev/null; then
-  plugins+=(tmux)
 fi
 if hash vault 2>/dev/null; then
   plugins+=(vault)
