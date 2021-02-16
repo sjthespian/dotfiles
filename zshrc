@@ -111,6 +111,9 @@ fi
 if hash systemctl 2>/dev/null; then
   plugins+=(systemd ubuntu)
 fi
+if [ -d /Applications/iTerm.app ]; then
+  plugins+=(iterm2)
+fi
 
 # User configuration
 
