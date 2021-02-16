@@ -313,7 +313,7 @@ checkcert() {
   fi
   args=""
   # Split arg 1 into host and port
-  IFS=':' read -a hostarg <<< $1
+  IFS=':' read -A hostarg <<< $1
   host=${hostarg[0]}
   port=${hostarg[1]:-443}
   if [ -n "$2" ]; then
