@@ -2,6 +2,11 @@
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 
+# Add user bin and /usr/local to beginning of path
+prepend PATH /usr/local/sbin:/usr/local/bin
+prepend PATH $HOME/bin
+export PATH
+
 # Done unless this is an interactive shell
 INTERACTIVE=
 if [[ -o login || -o interactive ]]; then
