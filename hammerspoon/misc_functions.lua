@@ -18,7 +18,10 @@ function reloadConfig(files)
 
 end
 
-
+-- Use the PushToTalk spoon to toggle the mic
+function mictoggle()
+    spoon.PushToTalk:toggleStates({'push-to-talk', 'release-to-talk'})
+end
 
 -- I always end up losing my mouse pointer, particularly if it's on a monitor full of terminals.
 -- This draws a bright red circle around the pointer for a few seconds

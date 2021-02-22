@@ -36,10 +36,42 @@ local modules = {
 hsm = {}
 
 --
+-- Load spoons
+--
+hs.loadSpoon("SpoonInstall")
+spoon.SpoonInstall.use_syncinstall = true
+
+-- 
+-- Hotkey to mute microphone from any app
+--
+-- spoon.SpoonInstall:andUse("MicMute")
+-- spoon.MicMute:bindHotkeys(
+--     {
+--         toggle = {{"cmd", "alt", "ctrl"}, "/"}
+--     }
+-- )
+
+-- 
+-- Push to talk for Zoome
+-- 
+-- spoon.SpoonInstall.repos.skrypka = {
+--   url = "https://github.com/skrypka/Spoons",
+--   desc = "Skrypka's spoon repository",
+-- }
+-- spoon.SpoonInstall:andUse("PushToTalk", {
+--   repo = 'skrypka',
+--   start = true,
+--   config = {
+--     app_switcher = { ['zoom.us'] = 'push-to-talk' }
+--   }
+-- })
+
+--
 -- Load my functions
 --
 --require('window_functions')
 require('misc_functions')
+require('zoom_local')
 
 -- load module configuration
 cfg = require('config')

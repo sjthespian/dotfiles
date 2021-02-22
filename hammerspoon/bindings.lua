@@ -71,6 +71,8 @@ function bindings.bind()
   
   -- bind keys, if no modifier specified use hyper
   hs.fnutils.each({
+      -- {key = '/', fn = mictoggle},
+      {key = '/', fn = zoomToggleMute},
       {key = 'h', fn = hs.hints.windowHints},
       {key = 'l', fn = hs.caffeinate.lockScreen},
       {key = 'm', fn = mouseHighlight},
