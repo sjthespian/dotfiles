@@ -8,7 +8,7 @@ zoomStatusMenuBarItem:setClickCallback(function()
 end)
 
 updateZoomStatus = function(event)
-  hs.printf("updateZoomStatus(%s)", event)
+--  hs.printf("updateZoomStatus(%s)", event)
   if (event == "from-running-to-meeting") then
     zoomStatusMenuBarItem:returnToMenuBar()
   elseif (event == "muted") then
@@ -23,10 +23,10 @@ end
 --
 -- Zoom sppon (non-official)
 --
-spoon.SpoonInstall:andUse("Zoom")
--- hs.loadSpoon("Zoom")
+-- spoon.SpoonInstall:andUse("Zoom")
+hs.loadSpoon("Zoom")
 spoon.Zoom:setStatusCallback(updateZoomStatus)
--- spoon.Zoom.start()
+spoon.Zoom.start()
 
 -- Function to toggle mic, binding in bindings.lua
 function zoomToggleMute()
