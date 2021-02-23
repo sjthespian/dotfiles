@@ -112,6 +112,10 @@ fi
 
 # User configuration
 
+# Bash-like navigation
+autoload -U select-word-style
+select-word-style bash
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -132,3 +136,6 @@ if (( $+commands[vault] )); then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C /usr/local/bin/vault vault
 fi
+
+# Enable history per window
+unsetopt share_history
