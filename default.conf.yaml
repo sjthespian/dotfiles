@@ -43,6 +43,9 @@
     ~/.zshrc.d/01-systype.zsh:
       create: true
       path: zshrc.d/01-systype.zsh
+    ~/.zshrc.d/50-iterm2.zsh:
+      create: true
+      path: zshrc.d/50-iterm2.zsh
     ~/.zshrc.d/75-editor.zsh:
       create: true
       path: zshrc.d/75-editor.zsh
