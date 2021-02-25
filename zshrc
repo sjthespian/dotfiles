@@ -137,5 +137,10 @@ if (( $+commands[vault] )); then
   complete -o nospace -C /usr/local/bin/vault vault
 fi
 
+# Use HomeBrew ruby if available
+if [[ -f /usr/local/opt/ruby/bin/ruby ]]; then
+  prepend PATH /usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin
+fi
+
 # Enable history per window
 unsetopt share_history
