@@ -11,4 +11,6 @@ fi
 
 domain=$1
 for i in $(dig +short $domain ns); do
-> echo -ne "$(printf "%25s\t" $i)"; dig +short $domain soa @$i; done
+  echo -ne "$(printf "%25s\t" $i)"
+  dig +short $domain soa @$i
+done
