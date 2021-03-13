@@ -93,6 +93,8 @@
       path: bin/yamlextract
     ~/bin/stripansi:
       path: bin/stripansi
+    ~/bin/dnssoa:
+      path: bin/dnssoa
 
     #
     # Emacs

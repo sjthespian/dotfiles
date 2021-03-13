@@ -1,0 +1,14 @@
+#!/bin/bash
+
+usage() {
+  echo "$0 domain"
+  exit 1
+}
+
+if [ -z "$1" ]; then
+  usage
+fi
+
+domain=$1
+for i in $(dig +short $domain ns); do
+> echo -ne "$(printf "%25s\t" $i)"; dig +short $domain soa @$i; done
