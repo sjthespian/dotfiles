@@ -73,6 +73,9 @@ ENABLE_CORRECTION="true"
 # see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
 
+# Set '-CC' option for iTerm2 tmux integration
+ZSH_TMUX_ITERM2=true
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
