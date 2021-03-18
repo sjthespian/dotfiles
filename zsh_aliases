@@ -324,3 +324,4 @@ checkcert() {
 
 # Filebot aliases for renaming files
 alias fbmvmovie='filebot -rename -non-strict --format '\''{plex.derive{" $audioLanguages"}{" [$resolution]"}}'\'' --output /media/video/DVDs/ --db TheMovieDB '
+alias fbmvtvshow='filebot -rename -non-strict --format '\''{plex}'\'' --output /media/video/DVDs/ --db TheTVDB'
