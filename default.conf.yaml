@@ -95,6 +95,8 @@
       path: bin/stripansi
     ~/bin/dnssoa:
       path: bin/dnssoa
+    ~/bin/movieres:
+      path: bin/movieres
 
     #
     # Emacs
