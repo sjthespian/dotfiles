@@ -321,3 +321,6 @@ checkcert() {
   fi
   openssl s_client -servername $host -connect $host:$port $=args < /dev/null | openssl x509 -noout -subject -alias -serial -dates
 }
+
+# Filebot aliases for renaming files
+alias fbmvmovie='filebot -rename -non-strict --format '\''{plex.derive{" $audioLanguages"}{" [$resolution]"}}'\'' --output /media/video/DVDs/ --db TheMovieDB '
