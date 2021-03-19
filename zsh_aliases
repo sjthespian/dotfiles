@@ -323,8 +323,13 @@ checkcert() {
 }
 
 # Filebot aliases for renaming files
-alias fbmvmovie='filebot -rename -non-strict --format '\''{plex.derive{" $audioLanguages"}{" [$resolution]"}}'\'' --output /media/video/DVDs/ --db TheMovieDB '
-alias fbmvdvdtvshow='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /media/video/DVDs/TV_Shows --db TheTVDB'
-alias fbmvdltvshow='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /media/video/TV/ --db TheTVDB'
-alias fbmvdvdanime='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /media/video/DVDs/TV_Shows/ --db AniDB'
-alias fbmvdlanime='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /media/video/TV/ --db AniDB'
+# Set video base dir
+VBASE=/media
+if [ -d /srv/media ]; then
+  VBASE=/srv/media
+fi
+alias fbmvmovie='filebot -rename -non-strict --format '\''{plex.derive{" $audioLanguages"}{" [$resolution]"}}'\'' --output /${VBASE}/video/DVDs/ --db TheMovieDB '
+alias fbmvdvdtvshow='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /${VBASE}/video/DVDs/TV_Shows --db TheTVDB'
+alias fbmvdltvshow='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /${VBASE}/video/TV/ --db TheTVDB'
+alias fbmvdvdanime='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /${VBASE}/video/DVDs/TV_Shows/ --db AniDB'
+alias fbmvdlanime='filebot -rename -non-strict --format '\''{plex.tail}'\'' --output /${VBASE}/video/TV/ --db AniDB'
