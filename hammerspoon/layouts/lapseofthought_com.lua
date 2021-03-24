@@ -14,6 +14,13 @@
 --------------------------------------------------------------------------------
 local layouts = {
    {
+      -- Always put Zoom on the primary monitor since it has the camera
+      name = "zoom.us",
+      func = function(index, win)
+	 win:moveToScreen(monitor_1, false, true)
+      end
+   },
+   {
       name = "Emacs",
       func = function(index, win)
 	 win:moveToScreen(monitor_2, false, true)

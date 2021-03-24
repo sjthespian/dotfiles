@@ -30,5 +30,6 @@ spoon.Zoom.start()
 
 -- Function to toggle mic, binding in bindings.lua
 function zoomToggleMute()
+--  hs.printf("zoomToggleMute() called")
   spoon.Zoom:toggleMute()
 end
