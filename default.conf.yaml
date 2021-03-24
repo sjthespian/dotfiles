@@ -55,6 +55,9 @@
     ~/.zshrc.d/99-p10k.zsh:
       create: true
       path: zshrc.d/99-p10k.zsh
+    ~/.zshrc.d/99-filebot.zsh:
+      create: true
+      path: zshrc.d/99-filebot.zsh
     ~/.oh-my-zsh: oh-my-zsh
     ~/.oh-my-zsh/custom/themes/powerlevel10k: oh-my-zsh-powerlevel10k
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: zsh-autosuggestions
