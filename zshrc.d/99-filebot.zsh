@@ -94,3 +94,31 @@ alias fbdlanime='call_filebot anime DOWNLOAD'
 alias fbdlanimetest='call_filebot anime TEST DOWNLOAD'
 alias fbdlanimeres='call_filebot anime DOWNLOAD RES'
 alias fbdlanimerestest='call_filebot anime TEST DOWNLOAD RES'
+
+# Youtube DL alias for filebot
+ytdltv() {
+  usage() {
+    if [ -n "$1" ]; then
+      echo $1
+    fi
+    echo "usage: ytdltv show_name S##E## url"
+    return 1
+  }
+  show=$1
+  se=$2
+  url=$3
+  ret=
+  if [ -z "$show" -o -z "$se" -o -z "$url" ]; then
+    usage
+    ret=$(( $? > 0 ))
+  fi
+  if [[ $se =~ 'S[0-9]*E[0-9]*' ]]; then
+    :
+  else 
+    usage "ERROR $se does not match S##E##"
+    ret=$(( $? > 0 ))
+  fi
+  if [ -z "$ret" -o "$ret" = 0 ]; then
+    echo youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
+  fi
+}
