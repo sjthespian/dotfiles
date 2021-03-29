@@ -119,6 +119,6 @@ ytdltv() {
     ret=$(( $? > 0 ))
   fi
   if [ -z "$ret" -o "$ret" = 0 ]; then
-    echo youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
+    youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
   fi
 }
