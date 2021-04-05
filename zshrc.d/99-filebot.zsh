@@ -33,7 +33,7 @@ call_filebot() {
             ;;
         music)
             args='-rename -non-strict --db ID3'
-            format='{plex}'
+            format='{plex.tail}'
             output=${VBASE}/mp3/
             ;;
         tvshow|anime)
