@@ -15,6 +15,7 @@ fi
 
 call_filebot() {
     # Usage call_filebot movie [TEST] file [...]
+    #       call_filebot music [TEST] file [...]
     #       call_filebot tvshow|anime [TEST] DVD|DOWNLOAD [RES]
     #           Optional "res" will include video resolution in the filename 
     type=$1
@@ -29,6 +30,11 @@ call_filebot() {
             args='-rename -non-strict --db TheMovieDB'
             format='{plex.derive{" $audioLanguages"}{" [$resolution]"}}'
             output=${VBASE}/video/DVDs/
+            ;;
+        music)
+            args='-rename -non-strict --db ID3'
+            format='{plex}'
+            output=${VBASE}/mp3/
             ;;
         tvshow|anime)
             format='{plex.tail}'
@@ -76,6 +82,9 @@ call_filebot() {
 # Movie aliases
 alias fbmovie='call_filebot movie'
 alias fbmovietest='call_filebot movie TEST'
+# Music alises
+alias fbmusic='call_filebot music'
+alias fbmusictest='call_filebot music TEST'
 # TV show aliass
 alias fbdvdtv='call_filebot tvshow DVD'
 alias fbdvdtvtest='call_filebot tvshow TEST DVD'
