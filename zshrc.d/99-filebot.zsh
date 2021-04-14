@@ -15,7 +15,7 @@ fi
 
 call_filebot() {
     # Usage call_filebot movie [TEST] file [...]
-    #       call_filebot music [TEST] file [...]
+    #       call_filebot music [TEST] [multidisc] [various|soundtrack|showtunes|virtual artist] file [...]
     #       call_filebot tvshow|anime [TEST] DVD|DOWNLOAD [RES]
     #           Optional "res" will include video resolution in the filename 
     type=$1
@@ -33,7 +33,36 @@ call_filebot() {
             ;;
         music)
             args='-rename -non-strict --db ID3'
-            format='{plex.tail}'
+	    multidisc=
+	    format='{artist}/{album+'\''/'\''}{pi.pad(2)} {t}'
+	    if [ $1 = "multidisc" ]; then
+		multidisc=1
+		shift
+            fi
+	    case $1 in
+	        virtual)
+		    shift
+		    artist=$1
+		    shift
+	            format='['${artist}']/{album+'\''/'\''}{pi.pad(2)} {t}'
+		    ;;
+	        various)
+		    shift
+	            format='Various Artists/{album+'\''/'\''}{pi.pad(2)} {t} ({artist})'
+		    ;;
+	        showtunes)
+		    shift
+	            format='Showtunes/{album+'\''/'\''}{pi.pad(2)} {t} ({artist})'
+		    ;;
+	        soundtrack)
+		    shift
+	            format='Soundtracks/{album+'\''/'\''}{pi.pad(2)} {t} ({artist})'
+		    ;;
+	    esac
+	    # Change track number in format for multidisc
+	    if [ -n "$multidisc" ]; then
+	        format="$(echo $format | sed 's/{pi.pad(2)/{media.PartPosition}-{pi.pad(2)/')"
+	    fi
             output=${VBASE}/mp3/
             ;;
         tvshow|anime)
@@ -85,6 +114,24 @@ alias fbmovietest='call_filebot movie TEST'
 # Music alises
 alias fbmusic='call_filebot music'
 alias fbmusictest='call_filebot music TEST'
+alias fbmusicmd='call_filebot music multidisc'
+alias fbmusicmdtest='call_filebot music TEST multidisc'
+alias fbmusicvdis='call_filebot music virtual disney'
+alias fbmusicvdistest='call_filebot music TEST virtual disney'
+alias fbmusicmdvdis='call_filebot music multidisc virtual disney'
+alias fbmusicmdvdistest='call_filebot music TEST multidisc virtual disney'
+alias fbmusicvar='call_filebot music various'
+alias fbmusicvartest='call_filebot music TEST various'
+alias fbmusicmdvar='call_filebot music multidisc various'
+alias fbmusicmdvartest='call_filebot music TEST multidisc various'
+alias fbmusicsh='call_filebot music showtunes'
+alias fbmusicshtest='call_filebot music TEST showtunes'
+alias fbmusicmdsh='call_filebot music multidisc showtunes'
+alias fbmusicmdshtest='call_filebot music TEST multidisc showtunes'
+alias fbmusicst='call_filebot music soundtrack'
+alias fbmusicsttest='call_filebot music TEST soundtrack'
+alias fbmusicmdst='call_filebot music multidisc soundtrack'
+alias fbmusicmdsttest='call_filebot music TEST multidisc soundtrack'
 # TV show aliass
 alias fbdvdtv='call_filebot tvshow DVD'
 alias fbdvdtvtest='call_filebot tvshow TEST DVD'
