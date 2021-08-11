@@ -16,7 +16,6 @@ fi
 
 # Temp file for RDP config
 TMPFILE=$(mktemp "XXXXXXXXXX.rdp" ) || exit 1
-echo $TMPFILE
 
 # Clean up temp file on exit
 trap 'rm -f "$TMPFILE"' EXIT
