@@ -100,6 +100,8 @@
       path: bin/dnssoa
     ~/bin/movieres:
       path: bin/movieres
+    ~/bin/openrdp:
+      path: bin/openrdp
 
     #
     # Emacs

@@ -1,0 +1,79 @@
+#!/bin/bash
+
+usage() {
+  if [ -n "$1" ]; then
+    echo $1
+  fi
+  echo "usage: $0 hostname"
+  exit 1
+}
+
+# Check command line
+hostname=$1
+if [ -z "$hostname" ]; then
+  usage "ERROR: no hostname specified"
+fi
+
+# Temp file for RDP config
+TMPFILE=$(mktemp "XXXXXXXXXX.rdp" ) || exit 1
+echo $TMPFILE
+
+# Clean up temp file on exit
+trap 'rm -f "$TMPFILE"' EXIT
+
+# Create rdp file, populate hostname, pass to RDP
+cat > $TMPFILE << EOFEOF
+targetisaadjoined:i:0
+redirected video capture encoding quality:i:0
+camerastoredirect:s:
+gatewaybrokeringtype:i:0
+use redirection server name:i:0
+alternate shell:s:
+disable themes:i:0
+disable cursor setting:i:1
+resourceprovider:s:
+disable menu anims:i:1
+remoteapplicationcmdline:s:
+promptcredentialonce:i:0
+gatewaycertificatelogonauthority:s:
+audiocapturemode:i:0
+prompt for credentials on client:i:0
+gatewayhostname:s:
+remoteapplicationprogram:s:
+gatewayusagemethod:i:2
+screen mode id:i:1
+use multimon:i:0
+authentication level:i:2
+desktopwidth:i:0
+desktopheight:i:0
+redirectsmartcards:i:0
+redirectclipboard:i:1
+forcehidpioptimizations:i:0
+full address:s:$hostname
+drivestoredirect:s:
+loadbalanceinfo:s:
+networkautodetect:i:1
+enablecredsspsupport:i:1
+redirectprinters:i:0
+autoreconnection enabled:i:1
+session bpp:i:32
+administrative session:i:0
+audiomode:i:0
+bandwidthautodetect:i:1
+authoring tool:s:
+connection type:i:7
+remoteapplicationmode:i:0
+disable full window drag:i:0
+gatewayusername:s:
+shell working directory:s:
+wvd endpoint pool:s:
+remoteapplicationappid:s:
+username:s:$LOGNAME
+allow font smoothing:i:1
+connect to console:i:0
+disable wallpaper:i:0
+gatewayaccesstoken:s:
+EOFEOF
+
+open -na "/Applications/Microsoft Remote Desktop.app/Contents/MacOS/Microsoft Remote Desktop" $TMPFILE
+sleep 5
