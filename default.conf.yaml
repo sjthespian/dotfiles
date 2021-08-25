@@ -46,9 +46,6 @@
     ~/.zshrc.d/50-iterm2.zsh:
       create: true
       path: zshrc.d/50-iterm2.zsh
-    ~/.zshrc.d/75-editor.zsh:
-      create: true
-      path: zshrc.d/75-editor.zsh
     ~/.zshrc.d/99-misc.zsh:
       create: true
       path: zshrc.d/99-misc.zsh
