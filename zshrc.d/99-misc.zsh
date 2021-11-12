@@ -18,6 +18,8 @@ fi
 # History management - history by host
 setopt nosharehistory
 export HISTIGNORE="&:[bf]g:exit"
+# Enable history per window
+unsetopt share_history
 
 # Make less the default pager unless it doesn't exist
 if hash less 2>/dev/null; then
