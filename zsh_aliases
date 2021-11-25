@@ -323,3 +323,9 @@ checkcert() {
   fi
   openssl s_client -servername $host -connect $host:$port $=args < /dev/null | openssl x509 -noout -subject -alias -serial -dates
 }
+
+# Create merged k8s config file
+mkk8sconfig() {
+  export KUBECONFIG=$(ls ~/.kube/config-* | tr '\n' ':' | sed 's/:$//')  
+  kubectl config view --flatten > ~/.kube/config
+}

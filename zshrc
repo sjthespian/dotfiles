@@ -147,3 +147,6 @@ fi
 
 # Enable history per window
 unsetopt share_history
+
+# Fix annoying omyzsh binding
+bindkey '\el' down-case-word

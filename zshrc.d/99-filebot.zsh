@@ -61,7 +61,7 @@ call_filebot() {
 	    esac
 	    # Change track number in format for multidisc
 	    if [ -n "$multidisc" ]; then
-	        format="$(echo $format | sed 's/{pi.pad(2)/{media.PartPosition}-{pi.pad(2)/')"
+	        format="$(echo $format | sed 's/{pi.pad(2)/{media.Part}{media.PartPosition}-{pi.pad(2)/')"
 	    fi
             output=${VBASE}/mp3/
             ;;
@@ -151,22 +151,36 @@ alias fbdlanimetest='call_filebot anime TEST DOWNLOAD'
 alias fbdlanimeres='call_filebot anime DOWNLOAD RES'
 alias fbdlanimerestest='call_filebot anime TEST DOWNLOAD RES'
 
+# Fix plex ownership and permissions
+plexperms () {
+  dir=${1:-.}
+  sudo chown -R plex:plex $dir
+  sudo chmod -R g+w $dir
+}
+
 # Youtube DL alias for filebot
 ytdltv() {
   usage() {
     if [ -n "$1" ]; then
       echo $1
     fi
-    echo "usage: ytdltv show_name S##E## url"
+    echo "usage: ytdltv [show_name] S##E## url"
     return 1
   }
-  show=$1
-  se=$2
-  url=$3
+  show="."
+  if [ "$#" -gt 2 ]; then	# If no first arg, use pwd as show name
+    show=$1
+    shift
+  fi
+  se=$1
+  url=$2
   ret=
   if [ -z "$show" -o -z "$se" -o -z "$url" ]; then
     usage
     ret=$(( $? > 0 ))
+  fi
+  if [ "$show" = "." ]; then
+    show="$(pwd | sed 's/^.*\///')"
   fi
   if [[ $se =~ 'S[0-9]*E[0-9]*' ]]; then
     :
