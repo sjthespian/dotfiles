@@ -155,7 +155,13 @@ alias fbdlanimerestest='call_filebot anime TEST DOWNLOAD RES'
 plexperms () {
   dir=${1:-.}
   sudo chown -R plex:plex $dir
-  sudo chmod -R g+w $dir
+  sudo chmod -R g+rw,a+r $dir
+}
+mp3perms () {
+  dir=${1:-.}
+  sudo chgrp -R mp3 $dir
+  sudo chmod -R g+rw,a+r $dir
+  find $dir -type d -print0 | xargs -0 chmod g+s
 }
 
 # Youtube DL alias for filebot
