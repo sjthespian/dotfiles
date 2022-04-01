@@ -191,4 +191,5 @@ ytdltv() {
   if [ -z "$ret" -o "$ret" = 0 ]; then
     youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
   fi
+  call_filebot tvshow DOWNLOAD *"$se"*
 }
