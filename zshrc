@@ -146,6 +146,7 @@ if [[ -f /usr/local/opt/ruby/bin/ruby ]]; then
 fi
 
 # Enable history per window
+unsetopt inc_append_history
 unsetopt share_history
 
 # Fix annoying omyzsh binding
