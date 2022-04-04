@@ -158,10 +158,12 @@ plexperms () {
   sudo chmod -R g+rw,a+r $dir
 }
 mp3perms () {
-  dir=${1:-.}
-  sudo chgrp -R mp3 $dir
-  sudo chmod -R g+rw,a+r $dir
-  find $dir -type d -print0 | xargs -0 chmod g+s
+  for d in $*; do
+    dir=${d:-.}
+    sudo chgrp -R mp3 $dir
+    sudo chmod -R g+rw,a+r $dir
+    find $dir -type d -print0 | xargs -0 sudo chmod g+s
+  done
 }
 
 # Youtube DL alias for filebot
@@ -195,6 +197,7 @@ ytdltv() {
     ret=$(( $? > 0 ))
   fi
   if [ -z "$ret" -o "$ret" = 0 ]; then
+    echo youtube-dl -o "\"$show - $se %(title)s.%(ext)s\"" $url
     youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
   fi
 }
