@@ -200,4 +200,5 @@ ytdltv() {
     echo youtube-dl -o "\"$show - $se %(title)s.%(ext)s\"" $url
     youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
   fi
+  call_filebot tvshow DOWNLOAD *"$se"*
 }
