@@ -99,6 +99,8 @@
       path: bin/movieres
     ~/bin/openrdp:
       path: bin/openrdp
+    ~/bin/watchtowerupdate:
+      path: bin/watchtowerupdate
 
     #
     # Emacs
