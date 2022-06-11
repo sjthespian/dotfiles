@@ -67,6 +67,7 @@
   (global-set-key (kbd "s-s") 'sr-speedbar-toggle)
   (setq sr-speedbar-right-side nil)
   (setq sr-speedbar-max-width 25)
+  (setq speedbar-show-unknown-files t)
   (make-face 'speedbar-face)
   (set-face-font 'speedbar-face "-*-Menlo-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")
   (setq speedbar-mode-hook '(lambda () (buffer-face-set 'speedbar-face)))
