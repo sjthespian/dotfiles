@@ -135,7 +135,11 @@ sshinstallkeys() {
     echo "usage: sshinstallkeys hostname"
   else
     if [ -x '/usr/bin/ssh-copy-id' ]; then
-      echo "$1..." && ssh-copy-id -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1
+      CMD="ssh-copy-id -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1"
+      if [ -x '/usr/local/bin/sshpass' -a ~/.pass ]; then
+        CMD="sshpass -f ~/.pass $CMD"
+      fi
+      echo "$1..." && eval $CMD
     else
       echo "$1..." && cat ~/.ssh/id_ed25519.pub | ssh -oConnectionAttempts=1 -oConnectTimeout=10 -oStrictHostKeyChecking=no $1 "umask 077 && mkdir ~/.ssh 2>/dev/null; cat >> ~/.ssh/authorized_keys"
     fi
