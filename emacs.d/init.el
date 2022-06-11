@@ -34,11 +34,11 @@
 (if window-system
     (progn
       ; if height/width < .5, assume multiple monitors
-      ; I want my Emacs window to be roughly 2/3 of the way across the
-      ; first monitor
+      ; I want my Emacs window to be roughly 10% of the way across the
+      ; second monitor
       (setq default-frame-alist
 	    '((top . 100) (left . 100)
-	      (width . 80) (height . 45)
+	      (width . 120) (height . 45)
 	      (menu-bar-lines . 1)))
       (setq frameheight 45)
       (setq framewidth 120)
@@ -66,8 +66,13 @@
   (autoload 'sr-speedbar-toggle "sr-speedbar" nil t)
   (global-set-key (kbd "s-s") 'sr-speedbar-toggle)
   (setq sr-speedbar-right-side nil)
-  (setq sr-speedbar-width 30)
+  (setq sr-speedbar-max-width 25)
+  (make-face 'speedbar-face)
+  (set-face-font 'speedbar-face "-*-Menlo-normal-normal-normal-*-10-*-*-*-m-0-iso10646-1")
+  (setq speedbar-mode-hook '(lambda () (buffer-face-set 'speedbar-face)))
   (sr-speedbar-open)
+;  (with-current-buffer sr-speedbar-buffer-name
+;    (setq window-size-fixed 'width))
   )
 
 ;;; Settings for various languages
