@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# Update the container specified on the command line using watchtower
+#
+
+WATCHTOWER=containrrr/watchtower:latest
+
+usage() {
+  if [ -n "$1" ]; then
+    echo $1
+  fi
+  echo "usage: $0 containername [...]"
+  exit 1
+}
+
+if [ -z "$1" ]; then
+  usage "ERROR: no container specified"
+fi
+
+for i in $*; do
+  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock $WATCHTOWER --run-once $i
+done

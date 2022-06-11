@@ -41,7 +41,7 @@
 	      (width . 80) (height . 45)
 	      (menu-bar-lines . 1)))
       (setq frameheight 45)
-      (setq framewidth 80)
+      (setq framewidth 120)
       (setcdr (assq 'height default-frame-alist) frameheight)
       (setcdr (assq 'width default-frame-alist) framewidth)
       (if (< (/ (float (display-pixel-height)) (display-pixel-width)) 0.5)
@@ -57,6 +57,17 @@
       (setcdr (assq 'top default-frame-alist) frametop)
       (setcdr (assq 'left default-frame-alist) frameleft)
       )
+  )
+
+;;; Use the better speedbar
+(require 'speedbar)
+(require 'sr-speedbar)
+(with-eval-after-load "speedbar"
+  (autoload 'sr-speedbar-toggle "sr-speedbar" nil t)
+  (global-set-key (kbd "s-s") 'sr-speedbar-toggle)
+  (setq sr-speedbar-right-side nil)
+  (setq sr-speedbar-width 30)
+  (sr-speedbar-open)
   )
 
 ;;; Settings for various languages
