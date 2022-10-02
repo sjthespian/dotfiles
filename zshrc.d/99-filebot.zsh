@@ -209,7 +209,6 @@ ytdltv() {
 ytrename() {
   for f in *\[*\].*; do
     n=$(echo $f | sed 's/[[:space:]]*\[[^]]*\]\././)
-    echo $n
-    #mv "$f" "$n"
+    mv "$f" "$n"
   done
 }
