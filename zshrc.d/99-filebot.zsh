@@ -208,7 +208,7 @@ ytdltv() {
 # Remove [xxx] from youtube downloads
 ytrename() {
   for f in *\[*\].*; do
-    n=$(echo $f | sed 's/[[:space:]]*\[[^]]*\]\././)
+    n=$(echo $f | sed 's/[[:space:]]*\[[^]]*\]\././')
     mv "$f" "$n"
   done
 }
