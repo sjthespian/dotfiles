@@ -103,6 +103,10 @@ fi
 if (( $+commands[kubectl] )); then
   plugins+=(kubectl helm)
 fi
+if (( $+commands[microk8s] )); then
+  plugins+=(microk8s)
+  alias kubectl="microk8s.kubectl"
+fi
 if (( $+commands[aws] )); then
   plugins+=(aws)
 fi

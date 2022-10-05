@@ -27,7 +27,7 @@ call_filebot() {
     fi
     case $type in
         movie)
-            args='-rename -non-strict --db TheMovieDB'
+            args="-rename -non-strict --db TheMovieDB"
             format='{plex.derive{" $audioLanguages"}{" [$resolution]"}}'
             output=${VBASE}/video/DVDs/
             ;;
