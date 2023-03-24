@@ -4,6 +4,7 @@
 
 # Add user bin and /usr/local to beginning of path
 prepend PATH /usr/local/sbin:/usr/local/bin
+prepend PATH ~/.local/bin
 prepend PATH $HOME/bin
 export PATH
 
