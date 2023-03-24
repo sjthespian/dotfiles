@@ -199,8 +199,8 @@ ytdltv() {
   if [ -z "$ret" -o "$ret" = 0 ]; then
     #echo youtube-dl -o "\"$show - $se %(title)s.%(ext)s\"" $url
     #youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
-    echo yt-dlp -o "\"$show - $se %(title)s.%(ext)s\"" $url
-    yt-dlp -o "$show - $se %(title)s.%(ext)s" $url
+    echo yt-dlp --no-hls-use-mpegts -o "\"$show - $se %(title)s.%(ext)s\"" $url
+    yt-dlp --no-hls-use-mpegts -o "$show - $se %(title)s.%(ext)s" $url
   fi
   call_filebot tvshow DOWNLOAD *"$se"*
 }

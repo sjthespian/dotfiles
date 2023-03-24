@@ -2,7 +2,7 @@
 -- Create a status icon in the menu bar to show mute status
 -- 
 -- This lets you click on the menu bar item to toggle the mute state
-zoomStatusMenuBarItem = hs.menubar.new(nil)
+zoomStatusMenuBarItem = hs.menubar.new(false)
 zoomStatusMenuBarItem:setClickCallback(function()
     spoon.Zoom:toggleMute()
 end)

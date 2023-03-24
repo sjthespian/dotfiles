@@ -21,6 +21,17 @@ local layouts = {
       end
    },
    {
+      name = "Reminders",
+      func = function(index, win)
+	 if (#hs.screen.allScreens() > 1) then
+	    win:moveToScreen(monitor_2, false, true)
+	    hsm.windows.moveTopRight(win)
+         else
+	    hsm.windows.moveTopRight(win)
+         end
+      end
+   },
+   {
       name = "Emacs",
       func = function(index, win)
 	 win:moveToScreen(monitor_2, false, true)
