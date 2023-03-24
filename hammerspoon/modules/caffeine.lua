@@ -77,7 +77,8 @@ end
 
 function m.start()
   timer = hs.timer.new(hs.timer.minutes(1), onTick)
-  menu = hs.menubar.newWithPriority(m.cfg.menupriority)
+  --- menu = hs.menubar.newWithPriority(m.cfg.menupriority)
+  menu = hs.menubar.new()
 
   if menu then
     menu:setClickCallback(m.toggle)
