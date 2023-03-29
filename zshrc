@@ -4,6 +4,7 @@
 
 # Add user bin and /usr/local to beginning of path
 prepend PATH /usr/local/sbin:/usr/local/bin
+prepend PATH ~/.local/bin
 prepend PATH $HOME/bin
 export PATH
 
@@ -102,6 +103,10 @@ if (( $+commands[knife] )); then
 fi
 if (( $+commands[kubectl] )); then
   plugins+=(kubectl helm)
+fi
+if (( $+commands[microk8s] )); then
+  plugins+=(microk8s)
+  alias kubectl="microk8s.kubectl"
 fi
 if (( $+commands[aws] )); then
   plugins+=(aws)

@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 -- Unsupported Spaces extension. Uses private APIs but works okay.
 -- (http://github.com/asmagill/hammerspoon_asm.undocumented)
-spaces = require("hs._asm.undocumented.spaces")
-
+-- spaces = require("hs._asm.undocumented.spaces")
+spaces = require("hs.spaces")
 
 -- config and methods originally taken from:
 -- https://github.com/rtoshiro/hammerspoon-init

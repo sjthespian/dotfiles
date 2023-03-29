@@ -71,13 +71,14 @@ if hash go 2>/dev/null; then
   # Make sure some common go utils are installed
   installgoutil() {
     if [ ! -f $GOPATH/bin/$1 ]; then
-      go get $2
+      go install $2
     fi
   }
-  installgoutil godef github.com/rogpeppe/godef
-  installgoutil gocode github.com/nsf/gocode
-  installgoutil goimports golang.org/x/tools/cmd/goimports
-  installgoutil guru golang.org/x/tools/cmd/guru
+  #installgoutil godef github.com/rogpeppe/godef
+  #installgoutil gocode github.com/nsf/gocode
+  installgoutil goimports golang.org/x/tools/cmd/goimports@latest
+  installgoutil guru golang.org/x/tools/cmd/guru@latest
+
   plugins+=(golang)
 fi
 

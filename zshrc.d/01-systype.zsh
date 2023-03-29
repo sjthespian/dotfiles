@@ -51,6 +51,15 @@ case `uname -s` in
                     prepend PATH /usr/local/opt/coreutils/libexec/gnubin
                     #prepend MANPATH /usr/local/opt/coreutils/libexec/gnuman
 		fi
+		if [ -d /opt/homebrew/bin ]; then
+                    export HOMEBREW_PREFIX="/opt/homebrew";
+                    export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+                    export HOMEBREW_REPOSITORY="/opt/homebrew";
+                    prepend PATH /opt/homebrew/bin
+                    prepend PATH /opt/homebrew/sbin
+                    prepend MANPATH /opt/homebrew/share/man
+                    prepend INFOPATH /opt/homebrew/share/info
+		fi
 		if [ -d /usr/local/sbin ]; then
                     append PATH /usr/local/sbin
 		fi

@@ -85,7 +85,7 @@ cfg.browser = {
   },
   -- map of URL to browser for browser-locked URLs
   urlmap = {
-    ['disney.service-now.com'] = 'com.apple.Safari',
+    ['disney.service-now.com'] = 'com.google.Chrome',
     ['.disney.network'] = 'com.apple.Safari',
     ['.wdig.com'] = 'com.apple.Safari',
     ['yammer.com'] = 'com.apple.Safari',

@@ -38,9 +38,6 @@
 [submodule "emacs.d/chef-mode"]
 	path = emacs.d/lisp/chef-mode
 	url = https://github.com/mpasternacki/chef-mode
-[submodule "emacs.d/nxhtml"]
-	path = emacs.d/lisp/nxhtml
-	url = https://github.com/jwiegley/nxhtml.git
 [submodule "dotbot-robobenklein"]
 	path = dotbot-robobenklein
 	url = https://github.com/robobenklein/dotbot.git

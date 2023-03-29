@@ -27,7 +27,7 @@ call_filebot() {
     fi
     case $type in
         movie)
-            args='-rename -non-strict --db TheMovieDB'
+            args="-rename -non-strict --db TheMovieDB"
             format='{plex.derive{" $audioLanguages"}{" [$resolution]"}}'
             output=${VBASE}/video/DVDs/
             ;;
@@ -197,8 +197,18 @@ ytdltv() {
     ret=$(( $? > 0 ))
   fi
   if [ -z "$ret" -o "$ret" = 0 ]; then
-    echo youtube-dl -o "\"$show - $se %(title)s.%(ext)s\"" $url
-    youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
+    #echo youtube-dl -o "\"$show - $se %(title)s.%(ext)s\"" $url
+    #youtube-dl -o "$show - $se %(title)s.%(ext)s" $url
+    echo yt-dlp --no-hls-use-mpegts -o "\"$show - $se %(title)s.%(ext)s\"" $url
+    yt-dlp --no-hls-use-mpegts -o "$show - $se %(title)s.%(ext)s" $url
   fi
   call_filebot tvshow DOWNLOAD *"$se"*
+}
+
+# Remove [xxx] from youtube downloads
+ytrename() {
+  for f in *\[*\].*; do
+    n=$(echo $f | sed 's/[[:space:]]*\[[^]]*\]\././')
+    mv "$f" "$n"
+  done
 }
