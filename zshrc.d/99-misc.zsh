@@ -61,6 +61,8 @@ if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
   # Add zsh plugins
   plugins+=(virtualenv virtualenvwrapper)
 fi
+# Add ~/.local/bin to the path
+  prepend PATH ${HOME}/.local/bin
 
 # Go
 if hash go 2>/dev/null; then
