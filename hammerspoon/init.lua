@@ -22,7 +22,7 @@ log = hs.logger.new(hs.host.localizedName(), LOGLEVEL)
 -- List of modules to load (found in modules/ dir)
 local modules = {
   'appwindows',
-  'battery',
+--  'battery',
   'browser', 
   'caffeine',
   'cheatsheet',
