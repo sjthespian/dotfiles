@@ -23,3 +23,5 @@ _load_bashrc_d
 export PATH
 
 complete -C /usr/local/bin/vault vault
+
+export PATH="$PATH:$HOME/.local/bin"
