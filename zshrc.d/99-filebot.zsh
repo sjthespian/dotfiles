@@ -158,7 +158,7 @@ plexperms () {
   dir=${1:-.}
   sudo chown -R plex:plex $dir
   sudo chmod -R g+rw,a+r $dir
-  sudo find $dir -type d -print0 | xargs sudo chmod a+x
+  sudo find $dir -type d -print0 | xargs -0 sudo chmod a+x
 }
 mp3perms () {
   for d in $*; do
