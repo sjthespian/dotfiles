@@ -68,7 +68,7 @@ call_filebot() {
         tvshow|anime)
             #format='{plex.tail}'
 	    # Naming format to (mostly) match TRaSH Sonarr guide - https://trash-guides.info/Sonarr/Sonarr-recommended-naming-scheme/
-	    format='Season {s.pad(2)}/{ny} - {s00e00} - {t} [{vf}]{[hdr]}[{ac} {channels}]{[vc]}{-group}'
+	    format='{ny} {"{imdb-$imdbid}"}/Season {s.pad(2)}/{ny} - {s00e00} - {t} [{vf}]{[hdr]}[{ac} {channels}]{[vc]}{-group}'
             case $1 in
                 DVD)
                     output="${VBASE}/video/DVDs/TV_Shows/"
@@ -191,7 +191,9 @@ ytdltv() {
     ret=$(( $? > 0 ))
   fi
   if [ "$show" = "." ]; then
-    show="$(pwd | sed 's/^.*\///')"
+    # Get show from dir name, strip year and any tag data
+    show="$(pwd | sed 's/^.*\///;s/ ([0-9]*)//;s/ {[^}]*}//;s/ *$//')"
+    echo $show
   fi
   if [[ $se =~ 'S[0-9]*E[0-9]*' ]]; then
     :
