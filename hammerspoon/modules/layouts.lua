@@ -28,13 +28,16 @@ local function applyAppLayout(layout, appName, counter)
 end
 
 function m.apply(app)
+  print("Calling apply()")
   local counter = 0
   for i, layout in ipairs(layouts) do
     appTable = layout.name
     if (type(layout.name) == "string") then
+      print("    " .. layout.name)
       appTable = {layout.name}
     end
     for i, appName in ipairs(appTable) do
+      print("    " .. appName)
       if app then
 	if appName == app:title() then
 	  applyAppLayout(layout, appName, counter)
@@ -76,6 +79,7 @@ local function loadLayouts()
 
   if domainname then
     --  hs.alert.show('Loaded layouts for ' .. domainname)
+    print("Loading layouts for " .. domainname)
     layouts = require('layouts/' .. domainname)
   else
     layouts = {}

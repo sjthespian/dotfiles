@@ -55,10 +55,12 @@ local layouts = {
       func = function(index, win)
 	 if (#hs.screen.allScreens() > 1) then
 	 -- second space on 2nd monitor
+            print("Moving Screen Sharing to 2nd monitor 2nd space")
 	    spaces.moveWindowToSpace(win:id(), spaces.spacesForScreen(hs.screen.allScreens()[2])[2])
 	 --   win:moveToScreen(monitor_2, false, true)
 	 else
 	 -- second space on only (1) monitor
+            print("Moving Screen Sharing to 1st monitor 2nd space")
 	    spaces.moveWindowToSpace(win:id(), spaces.spacesForScreen(hs.screen.allScreens()[1])[2])
 	 end
       end

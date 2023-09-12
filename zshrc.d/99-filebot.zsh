@@ -66,7 +66,9 @@ call_filebot() {
             output=${VBASE}/mp3/
             ;;
         tvshow|anime)
-            format='{plex.tail}'
+            #format='{plex.tail}'
+	    # Naming format to (mostly) match TRaSH Sonarr guide - https://trash-guides.info/Sonarr/Sonarr-recommended-naming-scheme/
+	    format='{ny} {"{imdb-$imdbid}"}/Season {s.pad(2)}/{ny} - {s00e00} - {t} [{vf}]{[hdr]}[{ac} {channels}]{[vc]}{-group}'
             case $1 in
                 DVD)
                     output="${VBASE}/video/DVDs/TV_Shows/"
@@ -81,13 +83,13 @@ call_filebot() {
                     exit 1
                     ;;
             esac
-            if [ "$1" = "RES" ]; then
-                format='{plex.derive{" [$resolution]"}.tail}'
-                if [ $type = "anime" ]; then
-                    format='{localize.English.plex.derive{" [$resolution]"}.tail}'
-                fi
-                shift
-            fi
+#            if [ "$1" = "RES" ]; then
+#                format='{plex.derive{" [$resolution]"}.tail}'
+#                if [ $type = "anime" ]; then
+#                    format='{localize.English.plex.derive{" [$resolution]"}.tail}'
+#                fi
+#                shift
+#            fi
             args="-rename -non-strict --db TheTVDB"
             if [ $type = "anime" ]; then
                 #format='{localize.English.plex.tail}'
@@ -156,6 +158,7 @@ plexperms () {
   dir=${1:-.}
   sudo chown -R plex:plex $dir
   sudo chmod -R g+rw,a+r $dir
+  sudo find $dir -type d -print0 | xargs -0 sudo chmod a+x
 }
 mp3perms () {
   for d in $*; do
@@ -188,7 +191,9 @@ ytdltv() {
     ret=$(( $? > 0 ))
   fi
   if [ "$show" = "." ]; then
-    show="$(pwd | sed 's/^.*\///')"
+    # Get show from dir name, strip year and any tag data
+    show="$(pwd | sed 's/^.*\///;s/ ([0-9]*)//;s/ {[^}]*}//;s/ *$//')"
+    echo $show
   fi
   if [[ $se =~ 'S[0-9]*E[0-9]*' ]]; then
     :
