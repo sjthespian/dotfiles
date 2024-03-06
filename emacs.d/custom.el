@@ -10,7 +10,7 @@
  '(global-font-lock-mode t nil (font-lock))
  '(load-home-init-file t t)
  '(package-selected-packages
-   '(better-defaults transient transient-dwim forge terraform-mode groovy-mode elpy-enable yaml-mode markdown-mode magit lua-mode json-mode go-mode flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit))
+   '(python-black better-defaults transient transient-dwim forge terraform-mode groovy-mode elpy-enable yaml-mode markdown-mode magit lua-mode json-mode go-mode flycheck-gometalinter dockerfile-mode color-theme-sanityinc-solarized cedit))
  '(query-user-mail-address nil)
  '(user-mail-address "drich@employees.org"))
 (custom-set-faces
