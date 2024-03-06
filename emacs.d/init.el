@@ -219,6 +219,7 @@
 
 ;;
 ;; ensure we can talk to ssh agent for magit
+(setq exec-path-from-shell-arguments nil)
 (require 'exec-path-from-shell)
 (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
