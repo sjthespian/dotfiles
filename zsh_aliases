@@ -304,7 +304,7 @@ alias flushmd="mailq | grep MAILER-DAEMON | awk '{print $1}'| xargs -n1 sudo pos
 #  sa-learn --no-sync --spam ~/Maildir/.spam/{cur,new}
 #  sa-learn --no-sync --ham ~/Maildir/{cur,new}
 #}
-alias learnspam='rspamc learn_spam ~/Maildir/.spam/cur'
+alias learnspam='rspamc learn_spam ~/Maildir/.Junk/{cur,new}'
 alias learnham='rspamc learn_ham ~/Maildir/cur'
 
 # SSL utils
@@ -333,3 +333,5 @@ mkk8sconfig() {
   export KUBECONFIG=$(ls ~/.kube/config-* | tr '\n' ':' | sed 's/:$//')  
   kubectl config view --flatten > ~/.kube/config
 }
+
+alias ytdlmp4='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
