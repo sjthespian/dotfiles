@@ -47,7 +47,9 @@ if [ -d /usr/local/opt/android-sdk ]; then
 fi
 
 # Python
-if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
+#if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
+if (( $+commands[virtualenvwrapper.sh] )); then
+if [ -d ~/.virtualenvs ]; then
   # Try and find python3
   for py in /usr/local/bin/python3 /usr/bin/python3; do
     if [ -e ${py} ]; then
@@ -56,10 +58,12 @@ if [ -d ~/.virtualenvs -a -e /usr/local/bin/virtualenvwrapper.sh ]; then
     fi
   done
   export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/local/bin/virtualenvwrapper.sh
+  #source /usr/local/bin/virtualenvwrapper.sh
+  source $(which virtualenvwrapper.sh)
   export VIRTUAL_ENV_DISABLE_PROMPT=0
   # Add zsh plugins
   plugins+=(virtualenv virtualenvwrapper)
+fi
 fi
 # Add ~/.local/bin to the path
   prepend PATH ${HOME}/.local/bin

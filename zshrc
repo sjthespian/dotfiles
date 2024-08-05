@@ -117,6 +117,10 @@ fi
 if grep 'ID=ubuntu' /etc/os-release > /dev/null 2>&1; then
   plugins+=(systemd ubuntu)
 fi
+if [ -d ~/.pyenv ]; then
+  ZSH_PYENV_QUIET=true
+  plugins+=(pyenv)
+fi
 
 # User configuration
 
