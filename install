@@ -2,53 +2,14 @@
 
 set -e
 
-DEFAULT_CONFIG_PREFIX="default"
-CONFIG_SUFFIX=".conf.yaml"
+CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
-#DOTBOT_DIR="dotbot-robobenklein"
-DOTBOT_BRANCH="master"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Parse command line options
-DOTBOTOPTS=""
-VERBOSE=""
-while getopts "Qqvd:c:" opt; do
-    case $opt in
-	v|Q|q)
-	    VERBOSE=$opt
-	    DOTBOTOPTS="$DOTBOTOPTS -$opt"
-	    ;;
-	d)
-	    BASEDIR=$opt
-	    ;;
-	c)
-	    CONFIG_SUFFIX=$opt
-	    ;;
-	?)
-	    exit 1
-	    ;;
-    esac
-done
-# Clean up parsed options
-while (( $((OPTIND--)) > 1 )); do
-    shift
-done
-
-
 cd "${BASEDIR}"
+git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
-if [ -n "$DOTBOT_BRANCH" ]; then
-	OPWD=`pwd`
-	cd $DOTBOT_DIR
-	git checkout $DOTBOT_BRANCH
-	cd $OPWD
-fi
 
-for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
-	if [ "$VERBOSE" != "Q" ]; then
-		echo -e "\nInstalling $conf..."
-	fi
-	"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" ${DOTBOTOPTS} -d "${BASEDIR}" -c "${conf}${CONFIG_SUFFIX}"
-done
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
