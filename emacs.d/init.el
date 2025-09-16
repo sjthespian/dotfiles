@@ -110,7 +110,7 @@
 ;; Ruby
 (autoload 'dash "dash" "Dash" t)
 (add-hook 'ruby-mode-hook 'flycheck-mode)
-(flycheck-add-next-checker 'chef-foodcritic 'ruby-rubocop)
+(flycheck-add-next-checker 'ruby-chef-cookstyle 'ruby-rubocop)
 
 ;; YAML
 ;(add-to-list 'load-path (concat lisp-directory "/yaml-mode"))
