@@ -75,7 +75,11 @@ call_filebot() {
                     shift
                     ;;   
                 DOWNLOAD)
-                    output="${VBASE}/video/TV/"
+                    if [ "$type" = "anime" ]; then
+                      output="${VBASE}/video/Anime/"
+                    else
+                      output="${VBASE}/video/TV/"
+                    fi
                     shift
                     ;;   
                 *)
