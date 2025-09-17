@@ -160,3 +160,6 @@ unsetopt share_history
 
 # Fix annoying omyzsh binding
 bindkey '\el' down-case-word
+
+# To customize prompt, run `p10k configure` or edit ~/.zshrc.d/99-p10k.zsh.
+[[ ! -f ~/.zshrc.d/99-p10k.zsh ]] || source ~/.zshrc.d/99-p10k.zsh
